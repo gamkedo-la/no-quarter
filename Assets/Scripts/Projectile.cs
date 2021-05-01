@@ -35,10 +35,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        other.SendMessageUpwards("TakeDamage", baseDamage);
+        other.SendMessageUpwards("TakeDamage", baseDamage, SendMessageOptions.DontRequireReceiver);
         Destroy(gameObject);
     }
 }
