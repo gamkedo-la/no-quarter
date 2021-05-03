@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 // using Unity.MPE;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerInputHandler : MonoBehaviour
@@ -34,6 +35,30 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField]
     private List<WeaponMod> equippedMods;
 
+    private FPSPlayerControls controls;
+    private FPSPlayerControls.PlayerActions playerActions;
+
+    private float fireInput;
+
+
+    private void Awake()
+    {
+        controls = new FPSPlayerControls();
+        playerActions = controls.Player;
+        playerActions.Fire.performed += ctx => { isFiring = true; };
+        playerActions.Fire.canceled += ctx => { isFiring = false; };
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDestroy()
+    {
+        controls.Disable();
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -60,7 +85,7 @@ public class PlayerInputHandler : MonoBehaviour
         // cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
         // playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
 
-        if (isFiring && canFire && Input.GetMouseButton(0))
+        if (isFiring && canFire)
         {
             Fire(playerCamera.forward);
         }
@@ -110,20 +135,6 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         return directions;
-    }
-
-    void OnFire()
-    {
-        if (!canFire) return;
-
-        StartCoroutine(Cooldown(GetFireDelay()));
-
-        var fireDirections = GetProjectileDirections(transform.forward);
-        foreach (var dir in fireDirections)
-        {
-            var projectileInstance = Instantiate(projectile, firePosition.position, Quaternion.identity);
-            projectileInstance.GetComponent<Projectile>().projectileDirection = dir;
-        }
     }
 
     void Fire(Vector3 fireDirection)
