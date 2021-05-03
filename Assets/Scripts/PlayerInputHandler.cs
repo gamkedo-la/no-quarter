@@ -29,6 +29,7 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField]
     private float fireDelay = 0.3f;
     private bool canFire = true;
+    private bool isFiring = false; // toggled by PlayerInput events
 
     [SerializeField]
     private List<WeaponMod> equippedMods;
@@ -45,21 +46,21 @@ public class PlayerInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveX = Input.GetAxis("Horizontal") * transform.right;
-        Vector3 moveZ = Input.GetAxis("Vertical") * transform.forward;
-        characterController.Move(moveSpeed * Time.deltaTime * (moveX + moveZ).normalized);
+        // Vector3 moveX = Input.GetAxis("Horizontal") * transform.right;
+        // Vector3 moveZ = Input.GetAxis("Vertical") * transform.forward;
+        // characterController.Move(moveSpeed * Time.deltaTime * (moveX + moveZ).normalized);
 
         // Rotate character transform around y (turn left & right).
-        float yRotation = Input.GetAxis("Mouse X") * lookSpeed;
-        transform.Rotate(Vector3.up, yRotation);
+        // float yRotation = Input.GetAxis("Mouse X") * lookSpeed;
+        // transform.Rotate(Vector3.up, yRotation);
 
         // Rotate camera round x (look up & down)
-        float cameraRotationDirection = invertCameraRotation ? 1 : -1;
-        float xRotation = Input.GetAxis("Mouse Y") * lookSpeed * cameraRotationDirection;
-        cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
-        playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
+        // float cameraRotationDirection = invertCameraRotation ? 1 : -1;
+        // float xRotation = Input.GetAxis("Mouse Y") * lookSpeed * cameraRotationDirection;
+        // cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
+        // playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
 
-        if (canFire && Input.GetMouseButton(0))
+        if (isFiring && canFire && Input.GetMouseButton(0))
         {
             Fire(playerCamera.forward);
         }
@@ -109,6 +110,20 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         return directions;
+    }
+
+    void OnFire()
+    {
+        if (!canFire) return;
+
+        StartCoroutine(Cooldown(GetFireDelay()));
+
+        var fireDirections = GetProjectileDirections(transform.forward);
+        foreach (var dir in fireDirections)
+        {
+            var projectileInstance = Instantiate(projectile, firePosition.position, Quaternion.identity);
+            projectileInstance.GetComponent<Projectile>().projectileDirection = dir;
+        }
     }
 
     void Fire(Vector3 fireDirection)
