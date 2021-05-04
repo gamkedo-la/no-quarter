@@ -3,6 +3,7 @@ using System.Collections.Generic;
 // using Unity.MPE;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerInputHandler : MonoBehaviour
@@ -39,14 +40,20 @@ public class PlayerInputHandler : MonoBehaviour
     private FPSPlayerControls.PlayerActions playerActions;
 
     private float fireInput;
-
+    private Vector2 lookDelta = Vector2.zero;
+    private Vector2 moveDelta = Vector2.zero;
 
     private void Awake()
     {
         controls = new FPSPlayerControls();
+
+        // Fire controls
         playerActions = controls.Player;
         playerActions.Fire.performed += ctx => { isFiring = true; };
         playerActions.Fire.canceled += ctx => { isFiring = false; };
+
+        // Camera controls
+        playerActions.Look.performed += ctx => lookDelta += ctx.ReadValue<Vector2>();
     }
 
     private void OnEnable()
@@ -75,21 +82,34 @@ public class PlayerInputHandler : MonoBehaviour
         // Vector3 moveZ = Input.GetAxis("Vertical") * transform.forward;
         // characterController.Move(moveSpeed * Time.deltaTime * (moveX + moveZ).normalized);
 
-        // Rotate character transform around y (turn left & right).
-        // float yRotation = Input.GetAxis("Mouse X") * lookSpeed;
-        // transform.Rotate(Vector3.up, yRotation);
-
-        // Rotate camera round x (look up & down)
-        // float cameraRotationDirection = invertCameraRotation ? 1 : -1;
-        // float xRotation = Input.GetAxis("Mouse Y") * lookSpeed * cameraRotationDirection;
-        // cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
-        // playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
-
         if (isFiring && canFire)
         {
             Fire(playerCamera.forward);
         }
     }
+
+    void FixedUpdate()
+    {
+        Look(Time.fixedDeltaTime);
+    }
+
+    void Look(float deltaTime)
+    {
+        // Rotate character transform around y (turn left & right).
+        float yRotation = lookDelta.x * lookSpeed * deltaTime;
+        transform.Rotate(Vector3.up, yRotation);
+
+        // Rotate camera round x (look up & down)
+        float cameraRotationDirection = invertCameraRotation ? 1 : -1;
+        float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection * deltaTime;
+        cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
+        playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
+
+        // Zero out the input after use.
+        lookDelta = Vector2.zero;
+    }
+
+
 
     int GetProjectileCount()
     {
