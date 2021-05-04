@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 // using Unity.MPE;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
@@ -31,7 +32,6 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField]
     private float fireDelay = 0.3f;
     private bool canFire = true;
-    private bool isFiring = false; // toggled by PlayerInput events
 
     [SerializeField]
     private List<WeaponMod> equippedMods;
@@ -39,9 +39,9 @@ public class PlayerInputHandler : MonoBehaviour
     private FPSPlayerControls controls;
     private FPSPlayerControls.PlayerActions playerActions;
 
-    private float fireInput;
-    private Vector2 lookDelta = Vector2.zero;
-    private Vector2 moveDelta = Vector2.zero;
+    // Toggled by PlayerInput events
+    private bool isFiring = false;
+    private bool isMoving = false;
 
     private void Awake()
     {
@@ -52,8 +52,9 @@ public class PlayerInputHandler : MonoBehaviour
         playerActions.Fire.performed += ctx => { isFiring = true; };
         playerActions.Fire.canceled += ctx => { isFiring = false; };
 
-        // Camera controls
-        playerActions.Look.performed += ctx => lookDelta += ctx.ReadValue<Vector2>();
+        // Movement controls
+        playerActions.Move.performed += ctx =>  isMoving = true;
+        playerActions.Move.canceled += ctx =>  isMoving = false;
     }
 
     private void OnEnable()
@@ -78,10 +79,6 @@ public class PlayerInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Vector3 moveX = Input.GetAxis("Horizontal") * transform.right;
-        // Vector3 moveZ = Input.GetAxis("Vertical") * transform.forward;
-        // characterController.Move(moveSpeed * Time.deltaTime * (moveX + moveZ).normalized);
-
         if (isFiring && canFire)
         {
             Fire(playerCamera.forward);
@@ -91,11 +88,17 @@ public class PlayerInputHandler : MonoBehaviour
     void FixedUpdate()
     {
         Look(Time.fixedDeltaTime);
+
+        if (isMoving)
+        {
+            Move(Time.fixedDeltaTime);
+        }
     }
 
     void Look(float deltaTime)
     {
         // Rotate character transform around y (turn left & right).
+        var lookDelta = playerActions.Look.ReadValue<Vector2>();
         float yRotation = lookDelta.x * lookSpeed * deltaTime;
         transform.Rotate(Vector3.up, yRotation);
 
@@ -104,12 +107,15 @@ public class PlayerInputHandler : MonoBehaviour
         float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection * deltaTime;
         cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
         playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
-
-        // Zero out the input after use.
-        lookDelta = Vector2.zero;
     }
 
-
+    void Move(float deltaTime)
+    {
+        var movement = playerActions.Move.ReadValue<Vector2>();
+        var moveX = movement.x * transform.right;
+        var moveZ = movement.y * transform.forward;
+        characterController.Move(moveSpeed * deltaTime * (moveX + moveZ).normalized);
+    }
 
     int GetProjectileCount()
     {
