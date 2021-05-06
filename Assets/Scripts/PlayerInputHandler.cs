@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 // using Unity.MPE;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
@@ -42,6 +43,8 @@ public class PlayerInputHandler : MonoBehaviour
     // Toggled by PlayerInput events
     private bool isFiring = false;
     private bool isMoving = false;
+
+    public UnityEvent OnFire;
 
     private void Awake()
     {
@@ -174,6 +177,8 @@ public class PlayerInputHandler : MonoBehaviour
             var projectileInstance = Instantiate(projectile, firePosition.position, Quaternion.identity);
             projectileInstance.GetComponent<Projectile>().projectileDirection = dir;
         }
+        
+        OnFire.Invoke();
     }
 
     private IEnumerator Cooldown(float duration)
