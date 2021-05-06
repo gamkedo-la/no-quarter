@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : TeleportAgent
 {
     public float baseDamage = 1.0f;
     public float projectileSpeed;

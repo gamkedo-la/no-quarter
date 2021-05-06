@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : TeleportAgent
 {
     [SerializeField]
     private float moveSpeed = 10f;
