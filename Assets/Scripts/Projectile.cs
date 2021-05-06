@@ -12,6 +12,9 @@ public class Projectile : TeleportAgent
     public Vector3 projectileDirection;
     public Vector3 startPosition;
 
+    [SerializeField]
+    private float spinRate = 30f;
+
     public float DistanceTraveled
     {
         get
@@ -28,6 +31,9 @@ public class Projectile : TeleportAgent
     private void Update()
     {
         transform.position += projectileSpeed * Time.deltaTime * projectileDirection;
+        
+        // Spin the projectile as it flies.
+        transform.RotateAround(transform.localPosition, transform.forward, spinRate * Time.deltaTime);
 
         if (DistanceTraveled > maxDistance)
         {

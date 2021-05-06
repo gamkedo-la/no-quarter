@@ -174,7 +174,7 @@ public class PlayerInputHandler : TeleportAgent
 
         foreach (var dir in fireDirections)
         {
-            var projectileInstance = Instantiate(projectile, firePosition.position, Quaternion.identity);
+            var projectileInstance = Instantiate(projectile, firePosition.position, playerCamera.rotation);
             projectileInstance.GetComponent<Projectile>().projectileDirection = dir;
         }
         
