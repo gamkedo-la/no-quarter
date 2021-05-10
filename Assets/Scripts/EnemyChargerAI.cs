@@ -7,11 +7,13 @@ public class EnemyChargerAI : MonoBehaviour
 {
     [SerializeField] Transform player = null;
     [SerializeField] float detectionDistance = 20.0f;
+    [SerializeField] float wanderDistance = 10.0f;
     [SerializeField] bool debug = false;
 
     private LineRenderer lineRenderer = null;
 
     private NavMeshAgent navMeshAgent;
+    private Vector3 target;
 
     private bool isPlayerLocated = false;
 
@@ -23,15 +25,44 @@ public class EnemyChargerAI : MonoBehaviour
         if (debug){
             lineRenderer = gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
         }
+
+        StartCoroutine(AIThink());
+    }
+
+    IEnumerator AIThink() 
+    {
+        while (true) 
+        {
+            LookForPlayer();
+            ChasePlayerIfLocated();
+            RandomWander();
+
+            navMeshAgent.destination = target;
+            yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        LookForPlayer();
-        ChasePlayerIfLocated();
-
         ShowPathIfDebugMode();
+    }
+
+    private void RandomWander()
+    {
+        // Use coroutines ?
+        if (!isPlayerLocated)
+        {
+            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * wanderDistance;
+
+            randomDirection += transform.position;
+
+            NavMeshHit navHit;
+
+            NavMesh.SamplePosition(randomDirection, out navHit, 10.0f, NavMesh.AllAreas);
+
+            target = navHit.position;
+        }
     }
 
     private void LookForPlayer()
@@ -52,7 +83,7 @@ public class EnemyChargerAI : MonoBehaviour
     {
         if (!isPlayerLocated) { return; }
 
-        navMeshAgent.destination = player.position;
+        target = player.position;
     }
 
     private void ShowPathIfDebugMode()
