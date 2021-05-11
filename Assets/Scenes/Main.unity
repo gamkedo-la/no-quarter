@@ -306,6 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 744929907}
+  detectionDistance: 20
+  wanderDistance: 10
   debug: 1
 --- !u!1001 &1105281855
 PrefabInstance:
@@ -698,17 +700,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FPSPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5977016722928570672, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: equippedMods.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8aa78ea1915bc3241ab010029099bbfa,
-        type: 2}
-    - target: {fileID: 5977016722928570672, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 6425298214093117194, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
