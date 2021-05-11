@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 292447643355148030}
   - component: {fileID: 292447643355148029}
+  - component: {fileID: 2513141097814091285}
   m_Layer: 0
   m_Name: health pickup
   m_TagString: Untagged
@@ -46,6 +47,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2513141097814091285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292447643355148028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ec42c231ca2a147b2963c6d1355ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 60
+  bobFrequency: 2
+  bobAmplitude: 0.2
+  bobTarget: {fileID: 8929100105727929888}
 --- !u!1 &292447643466021416
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +112,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -184,22 +201,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2025f3c6e215e6b4daefe645dfd8c782,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99862957
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2025f3c6e215e6b4daefe645dfd8c782,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2025f3c6e215e6b4daefe645dfd8c782,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.05233608
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2025f3c6e215e6b4daefe645dfd8c782,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2025f3c6e215e6b4daefe645dfd8c782,
         type: 3}
@@ -236,6 +253,12 @@ PrefabInstance:
 --- !u!4 &253401045041250559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2025f3c6e215e6b4daefe645dfd8c782,
+    type: 3}
+  m_PrefabInstance: {fileID: 292447643560896276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8929100105727929888 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9215616811037886772, guid: 2025f3c6e215e6b4daefe645dfd8c782,
     type: 3}
   m_PrefabInstance: {fileID: 292447643560896276}
   m_PrefabAsset: {fileID: 0}
