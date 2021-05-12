@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2454609240397379613}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: basicgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: basicgun1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 044e6002883a4074c98b396810439e3b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 044e6002883a4074c98b396810439e3b, type: 3}
 --- !u!4 &868114871953229167 stripped
@@ -139,6 +144,81 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795001, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795001, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795001, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: Lifetime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Name
+      value: Flash color
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
+      value: 3.4509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
+      value: 0.8156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
+      value: 0.3764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795003, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062544795006, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5162886062723268592, guid: a410424038119b940ab97fec5f42252d,
         type: 3}
       propertyPath: m_RootOrder
@@ -162,17 +242,17 @@ PrefabInstance:
     - target: {fileID: 5162886062723268592, guid: a410424038119b940ab97fec5f42252d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.496
+      value: -0.391
       objectReference: {fileID: 0}
     - target: {fileID: 5162886062723268592, guid: a410424038119b940ab97fec5f42252d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.411
+      value: 0.417
       objectReference: {fileID: 0}
     - target: {fileID: 5162886062723268592, guid: a410424038119b940ab97fec5f42252d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5162886062723268592, guid: a410424038119b940ab97fec5f42252d,
         type: 3}
@@ -213,6 +293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MuzzleFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162886062723268593, guid: a410424038119b940ab97fec5f42252d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a410424038119b940ab97fec5f42252d, type: 3}
