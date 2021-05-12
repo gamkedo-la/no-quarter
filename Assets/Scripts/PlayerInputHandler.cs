@@ -10,8 +10,7 @@ using UnityEngine.PlayerLoop;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerInputHandler : TeleportAgent
 {
-    [SerializeField]
-    private float moveSpeed = 10f;
+    public float moveSpeed = 10f;
     [SerializeField]
     private float lookSpeed = 3f;
 
@@ -42,7 +41,7 @@ public class PlayerInputHandler : TeleportAgent
 
     // Toggled by PlayerInput events
     private bool isFiring = false;
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     public UnityEvent OnFire;
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5977016722928570672}
   - component: {fileID: 2862044013043102557}
   - component: {fileID: 8813864339694419779}
+  - component: {fileID: 6608216660649967057}
   m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
@@ -271,6 +272,54 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 6280088877359414976}
+--- !u!114 &6608216660649967057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181492876791736409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5708dca55b56f4ab88d44426fd7be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponParentSocket: {fileID: 1468167316612546980}
+  bobFrequency: 10
+  bobSharpness: 10
+  defaultBobAmount: 0.05
+  aimingBobAmount: 0.05
+--- !u!1 &1825647250157117504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468167316612546980}
+  m_Layer: 8
+  m_Name: WeaponSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1468167316612546980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825647250157117504}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.49399996, y: -0.51, z: 0.90496063}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1853935721418159044}
+  m_Father: {fileID: 2874906018463814346}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5477605148766593107
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +350,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.491, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1853935721418159044}
+  - {fileID: 1468167316612546980}
   - {fileID: 6191812220765478465}
   - {fileID: 4528564800295297213}
   m_Father: {fileID: 181492876791736389}
@@ -629,7 +678,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2874906018463814346}
+    m_TransformParent: {fileID: 1468167316612546980}
     m_Modifications:
     - target: {fileID: 2454609240397379613, guid: 0d048225c7e82cf4bb048a53eebf1642,
         type: 3}
@@ -639,17 +688,17 @@ PrefabInstance:
     - target: {fileID: 2454609240397379613, guid: 0d048225c7e82cf4bb048a53eebf1642,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.49399996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2454609240397379613, guid: 0d048225c7e82cf4bb048a53eebf1642,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2454609240397379613, guid: 0d048225c7e82cf4bb048a53eebf1642,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.90496063
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2454609240397379613, guid: 0d048225c7e82cf4bb048a53eebf1642,
         type: 3}
