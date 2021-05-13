@@ -4168,9 +4168,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 744929907}
-  detectionDistance: 20
-  wanderDistance: 10
   debug: 1
+  detectionDistance: 30
+  chargeDistance: 20
+  wanderDistance: 10
+  chargeSpeed: 20
+  regularSpeed: 5
+  redAlertDuration: 5
 --- !u!43 &1005921092
 Mesh:
   m_ObjectHideFlags: 0
@@ -6816,6 +6820,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 162587698, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 162587698, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5493439055178838723, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
       propertyPath: m_Name
@@ -6874,6 +6886,11 @@ PrefabInstance:
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450071732115918954, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
