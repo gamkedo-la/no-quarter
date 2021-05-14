@@ -106,6 +106,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4166021d32f2afa44a50ed5694e8ea20, type: 3}
   - {fileID: 8300000, guid: 8e1c1dfaf3cc69a4e8798ea12a884b1b, type: 3}
   - {fileID: 8300000, guid: ca55c4e453bda3f4dba7fc206ddaaf10, type: 3}
+  footstepPace: 0.333
+  footstepSFX:
+  - {fileID: 8300000, guid: ebe5325eb7d50584bb1b5126a9ea220b, type: 3}
+  - {fileID: 8300000, guid: b263d10be9e14d742b84dcfbc0534567, type: 3}
 --- !u!114 &8813864339694419779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +664,11 @@ PrefabInstance:
     - target: {fileID: 6756606638111926289, guid: 0d048225c7e82cf4bb048a53eebf1642,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756606638111926289, guid: 0d048225c7e82cf4bb048a53eebf1642,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6756606638111926295, guid: 0d048225c7e82cf4bb048a53eebf1642,

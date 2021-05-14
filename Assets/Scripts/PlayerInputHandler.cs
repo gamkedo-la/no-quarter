@@ -46,6 +46,9 @@ public class PlayerInputHandler : TeleportAgent
     public UnityEvent OnFire;
 
 	public List<AudioClip> gunshotSFX = new List<AudioClip>();
+    public float footstepPace = 0.333f;
+    public List<AudioClip> footstepSFX = new List<AudioClip>();
+
 
     private void Awake()
     {
@@ -57,8 +60,14 @@ public class PlayerInputHandler : TeleportAgent
         playerActions.Fire.canceled += ctx => { isFiring = false; };
 
         // Movement controls
-        playerActions.Move.performed += ctx =>  isMoving = true;
-        playerActions.Move.canceled += ctx =>  isMoving = false;
+        playerActions.Move.performed += ctx =>
+        {
+            isMoving = true;
+        };
+        playerActions.Move.canceled += ctx =>
+        {
+            isMoving = false;
+        };
     }
 
     private void OnEnable()
@@ -78,6 +87,8 @@ public class PlayerInputHandler : TeleportAgent
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        StartCoroutine(PlayFootsteps());
     }
 
     // Update is called once per frame
@@ -111,6 +122,18 @@ public class PlayerInputHandler : TeleportAgent
         float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection * deltaTime;
         cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
         playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
+    }
+
+    IEnumerator PlayFootsteps()
+    {
+        while (true)
+        {
+            if (isMoving)
+            {
+                PlayRandomAudioOneshot(footstepSFX, 0.7f, 1.0f, 0.9f, 1.1f);
+            }
+            yield return new WaitForSeconds(footstepPace);
+        }
     }
 
     void Move(float deltaTime)
@@ -181,10 +204,26 @@ public class PlayerInputHandler : TeleportAgent
         
         OnFire.Invoke();
 
-		if (gunshotSFX.Count > 0) {
-			AudioManager.Instance.PlaySFX(gunshotSFX[Random.Range(0, gunshotSFX.Count)], gameObject, Random.Range(0.7f, 1f), Random.Range(0.9f, 1.1f), 0f);
-		}
+        PlayRandomAudioOneshot(gunshotSFX, 0.7f, 1f, 0.9f, 1.1f);
     }
+
+    void PlayRandomAudioOneshot(List<AudioClip> sources, float minVolume, float maxVolume, float minPitch, float maxPitch)
+    {
+        if (sources.Count > 0)
+        {
+            AudioManager.Instance.PlaySFX(
+                sources[Random.Range(0, sources.Count)],
+                gameObject,
+                Random.Range(minVolume, maxVolume),
+                Random.Range(minPitch, maxPitch),
+                0f);
+        }
+        else
+        {
+            Debug.LogError("Tried to play audioclip from an empty list");
+        }
+    }
+
 
     private IEnumerator Cooldown(float duration)
     {
