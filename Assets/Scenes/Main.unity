@@ -2100,6 +2100,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5502147531819536494, guid: 7851f2d36e5f3864380172ed1301dff0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64b90c917fd70864eb2d0830a265ed19, type: 2}
+    - target: {fileID: 5502147531819536494, guid: 7851f2d36e5f3864380172ed1301dff0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9acc7d290e4a2e944ad1930ab02de4d2, type: 2}
+    - target: {fileID: 5502147531819536494, guid: 7851f2d36e5f3864380172ed1301dff0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3213b9e33528ff4aa701af90aef9724, type: 2}
     - target: {fileID: 7082181294687557770, guid: 7851f2d36e5f3864380172ed1301dff0,
         type: 3}
       propertyPath: playerCamera
@@ -2210,6 +2225,16 @@ PrefabInstance:
       propertyPath: sisterPortal
       value: 
       objectReference: {fileID: 1930364653}
+    - target: {fileID: 7965072842783775030, guid: 7851f2d36e5f3864380172ed1301dff0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009631719064866959, guid: 7851f2d36e5f3864380172ed1301dff0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7851f2d36e5f3864380172ed1301dff0, type: 3}
 --- !u!1 &66913763
