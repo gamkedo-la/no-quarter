@@ -45,6 +45,8 @@ public class PlayerInputHandler : TeleportAgent
 
     public UnityEvent OnFire;
 
+	public List<AudioClip> gunshotSFX = new List<AudioClip>();
+
     private void Awake()
     {
         controls = new FPSPlayerControls();
@@ -178,6 +180,10 @@ public class PlayerInputHandler : TeleportAgent
         }
         
         OnFire.Invoke();
+
+		if (gunshotSFX.Count > 0) {
+			AudioManager.Instance.PlaySFX(gunshotSFX[Random.Range(0, gunshotSFX.Count)], gameObject, Random.Range(0.7f, 1f), Random.Range(0.9f, 1.1f), 0f);
+		}
     }
 
     private IEnumerator Cooldown(float duration)
