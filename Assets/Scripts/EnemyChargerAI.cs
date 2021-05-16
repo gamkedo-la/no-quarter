@@ -12,7 +12,8 @@ public class EnemyChargerAI : MonoBehaviour
     [Header("Distances")]
     [SerializeField] float detectionDistance = 20.0f;
     [SerializeField] float chargeDistance = 10.0f;
-    [SerializeField] float wanderDistance = 10.0f;
+    [SerializeField] float minWanderDistance = 5.0f;
+    [SerializeField] float maxWanderDistance = 15.0f;
 
     [Header("Speeds")]
     [SerializeField] float wanderSpeed = 5.0f;
@@ -21,10 +22,13 @@ public class EnemyChargerAI : MonoBehaviour
 
     [Header("Durations")]
     [SerializeField] float redAlertDuration = 5.0f;
+    [SerializeField] float minWanderDuration = 3.0f;
 
     private LineRenderer lineRenderer = null;
 
     private NavMeshAgent navMeshAgent;
+
+    private Vector3 target;
 
     private bool isPlayerInDetectionArea = false;
     private bool isPlayerVisible = false;
@@ -34,6 +38,7 @@ public class EnemyChargerAI : MonoBehaviour
     private float distanceToPlayer;
     private float angleToPlayer;
     private RaycastHit rayToPlayer;
+    private float timeSinceLastWander = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +46,7 @@ public class EnemyChargerAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = wanderSpeed;
         lineRenderer = GetComponent<LineRenderer>();
-
+        
         StartCoroutine(AIThink());
     }
 
@@ -59,6 +64,7 @@ public class EnemyChargerAI : MonoBehaviour
             SetAgentSpeed();
             ChasePlayerIfLocated();
             RandomWander();
+            navMeshAgent.SetDestination(target);
 
             yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
         }
@@ -94,19 +100,25 @@ public class EnemyChargerAI : MonoBehaviour
     private void ChasePlayerIfLocated()
     {
         if (!isPlayerLocated) { return; }
-        navMeshAgent.SetDestination(player.position);
+        target = player.position;
     }
 
     private void RandomWander()
     {
-        if (!isPlayerLocated)
-        {
-            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * wanderDistance;
+        if (isPlayerLocated){ return; }
+        if (Time.time - timeSinceLastWander < minWanderDuration) { return; }
+
+        do {
+            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * maxWanderDistance;
             randomDirection += transform.position;
             NavMeshHit navHit;
-            NavMesh.SamplePosition(randomDirection, out navHit, wanderDistance, NavMesh.AllAreas);
-            navMeshAgent.SetDestination(navHit.position);
-        }
+            NavMesh.SamplePosition(randomDirection, out navHit, maxWanderDistance, NavMesh.AllAreas);
+            target = navHit.position;
+        } while(Vector3.Distance(transform.position, target) < minWanderDistance);
+        
+        Debug.Log(Vector3.Distance(transform.position, target));
+
+        timeSinceLastWander = Time.time;
     }
 
     private void CheckIfPlayerIsVisible()
