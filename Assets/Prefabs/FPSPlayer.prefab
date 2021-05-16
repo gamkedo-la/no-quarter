@@ -78,6 +78,7 @@ MonoBehaviour:
   fireDelay: 0.3
   equippedMods: []
   isMoving: 0
+  capsuleCollider: {fileID: 4683705198333698965}
   OnFire:
     m_PersistentCalls:
       m_Calls:

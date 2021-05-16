@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 // using Unity.MPE;
 using UnityEngine;
@@ -42,6 +43,12 @@ public class PlayerInputHandler : TeleportAgent
     // Toggled by PlayerInput events
     private bool isFiring = false;
     public bool isMoving = false;
+    private bool isJumping = false;
+
+    [SerializeField]
+    private CapsuleCollider capsuleCollider;
+    private Vector3 playerJumpVelocity = Vector3.zero;
+    private float gravityValue = -9.81f;
 
     public UnityEvent OnFire;
 
@@ -67,6 +74,14 @@ public class PlayerInputHandler : TeleportAgent
         playerActions.Move.canceled += ctx =>
         {
             isMoving = false;
+        };
+        playerActions.Jump.performed += ctx =>
+        {
+            isJumping = true;
+        };
+        playerActions.Jump.canceled += ctx =>
+        {
+            isJumping = false;
         };
     }
 
@@ -105,6 +120,7 @@ public class PlayerInputHandler : TeleportAgent
         {
             Move(Time.deltaTime);
         }
+        Jump();
     }
 
     void Look(float deltaTime)
@@ -174,7 +190,7 @@ public class PlayerInputHandler : TeleportAgent
         {
             for (var i = 0; i < numProjectiles; i++)
             {
-                Vector3 spread = Random.insideUnitCircle * 0.1f;
+                Vector3 spread = UnityEngine.Random.insideUnitCircle * 0.1f;
                 var skewedDirection = originalDirection + (spread.x * playerCamera.right) + (spread.y * playerCamera.up);
                 directions.Add(skewedDirection);
             }
@@ -204,15 +220,32 @@ public class PlayerInputHandler : TeleportAgent
         PlayRandomAudioOneshot(gunshotSFX, 0.7f, 1f, 0.9f, 1.1f);
     }
 
+    private void Jump()
+    {
+        if (characterController.isGrounded && playerJumpVelocity.y < 0)
+        {
+            playerJumpVelocity.y = 0f;
+        }
+        if (characterController.isGrounded && isJumping)
+        {
+            float jumpHeight = capsuleCollider.bounds.size.y;
+            Debug.Log(capsuleCollider.bounds.size.y);
+            playerJumpVelocity.y += Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
+            isJumping = false;
+        }
+        playerJumpVelocity.y += gravityValue * Time.deltaTime;
+        characterController.Move(playerJumpVelocity * Time.deltaTime);
+    }
+
     void PlayRandomAudioOneshot(List<AudioClip> sources, float minVolume, float maxVolume, float minPitch, float maxPitch)
     {
         if (sources.Count > 0)
         {
             AudioManager.Instance.PlaySFX(
-                sources[Random.Range(0, sources.Count)],
+                sources[UnityEngine.Random.Range(0, sources.Count)],
                 gameObject,
-                Random.Range(minVolume, maxVolume),
-                Random.Range(minPitch, maxPitch),
+                UnityEngine.Random.Range(minVolume, maxVolume),
+                UnityEngine.Random.Range(minPitch, maxPitch),
                 0f);
         }
         else
