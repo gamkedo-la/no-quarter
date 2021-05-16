@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTeleport: 1
   moveSpeed: 10
-  lookSpeed: 100
+  lookSpeed: 0.2
   cameraMaxAngle: 60
   cameraMinAngle: -60
   invertCameraRotation: 0

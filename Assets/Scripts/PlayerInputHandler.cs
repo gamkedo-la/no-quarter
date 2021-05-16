@@ -94,19 +94,16 @@ public class PlayerInputHandler : TeleportAgent
     // Update is called once per frame
     void Update()
     {
+        Look(Time.deltaTime);
+        
         if (isFiring && canFire)
         {
             Fire(playerCamera.forward);
         }
-    }
-
-    void FixedUpdate()
-    {
-        Look(Time.fixedDeltaTime);
-
+        
         if (isMoving)
         {
-            Move(Time.fixedDeltaTime);
+            Move(Time.deltaTime);
         }
     }
 
@@ -114,12 +111,12 @@ public class PlayerInputHandler : TeleportAgent
     {
         // Rotate character transform around y (turn left & right).
         var lookDelta = playerActions.Look.ReadValue<Vector2>();
-        float yRotation = lookDelta.x * lookSpeed * deltaTime;
+        float yRotation = lookDelta.x * lookSpeed;
         transform.Rotate(Vector3.up, yRotation);
 
         // Rotate camera round x (look up & down)
         float cameraRotationDirection = invertCameraRotation ? 1 : -1;
-        float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection * deltaTime;
+        float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection;
         cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
         playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
     }
