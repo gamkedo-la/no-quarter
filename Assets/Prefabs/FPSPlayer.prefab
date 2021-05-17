@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5977016722928570672}
   - component: {fileID: 8813864339694419779}
   - component: {fileID: 6608216660649967057}
+  - component: {fileID: 4253107854215848623}
+  - component: {fileID: 5352909644043770458}
   m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
@@ -211,6 +213,36 @@ MonoBehaviour:
   bobSharpness: 10
   defaultBobAmount: 0.05
   aimingBobAmount: 0.05
+--- !u!114 &4253107854215848623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181492876791736409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a6b45ebbcb4ef4a96d5166fd5f9aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  lowHealthThreshold: 20
+  heartbeats:
+  - {fileID: 8300000, guid: 1afb4172d8671244f84fc4da67d485d1, type: 3}
+  - {fileID: 8300000, guid: e585bd10cce27464f80fc31ff5d28458, type: 3}
+  heartbeatPace: 0.333
+--- !u!114 &5352909644043770458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181492876791736409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2312632517b6b0741bf5c193a6c0764c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1825647250157117504
 GameObject:
   m_ObjectHideFlags: 0

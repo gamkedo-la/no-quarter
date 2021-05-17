@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-// using Unity.MPE;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerInputHandler : TeleportAgent
@@ -56,6 +53,7 @@ public class PlayerInputHandler : TeleportAgent
     public float footstepPace = 0.333f;
     public List<AudioClip> footstepSFX = new List<AudioClip>();
 
+    private SfxHelper sfx;
 
     private void Awake()
     {
@@ -99,6 +97,7 @@ public class PlayerInputHandler : TeleportAgent
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>().transform;
+        sfx = GetComponent<SfxHelper>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -145,7 +144,7 @@ public class PlayerInputHandler : TeleportAgent
         {
             if (isMoving)
             {
-                PlayRandomAudioOneshot(footstepSFX, 0.7f, 1.0f, 0.9f, 1.1f);
+                sfx.PlayRandomAudioOneshot(footstepSFX, 0.7f, 1.0f, 0.9f, 1.1f);
             }
             yield return new WaitForSeconds(footstepPace);
         }
@@ -219,7 +218,7 @@ public class PlayerInputHandler : TeleportAgent
         
         OnFire.Invoke();
 
-        PlayRandomAudioOneshot(gunshotSFX, 0.7f, 1f, 0.9f, 1.1f);
+        sfx.PlayRandomAudioOneshot(gunshotSFX, 0.7f, 1f, 0.9f, 1.1f);
     }
 
     private void Jump()
@@ -238,24 +237,6 @@ public class PlayerInputHandler : TeleportAgent
         playerJumpVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerJumpVelocity * Time.deltaTime);
     }
-
-    void PlayRandomAudioOneshot(List<AudioClip> sources, float minVolume, float maxVolume, float minPitch, float maxPitch)
-    {
-        if (sources.Count > 0)
-        {
-            AudioManager.Instance.PlaySFX(
-                sources[UnityEngine.Random.Range(0, sources.Count)],
-                gameObject,
-                UnityEngine.Random.Range(minVolume, maxVolume),
-                UnityEngine.Random.Range(minPitch, maxPitch),
-                0f);
-        }
-        else
-        {
-            Debug.LogError("Tried to play audioclip from an empty list");
-        }
-    }
-
 
     private IEnumerator Cooldown(float duration)
     {
