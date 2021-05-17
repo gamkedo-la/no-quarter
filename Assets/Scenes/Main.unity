@@ -72044,10 +72044,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5903242358210382839, guid: 9130749cd11452745aa630130c13f566,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5903242358210382839, guid: 9130749cd11452745aa630130c13f566,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 878a45a929280ec4ba4368029bd61ae8, type: 2}
+    - target: {fileID: -5903242358210382839, guid: 9130749cd11452745aa630130c13f566,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 65cd2187a0b0a1f4398310bd2ba115fa, type: 2}
     - target: {fileID: 919132149155446097, guid: 9130749cd11452745aa630130c13f566,
         type: 3}
       propertyPath: m_Name
       value: robot_skull_deco
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9130749cd11452745aa630130c13f566,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 968022964083750120, guid: 9130749cd11452745aa630130c13f566,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9130749cd11452745aa630130c13f566, type: 3}
