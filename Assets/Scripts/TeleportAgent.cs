@@ -10,20 +10,18 @@ public class TeleportAgent : MonoBehaviour
     {
         if(canTeleport)
         {
+            canTeleport = false;
             this.toPortal = toPortal;
             transform.position = pos;
-            transform.rotation = rot;
-            canTeleport = false;
+            //transform.rotation = rot;
+            Debug.Log("Teleport");
+            StartCoroutine("WaitToTeleport");
         }
     }
-    public virtual void LateUpdate()
+    public IEnumerator WaitToTeleport()
     {
-        if (toPortal && canTeleport == false)
-        {
-            if (Vector3.Distance(gameObject.transform.position, toPortal.position) > 2f)
-            {
-                canTeleport = true;
-            }
-        }
+       yield return new WaitForSeconds(0.1f);
+        canTeleport = true;
     }
+   
 }

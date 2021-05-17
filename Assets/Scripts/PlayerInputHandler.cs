@@ -109,18 +109,20 @@ public class PlayerInputHandler : TeleportAgent
     // Update is called once per frame
     void Update()
     {
-        Look(Time.deltaTime);
+        if (canTeleport)
+            Look(Time.deltaTime);
         
         if (isFiring && canFire)
         {
             Fire(playerCamera.forward);
         }
         
-        if (isMoving)
+        if (isMoving && canTeleport)
         {
             Move(Time.deltaTime);
         }
-        Jump();
+        if(canTeleport)
+            Jump();
     }
 
     void Look(float deltaTime)
