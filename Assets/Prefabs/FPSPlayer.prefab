@@ -290,9 +290,9 @@ MonoBehaviour:
   lowHealthThreshold: 20
   currentHealth: 100
   heartbeats:
-  - {fileID: 8300000, guid: 1afb4172d8671244f84fc4da67d485d1, type: 3}
-  - {fileID: 8300000, guid: e585bd10cce27464f80fc31ff5d28458, type: 3}
-  heartbeatPace: 0.333
+  - {fileID: 8300000, guid: 0f2483c20f1764b4183151eac3576ff4, type: 3}
+  - {fileID: 8300000, guid: e36bdd6a6ef04214790183a2ec7a2269, type: 3}
+  heartbeatPace: 1
 --- !u!114 &5352909644043770458
 MonoBehaviour:
   m_ObjectHideFlags: 0
