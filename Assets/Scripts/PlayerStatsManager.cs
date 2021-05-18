@@ -33,4 +33,16 @@ public class PlayerStatsManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
     }
+
+    public void RestoreHealth(float amount)
+    {
+        if (amount > 0)
+        {
+            currentHealth += amount;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+        }
+    }
 }
