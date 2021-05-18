@@ -71,6 +71,67 @@ MonoBehaviour:
   canTeleport: 1
   moveSpeed: 10
   lookSpeed: 0.2
+  dashDistance: 10
+  dashTime: 0.2
+  dashSmoothingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dashFovCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.505391
+      outSlope: -0.505391
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.23333333
+    - serializedVersion: 3
+      time: 0.492299
+      value: 0.7991053
+      inSlope: 0.0008297212
+      outSlope: 0.0008297212
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.7947751
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.58319056
+      outSlope: 0.58319056
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27499998
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dashSFX:
+  - {fileID: 8300000, guid: 5463d65d169f50745bbbd5906323b9d9, type: 3}
   cameraMaxAngle: 60
   cameraMinAngle: -60
   invertCameraRotation: 0
@@ -227,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   lowHealthThreshold: 20
+  currentHealth: 100
   heartbeats:
   - {fileID: 8300000, guid: 1afb4172d8671244f84fc4da67d485d1, type: 3}
   - {fileID: 8300000, guid: e585bd10cce27464f80fc31ff5d28458, type: 3}

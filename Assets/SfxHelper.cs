@@ -5,6 +5,11 @@ using UnityEngine;
 public class SfxHelper : MonoBehaviour
 {
 
+    public int PlayRandomAudioOneshot(List<AudioClip> sources)
+    {
+        return PlayRandomAudioOneshot(sources, 1f, 1f, 1f, 1f);
+    }
+
     public int PlayRandomAudioOneshot(List<AudioClip> sources, float minVolume, float maxVolume, float minPitch, float maxPitch)
     {
         if (sources.Count > 0)

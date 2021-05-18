@@ -12,6 +12,13 @@ public class PlayerInputHandler : TeleportAgent
     [SerializeField]
     private float lookSpeed = 3f;
 
+    [Header("Dash")]
+    [SerializeField] private float dashDistance = 1f;
+    [SerializeField] private float dashTime = 0.333f;
+    [SerializeField] private AnimationCurve dashSmoothingCurve;
+    [SerializeField] private AnimationCurve dashFovCurve;
+    [SerializeField] private List<AudioClip> dashSFX = new List<AudioClip>();
+
     private CharacterController characterController;
     private Transform playerCamera;
 
@@ -80,6 +87,10 @@ public class PlayerInputHandler : TeleportAgent
         playerActions.Jump.canceled += ctx =>
         {
             isJumping = false;
+        };
+        playerActions.Dash.performed += ctx =>
+        {
+            StartCoroutine(Dash());
         };
     }
 
@@ -236,6 +247,46 @@ public class PlayerInputHandler : TeleportAgent
         }
         playerJumpVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerJumpVelocity * Time.deltaTime);
+    }
+
+    private IEnumerator Dash()
+    {
+        playerActions.Disable();
+
+        var mainCam = Camera.main;
+        var baseFOV = mainCam.fieldOfView;
+
+        var time = 0f;
+        var dashDirection = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+        var dashMovement = dashDirection * dashDistance;
+        var origin = transform.position;
+        var destination = transform.position + dashMovement;
+        
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, dashDistance))
+        {
+            destination = hitInfo.point;
+        }
+
+        sfx.PlayRandomAudioOneshot(dashSFX);
+
+        while (time < dashTime)
+        {
+            var curTime = time / dashTime;
+            var t = dashSmoothingCurve.Evaluate(curTime);
+            var between = Vector3.Lerp(origin, destination, t);
+            var diff = between - transform.position;
+            characterController.Move(diff);
+            
+            var fovMulti = dashFovCurve.Evaluate(curTime);
+            mainCam.fieldOfView = baseFOV * fovMulti;
+            
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        mainCam.fieldOfView = baseFOV;
+        playerActions.Enable();
     }
 
     private IEnumerator Cooldown(float duration)
