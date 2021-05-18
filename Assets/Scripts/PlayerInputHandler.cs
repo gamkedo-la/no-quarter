@@ -17,7 +17,9 @@ public class PlayerInputHandler : TeleportAgent
     [SerializeField] private float dashTime = 0.333f;
     [SerializeField] private AnimationCurve dashSmoothingCurve;
     [SerializeField] private AnimationCurve dashFovCurve;
-    [SerializeField] private List<AudioClip> dashSFX = new List<AudioClip>();
+    [SerializeField] private AudioClip dashSFX;
+    [Range(0f, 1f)]
+    [SerializeField] private float dashSFXVolume = 1f;
 
     private CharacterController characterController;
     private Transform playerCamera;
@@ -268,7 +270,7 @@ public class PlayerInputHandler : TeleportAgent
             destination = hitInfo.point;
         }
 
-        sfx.PlayRandomAudioOneshot(dashSFX);
+        AudioManager.Instance.PlaySFX(dashSFX, gameObject, dashSFXVolume, 1f, 0f);
 
         while (time < dashTime)
         {
