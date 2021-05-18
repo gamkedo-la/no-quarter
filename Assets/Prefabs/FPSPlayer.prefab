@@ -130,8 +130,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dashSFX:
-  - {fileID: 8300000, guid: 5463d65d169f50745bbbd5906323b9d9, type: 3}
+  dashSFX: {fileID: 8300000, guid: 5463d65d169f50745bbbd5906323b9d9, type: 3}
+  dashSFXVolume: 0.2
   cameraMaxAngle: 60
   cameraMinAngle: -60
   invertCameraRotation: 0

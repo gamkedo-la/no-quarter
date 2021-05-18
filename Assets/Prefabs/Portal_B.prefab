@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sisterPortal: {fileID: 0}
+  teleportSound: {fileID: 8300000, guid: 2fb95455938b677469d3cfc420ecc8bf, type: 3}
 --- !u!1001 &7082181294812161127
 PrefabInstance:
   m_ObjectHideFlags: 0

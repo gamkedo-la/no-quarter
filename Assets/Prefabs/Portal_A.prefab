@@ -332,6 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sisterPortal: {fileID: 0}
+  teleportSound: {fileID: 8300000, guid: 2fb95455938b677469d3cfc420ecc8bf, type: 3}
 --- !u!1 &4272020133959862470
 GameObject:
   m_ObjectHideFlags: 0

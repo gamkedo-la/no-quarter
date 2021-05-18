@@ -7,17 +7,22 @@ public class PortalCollider : MonoBehaviour
     [SerializeField]
     private Transform sisterPortal;
 
+    [SerializeField]
+    private AudioClip teleportSound;
+
     private Vector3 exitPos;
     private Quaternion exitRot;
 
     private void OnTriggerEnter(Collider other)
     {
-       if(other.gameObject.GetComponent<TeleportAgent>())
+        if(other.gameObject.GetComponent<TeleportAgent>())
         {
             exitPositionRotationCalculator(other.gameObject.transform);
             other.gameObject.GetComponent<TeleportAgent>().Teleport(sisterPortal, exitPos, exitRot);
+            AudioManager.Instance.PlaySFX(teleportSound, exitPos);
         }
     }
+
     private void exitPositionRotationCalculator(Transform agentTransform)
     {
         Vector3 offsetFromPortal = agentTransform.position - transform.position;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 292447643355148030}
   - component: {fileID: 292447643355148029}
   - component: {fileID: 2513141097814091285}
+  - component: {fileID: 1567903338468177660}
   m_Layer: 0
   m_Name: health pickup
   m_TagString: Untagged
@@ -63,6 +64,19 @@ MonoBehaviour:
   bobFrequency: 2
   bobAmplitude: 0.2
   bobTarget: {fileID: 8929100105727929888}
+--- !u!114 &1567903338468177660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292447643355148028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a4744a8db885f4693e076fca18ad37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthRestoreAmount: 25
 --- !u!1 &292447643466021416
 GameObject:
   m_ObjectHideFlags: 0
