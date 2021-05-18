@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/FPSPlayerControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/FPSPlayerControls.inputactions'
 
 using System;
 using System.Collections;
