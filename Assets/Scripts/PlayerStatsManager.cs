@@ -34,6 +34,17 @@ public class PlayerStatsManager : MonoBehaviour
         }
     }
 
+
+    public void TakeDamage(float amount) {
+        if (amount > 0) {
+            currentHealth -= amount;
+            if (currentHealth <= 0 ) {
+                //TODO: player death or level fail; currently just reset hp to maxhp
+                currentHealth = maxHealth;
+            }
+        }
+    }
+
     public void RestoreHealth(float amount)
     {
         if (amount > 0)
