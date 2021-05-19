@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 292447643355148030}
   - component: {fileID: 292447643355148029}
   - component: {fileID: 2513141097814091285}
+  - component: {fileID: 1567903338468177660}
   m_Layer: 0
   m_Name: health pickup
   m_TagString: Untagged
@@ -63,6 +64,19 @@ MonoBehaviour:
   bobFrequency: 2
   bobAmplitude: 0.2
   bobTarget: {fileID: 8929100105727929888}
+--- !u!114 &1567903338468177660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292447643355148028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a4744a8db885f4693e076fca18ad37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthRestoreAmount: 25
 --- !u!1 &292447643466021416
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +251,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e3213b9e33528ff4aa701af90aef9724, type: 2}
+      objectReference: {fileID: 2100000, guid: 44130771e85ea41e18aa16d48588be37, type: 2}
     - target: {fileID: 919132149155446097, guid: 2025f3c6e215e6b4daefe645dfd8c782,
         type: 3}
       propertyPath: m_Name
@@ -247,7 +261,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fc03d51e5bfdfc548916a9d308541fa2, type: 2}
+      objectReference: {fileID: 2100000, guid: 6d6f44bb92a5642e29b6756026601c6a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2025f3c6e215e6b4daefe645dfd8c782, type: 3}
 --- !u!4 &253401045041250559 stripped

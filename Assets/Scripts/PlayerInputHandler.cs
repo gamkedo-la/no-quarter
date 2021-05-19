@@ -1,11 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-// using Unity.MPE;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerInputHandler : TeleportAgent
@@ -13,6 +11,15 @@ public class PlayerInputHandler : TeleportAgent
     public float moveSpeed = 10f;
     [SerializeField]
     private float lookSpeed = 3f;
+
+    [Header("Dash")]
+    [SerializeField] private float dashDistance = 1f;
+    [SerializeField] private float dashTime = 0.333f;
+    [SerializeField] private AnimationCurve dashSmoothingCurve;
+    [SerializeField] private AnimationCurve dashFovCurve;
+    [SerializeField] private AudioClip dashSFX;
+    [Range(0f, 1f)]
+    [SerializeField] private float dashSFXVolume = 1f;
 
     private CharacterController characterController;
     private Transform playerCamera;
@@ -42,8 +49,20 @@ public class PlayerInputHandler : TeleportAgent
     // Toggled by PlayerInput events
     private bool isFiring = false;
     public bool isMoving = false;
+    private bool isJumping = false;
+
+    [SerializeField]
+    private CapsuleCollider capsuleCollider;
+    private Vector3 playerJumpVelocity = Vector3.zero;
+    private float gravityValue = -9.81f;
 
     public UnityEvent OnFire;
+
+	public List<AudioClip> gunshotSFX = new List<AudioClip>();
+    public float footstepPace = 0.333f;
+    public List<AudioClip> footstepSFX = new List<AudioClip>();
+
+    private SfxHelper sfx;
 
     private void Awake()
     {
@@ -55,8 +74,26 @@ public class PlayerInputHandler : TeleportAgent
         playerActions.Fire.canceled += ctx => { isFiring = false; };
 
         // Movement controls
-        playerActions.Move.performed += ctx =>  isMoving = true;
-        playerActions.Move.canceled += ctx =>  isMoving = false;
+        playerActions.Move.performed += ctx =>
+        {
+            isMoving = true;
+        };
+        playerActions.Move.canceled += ctx =>
+        {
+            isMoving = false;
+        };
+        playerActions.Jump.performed += ctx =>
+        {
+            isJumping = true;
+        };
+        playerActions.Jump.canceled += ctx =>
+        {
+            isJumping = false;
+        };
+        playerActions.Dash.performed += ctx =>
+        {
+            StartCoroutine(Dash());
+        };
     }
 
     private void OnEnable()
@@ -73,42 +110,57 @@ public class PlayerInputHandler : TeleportAgent
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>().transform;
+        sfx = GetComponent<SfxHelper>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        StartCoroutine(PlayFootsteps());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (canTeleport)
+            Look(Time.deltaTime);
+        
         if (isFiring && canFire)
         {
             Fire(playerCamera.forward);
         }
-    }
-
-    void FixedUpdate()
-    {
-        Look(Time.fixedDeltaTime);
-
-        if (isMoving)
+        
+        if (isMoving && canTeleport)
         {
-            Move(Time.fixedDeltaTime);
+            Move(Time.deltaTime);
         }
+        if(canTeleport)
+            Jump();
     }
 
     void Look(float deltaTime)
     {
         // Rotate character transform around y (turn left & right).
         var lookDelta = playerActions.Look.ReadValue<Vector2>();
-        float yRotation = lookDelta.x * lookSpeed * deltaTime;
+        float yRotation = lookDelta.x * lookSpeed;
         transform.Rotate(Vector3.up, yRotation);
 
         // Rotate camera round x (look up & down)
         float cameraRotationDirection = invertCameraRotation ? 1 : -1;
-        float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection * deltaTime;
+        float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection;
         cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
         playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
+    }
+
+    IEnumerator PlayFootsteps()
+    {
+        while (true)
+        {
+            if (isMoving)
+            {
+                sfx.PlayRandomAudioOneshot(footstepSFX, 0.7f, 1.0f, 0.9f, 1.1f);
+            }
+            yield return new WaitForSeconds(footstepPace);
+        }
     }
 
     void Move(float deltaTime)
@@ -152,7 +204,7 @@ public class PlayerInputHandler : TeleportAgent
         {
             for (var i = 0; i < numProjectiles; i++)
             {
-                Vector3 spread = Random.insideUnitCircle * 0.1f;
+                Vector3 spread = UnityEngine.Random.insideUnitCircle * 0.1f;
                 var skewedDirection = originalDirection + (spread.x * playerCamera.right) + (spread.y * playerCamera.up);
                 directions.Add(skewedDirection);
             }
@@ -178,6 +230,65 @@ public class PlayerInputHandler : TeleportAgent
         }
         
         OnFire.Invoke();
+
+        sfx.PlayRandomAudioOneshot(gunshotSFX, 0.7f, 1f, 0.9f, 1.1f);
+    }
+
+    private void Jump()
+    {
+        if (characterController.isGrounded && playerJumpVelocity.y < 0)
+        {
+            playerJumpVelocity.y = 0f;
+        }
+        if (characterController.isGrounded && isJumping)
+        {
+            float jumpHeight = capsuleCollider.bounds.size.y;
+            Debug.Log(capsuleCollider.bounds.size.y);
+            playerJumpVelocity.y += Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
+            isJumping = false;
+        }
+        playerJumpVelocity.y += gravityValue * Time.deltaTime;
+        characterController.Move(playerJumpVelocity * Time.deltaTime);
+    }
+
+    private IEnumerator Dash()
+    {
+        playerActions.Disable();
+
+        var mainCam = Camera.main;
+        var baseFOV = mainCam.fieldOfView;
+
+        var time = 0f;
+        var dashDirection = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+        var dashMovement = dashDirection * dashDistance;
+        var origin = transform.position;
+        var destination = transform.position + dashMovement;
+        
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, dashDistance))
+        {
+            destination = hitInfo.point;
+        }
+
+        AudioManager.Instance.PlaySFX(dashSFX, gameObject, dashSFXVolume, 1f, 0f);
+
+        while (time < dashTime)
+        {
+            var curTime = time / dashTime;
+            var t = dashSmoothingCurve.Evaluate(curTime);
+            var between = Vector3.Lerp(origin, destination, t);
+            var diff = between - transform.position;
+            characterController.Move(diff);
+            
+            var fovMulti = dashFovCurve.Evaluate(curTime);
+            mainCam.fieldOfView = baseFOV * fovMulti;
+            
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        mainCam.fieldOfView = baseFOV;
+        playerActions.Enable();
     }
 
     private IEnumerator Cooldown(float duration)
