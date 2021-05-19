@@ -17,18 +17,22 @@ public class EnemyChargerAI : MonoBehaviour
 
     [Header("Speeds")]
     [SerializeField] float wanderSpeed = 5.0f;
+    [SerializeField] float wanderAcceleration = 10.0f;
     [SerializeField] float attackSpeed = 10.0f;
+    [SerializeField] float attackAcceleration = 50.0f;
     [SerializeField] float chargeSpeed = 50.0f;
+    [SerializeField] float chargeAcceleration = 100.0f;
 
     [Header("Durations")]
     [SerializeField] float redAlertDuration = 5.0f;
     [SerializeField] float minWanderDuration = 3.0f;
+    [SerializeField] float pauseBeforeCharge = 0.1f;
 
     private LineRenderer lineRenderer = null;
 
     private NavMeshAgent navMeshAgent;
 
-    private Vector3 target;
+    [SerializeField] Vector3 target;
 
     private bool isPlayerInDetectionArea = false;
     private bool isPlayerVisible = false;
@@ -39,6 +43,11 @@ public class EnemyChargerAI : MonoBehaviour
     private float angleToPlayer;
     private RaycastHit rayToPlayer;
     private float timeSinceLastWander = 0.0f;
+    private bool isPlayerInChargeArea = false;
+    private float thinkDuration = 0.5f;
+
+    private bool isCharging = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +55,7 @@ public class EnemyChargerAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = wanderSpeed;
         lineRenderer = GetComponent<LineRenderer>();
-        
+
         StartCoroutine(AIThink());
     }
 
@@ -60,15 +69,18 @@ public class EnemyChargerAI : MonoBehaviour
     {
         while (true) 
         {
-            LookForPlayer();
-            SetAgentSpeed();
-            ChasePlayerIfLocated();
-            RandomWander();
-            navMeshAgent.SetDestination(target);
+            // Time before updating status
+            thinkDuration = Random.Range(0.5f, 2.0f);
 
-            yield return new WaitForSeconds(Random.Range(0.5f, 2.0f));
+            LookForPlayer();
+            SetTarget();
+            SetAgentSpeed();
+            ProcessBehaviourIfPlayerInChargeArea();
+
+            yield return new WaitForSeconds(thinkDuration);
         }
     }
+
     private void LookForPlayer()
     {
         if (isInRedAlertMode) { return; }
@@ -79,27 +91,82 @@ public class EnemyChargerAI : MonoBehaviour
         if (isPlayerInDetectionArea && isPlayerVisible)
         {
             isPlayerLocated = true;
+            CheckIfPlayerInChargeArea();
+        }
+        else
+        {
+            isPlayerLocated = false;
+            isPlayerInChargeArea = false;
         }
     }
 
+    private void SetTarget()
+    {
+        if (isPlayerLocated)
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            RandomWander();
+        }
+
+        navMeshAgent.SetDestination(target);
+    }
     private void SetAgentSpeed()
     {
         if (!isPlayerLocated)
         {
+            navMeshAgent.acceleration = wanderAcceleration;
             navMeshAgent.speed = wanderSpeed;
         }
-        else if (distanceToPlayer > chargeDistance)
+        else if (!isPlayerInChargeArea)
         {
+            navMeshAgent.acceleration = attackAcceleration;
             navMeshAgent.speed = attackSpeed;
         }
         else
         {
+            navMeshAgent.acceleration = chargeAcceleration;
             navMeshAgent.speed = chargeSpeed;
         }
     }
-    private void ChasePlayerIfLocated()
+
+    private void ProcessBehaviourIfPlayerInChargeArea()
     {
-        if (!isPlayerLocated) { return; }
+        if (!isPlayerInChargeArea) { return; }
+
+        if (isPlayerInChargeArea)
+        {
+            if (!isCharging)
+            {
+                isCharging = true;
+
+                // Pause a little before charging
+                navMeshAgent.isStopped = true;
+                thinkDuration = pauseBeforeCharge;
+            }
+            else
+            {
+                navMeshAgent.isStopped = false;
+            }
+        }
+    }
+
+    private void CheckIfPlayerInChargeArea()
+    {
+        if(distanceToPlayer < chargeDistance)
+        {
+            isPlayerInChargeArea = true;
+        }
+        else
+        {
+            isPlayerInChargeArea = false;
+        }
+    }
+
+    private void ChasePlayer()
+    {
         target = player.position;
     }
 
@@ -116,8 +183,6 @@ public class EnemyChargerAI : MonoBehaviour
             target = navHit.position;
         } while(Vector3.Distance(transform.position, target) < minWanderDistance);
         
-        Debug.Log(Vector3.Distance(transform.position, target));
-
         timeSinceLastWander = Time.time;
     }
 

@@ -43578,16 +43578,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 744929907}
   debug: 1
-  viewCone: 60
+  viewCone: 90
   detectionDistance: 20
   chargeDistance: 10
   minWanderDistance: 15
   maxWanderDistance: 30
   wanderSpeed: 5
+  wanderAcceleration: 10
   attackSpeed: 10
+  attackAcceleration: 50
   chargeSpeed: 20
+  chargeAcceleration: 100
   redAlertDuration: 5
   minWanderDuration: 3
+  pauseBeforeCharge: 0.1
+  target: {x: 0, y: 0, z: 0}
 --- !u!4 &969113634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
