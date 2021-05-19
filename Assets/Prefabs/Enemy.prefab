@@ -515,6 +515,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: charger_bot
       objectReference: {fileID: 0}
+    - target: {fileID: 968022964083750120, guid: 7bdce7fd0d8cdf94ea794901ec728c6f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bdce7fd0d8cdf94ea794901ec728c6f, type: 3}
 --- !u!1 &602220927931853008 stripped
