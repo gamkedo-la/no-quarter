@@ -13,6 +13,8 @@ public class PlayerStatsManager : MonoBehaviour
     public float heartbeatPace = 1f;
     private SfxHelper sfx;
 
+    public delegate void HealthChange(float currentHealth);
+    public static event HealthChange OnHealthChange;
 
     void Start()
     {
@@ -43,6 +45,7 @@ public class PlayerStatsManager : MonoBehaviour
                 currentHealth = maxHealth;
             }
         }
+        OnHealthChange?.Invoke(currentHealth);
     }
 
     public void RestoreHealth(float amount)
@@ -55,5 +58,6 @@ public class PlayerStatsManager : MonoBehaviour
                 currentHealth = maxHealth;
             }
         }
+        OnHealthChange?.Invoke(currentHealth);
     }
 }

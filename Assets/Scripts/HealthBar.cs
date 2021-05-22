@@ -8,31 +8,43 @@ public class HealthBar : MonoBehaviour
 {   
     private PlayerStatsManager playerStats;
     private float currentHealth;
+    private float maxHealth;
     private float fillAmount = 1;
     public Image hpBarInner;
     public TextMeshProUGUI hpText;
 
-    private void Start() {
+    private void OnEnable()
+    {
+        PlayerStatsManager.OnHealthChange += UpdateHealth;
+    }
+
+    private void OnDisable() 
+    {
+        PlayerStatsManager.OnHealthChange -= UpdateHealth;
+    }
+
+    private void Start()
+    {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         currentHealth = playerStats.currentHealth;
+        maxHealth = playerStats.maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateHealthBarFill()
     {
+            fillAmount = currentHealth / maxHealth;
+            hpBarInner.fillAmount = fillAmount;
+    }
+
+    private void UpdateHealthText()
+    {
+        hpText.text = Mathf.Round(currentHealth).ToString();
+    }
+
+    private void UpdateHealth(float newHealth)
+    {
+        currentHealth = newHealth;
         UpdateHealthBarFill();
         UpdateHealthText();
-    }
-
-    private void UpdateHealthBarFill() {
-        if (currentHealth != playerStats.currentHealth) {
-            currentHealth = playerStats.currentHealth;
-            fillAmount = ((currentHealth * 100) / playerStats.maxHealth)/100;
-            hpBarInner.fillAmount = fillAmount;
-        }
-    }
-
-    private void UpdateHealthText() {
-        hpText.text = Mathf.Round(currentHealth).ToString();
     }
 }
