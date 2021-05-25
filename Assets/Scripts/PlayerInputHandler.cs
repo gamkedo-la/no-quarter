@@ -21,6 +21,10 @@ public class PlayerInputHandler : TeleportAgent
     [Range(0f, 1f)]
     [SerializeField] private float dashSFXVolume = 1f;
 
+    // [Header("Stamina")]
+    // [SerializeField] private float staminaRecoveryTime = 2f;
+    // private float[] staminaCharges = new float[3];
+
     private CharacterController characterController;
     private Transform playerCamera;
 
@@ -64,6 +68,11 @@ public class PlayerInputHandler : TeleportAgent
 
     private SfxHelper sfx;
 
+    private bool isSwitchingWeapon = false;
+    [SerializeField] private float weaponSwitchDuration = 0.3f;
+    public delegate void WeaponScroll(int scrollDirection);
+    public static event WeaponScroll OnWeaponScroll;
+
     private void Awake()
     {
         controls = new FPSPlayerControls();
@@ -93,6 +102,14 @@ public class PlayerInputHandler : TeleportAgent
         playerActions.Dash.performed += ctx =>
         {
             StartCoroutine(Dash());
+        };
+
+        // Swap Weapon Controls
+        playerActions.ScrollWeapon.performed += ctx => {
+            if (!isSwitchingWeapon){
+                StartCoroutine(SwitchingWeaponDelay(weaponSwitchDuration));
+                OnWeaponScroll?.Invoke(Mathf.RoundToInt(ctx.ReadValue<Vector2>().y));
+            }
         };
     }
 
@@ -296,5 +313,12 @@ public class PlayerInputHandler : TeleportAgent
         canFire = false;
         yield return new WaitForSeconds(duration);
         canFire = true;
+    }
+
+    private IEnumerator SwitchingWeaponDelay(float duration) {
+        //TODO: disable Player's ability to shoot while weapons are switching
+        isSwitchingWeapon = true;
+        yield return new WaitForSeconds(duration);
+        isSwitchingWeapon = false;
     }
 }
