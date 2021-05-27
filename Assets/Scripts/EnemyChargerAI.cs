@@ -47,6 +47,7 @@ public class EnemyChargerAI : MonoBehaviour
     private float thinkDuration = 0.5f;
 
     private bool isCharging = false;
+    [SerializeField] float damage = 10.0f;
 
 
     // Start is called before the first frame update
@@ -242,5 +243,16 @@ public class EnemyChargerAI : MonoBehaviour
         yield return new WaitForSeconds(redAlertDuration);
 
         isInRedAlertMode = false;
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.transform.parent)
+        {
+            if (other.transform.parent.CompareTag("Player"))
+            {
+                other.transform.parent.SendMessage("TakeDamage", damage);
+            }
+        }
     }
 }
