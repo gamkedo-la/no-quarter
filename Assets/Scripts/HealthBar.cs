@@ -9,9 +9,14 @@ public class HealthBar : MonoBehaviour
     private PlayerStatsManager playerStats;
     private float currentHealth;
     private float maxHealth;
+    private float healthWarningThreashold;
     private float fillAmount = 1;
+    private float lerpTime = 0.3f;
     public Image hpBarInner;
     public TextMeshProUGUI hpText;
+
+    public Color mainColor;
+    public Color warningColor;
 
     private void OnEnable()
     {
@@ -28,6 +33,7 @@ public class HealthBar : MonoBehaviour
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         currentHealth = playerStats.currentHealth;
         maxHealth = playerStats.maxHealth;
+        healthWarningThreashold = playerStats.lowHealthThreshold;
     }
 
     private void UpdateHealthBarFill()
@@ -42,9 +48,28 @@ public class HealthBar : MonoBehaviour
     }
 
     private void UpdateHealth(float newHealth)
-    {
+    {   
+        StartCoroutine(HealthBarLerp(newHealth, lerpTime));
         currentHealth = newHealth;
-        UpdateHealthBarFill();
+        if (currentHealth < healthWarningThreashold)
+            hpBarInner.color = warningColor;
+        else 
+            hpBarInner.color = mainColor;
         UpdateHealthText();
+    }
+
+    private IEnumerator HealthBarLerp(float newHealth, float lerpDuration) {
+        StopCoroutine("HealthBarLerp");
+        float timeElapsed = 0;
+        float startHealth = currentHealth;
+
+        while (timeElapsed < lerpDuration)
+        {
+            hpBarInner.fillAmount = Mathf.Lerp(startHealth, newHealth, timeElapsed / lerpDuration) / maxHealth;
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+        hpBarInner.fillAmount = newHealth / maxHealth;
     }
 }

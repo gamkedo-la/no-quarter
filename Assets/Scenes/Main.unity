@@ -15876,6 +15876,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBarInner: {fileID: 407458286}
   hpText: {fileID: 1717448891}
+  mainColor: {r: 0.47450984, g: 0.86666673, b: 0.9803922, a: 1}
+  warningColor: {r: 0.9716981, g: 0.2062567, b: 0.6006973, a: 1}
 --- !u!43 &412028082
 Mesh:
   m_ObjectHideFlags: 0
