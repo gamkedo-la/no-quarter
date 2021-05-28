@@ -8,10 +8,10 @@ public class WeaponUI : MonoBehaviour
 
     void OnEnable()
     {
-        reticule.SetActive(true);
+        if (reticule != null ) reticule.SetActive(true);
     }
     void OnDisable()
     {
-        reticule.SetActive(false);
+        if (reticule != null ) reticule.SetActive(false);
     }
 }
