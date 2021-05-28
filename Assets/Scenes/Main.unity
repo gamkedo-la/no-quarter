@@ -9059,18 +9059,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259393061}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 14056346}
   - {fileID: 1729941663}
-  m_Father: {fileID: 1683795763}
-  m_RootOrder: 3
+  m_Father: {fileID: 708857224}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 124.000046, y: -69.00001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!43 &262530429
@@ -27264,6 +27264,7 @@ GameObject:
   - component: {fileID: 708857224}
   - component: {fileID: 708857226}
   - component: {fileID: 708857225}
+  - component: {fileID: 708857227}
   m_Layer: 0
   m_Name: Dash Icon
   m_TagString: Untagged
@@ -27281,7 +27282,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 259393062}
+  - {fileID: 1628051237}
+  - {fileID: 958517257}
   m_Father: {fileID: 1683795763}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27329,6 +27333,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708857223}
   m_CullTransparentMesh: 1
+--- !u!114 &708857227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708857223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84bcf3a05d644d468737626750331db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charges:
+  - {fileID: 1729941662}
+  - {fileID: 1334446937}
+  - {fileID: 806754078}
 --- !u!1001 &711520618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42854,18 +42874,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958517256}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 405592272}
   - {fileID: 806754079}
-  m_Father: {fileID: 1683795763}
-  m_RootOrder: 5
+  m_Father: {fileID: 708857224}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113, y: 0}
+  m_AnchoredPosition: {x: 237, y: -69.00001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!43 &961007464
@@ -76345,18 +76365,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628051236}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1025562041}
   - {fileID: 1334446938}
-  m_Father: {fileID: 1683795763}
-  m_RootOrder: 4
+  m_Father: {fileID: 708857224}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56, y: 0}
+  m_AnchoredPosition: {x: 179.99994, y: -69.00001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!43 &1628118659
@@ -78901,9 +78921,6 @@ RectTransform:
   - {fileID: 407458285}
   - {fileID: 1717448890}
   - {fileID: 708857224}
-  - {fileID: 259393062}
-  - {fileID: 1628051237}
-  - {fileID: 958517257}
   m_Father: {fileID: 968745221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102954,6 +102971,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VolumeLayerMask.m_Bits
       value: 823
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253107854215848623, guid: ed49fe6db44039b4b99ef95d4e6236e9,
+        type: 3}
+      propertyPath: staminaChargeRecoveryTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6425298214093117194, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}

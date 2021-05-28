@@ -21,10 +21,6 @@ public class PlayerInputHandler : TeleportAgent
     [Range(0f, 1f)]
     [SerializeField] private float dashSFXVolume = 1f;
 
-    // [Header("Stamina")]
-    // [SerializeField] private float staminaRecoveryTime = 2f;
-    // private float[] staminaCharges = new float[3];
-
     private CharacterController characterController;
     private Transform playerCamera;
 
@@ -43,6 +39,10 @@ public class PlayerInputHandler : TeleportAgent
     [SerializeField]
     private float fireDelay = 0.3f;
     private bool canFire = true;
+
+    private bool canDash = true;
+    public delegate void DashStarted();
+    public static event DashStarted dashStarted;
 
     [SerializeField]
     private List<WeaponMod> equippedMods;
@@ -101,7 +101,9 @@ public class PlayerInputHandler : TeleportAgent
         };
         playerActions.Dash.performed += ctx =>
         {
-            StartCoroutine(Dash());
+            if (canDash){
+                 StartCoroutine(Dash());
+            }
         };
 
         // Swap Weapon Controls
@@ -116,6 +118,11 @@ public class PlayerInputHandler : TeleportAgent
     private void OnEnable()
     {
         controls.Enable();
+        PlayerStatsManager.OnStaminaChange += updateCanDash;
+    }
+
+    private void OnDisable() {
+        PlayerStatsManager.OnStaminaChange += updateCanDash;
     }
 
     private void OnDestroy()
@@ -271,6 +278,7 @@ public class PlayerInputHandler : TeleportAgent
     private IEnumerator Dash()
     {
         playerActions.Disable();
+        dashStarted?.Invoke();
 
         var mainCam = Camera.main;
         var baseFOV = mainCam.fieldOfView;
@@ -320,5 +328,12 @@ public class PlayerInputHandler : TeleportAgent
         isSwitchingWeapon = true;
         yield return new WaitForSeconds(duration);
         isSwitchingWeapon = false;
+    }
+
+    private void updateCanDash(int currentCharges){
+        if (currentCharges == 0)
+            canDash = false;
+        else if (!canDash) 
+            canDash = true;
     }
 }
