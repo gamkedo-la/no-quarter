@@ -44,8 +44,7 @@ public class PlayerInputHandler : TeleportAgent
     public delegate void DashStarted();
     public static event DashStarted dashStarted;
 
-    [SerializeField]
-    private List<WeaponMod> equippedMods;
+    public List<WeaponMod> equippedMods;
 
     private FPSPlayerControls controls;
     private FPSPlayerControls.PlayerActions playerActions;

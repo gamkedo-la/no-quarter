@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -26,6 +28,7 @@ public class PlayerStatsManager : MonoBehaviour
     public delegate void HealthChange(float currentHealth);
     public static event HealthChange OnHealthChange;
 
+    private PlayerInputHandler playerInputHandler;
 
     private void OnEnable() {
         PlayerInputHandler.dashStarted += UseStaminaCharge;
@@ -41,6 +44,7 @@ public class PlayerStatsManager : MonoBehaviour
         sfx = GetComponent<SfxHelper>();
         StartCoroutine(PlayHeartbeat());
         StartCoroutine(StaminaChargesCoordinator());
+        playerInputHandler = gameObject.GetComponent<PlayerInputHandler>();
     }
 
     IEnumerator PlayHeartbeat()
@@ -128,5 +132,44 @@ public class PlayerStatsManager : MonoBehaviour
 
     public void SetImmortal(bool value) {
         isImmortal = value;
+    }
+
+    public void SaveGame()
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/Save.dat");
+        SaveData data = new SaveData();
+        foreach (var item in playerInputHandler.equippedMods)
+        {
+            data.equippedMods.Add(item.name);
+        }
+        binaryFormatter.Serialize(file, data);
+        file.Close();
+        Debug.Log("Game saved");
+    }
+    public void LoadGame()
+    {
+        if (File.Exists(Application.persistentDataPath
+                   + "/Save.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file =
+                       File.Open(Application.persistentDataPath
+                       + "/Save.dat", FileMode.Open);
+            SaveData data = (SaveData)bf.Deserialize(file);
+            file.Close();
+
+            playerInputHandler.equippedMods.Clear();
+            foreach (var item in data.equippedMods)
+            {
+                string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
+                WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
+                playerInputHandler.equippedMods.Add(weaponModToAdd);
+            }
+
+            Debug.Log("Game data loaded!");
+        }
+        else
+            Debug.LogError("There is no save data!");
     }
 }
