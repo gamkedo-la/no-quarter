@@ -73,6 +73,9 @@ public class PlayerInputHandler : TeleportAgent
     public delegate void WeaponScroll(int scrollDirection);
     public static event WeaponScroll OnWeaponScroll;
 
+    public delegate void Pause();
+    public static event Pause OnPause;
+
     private void Awake()
     {
         controls = new FPSPlayerControls();
@@ -104,6 +107,10 @@ public class PlayerInputHandler : TeleportAgent
             if (canDash){
                  StartCoroutine(Dash());
             }
+        };
+        controls.UI.Pause.performed += ctx =>
+        {
+            TogglePause();
         };
 
         // Swap Weapon Controls
@@ -335,5 +342,25 @@ public class PlayerInputHandler : TeleportAgent
             canDash = false;
         else if (!canDash) 
             canDash = true;
+    }
+
+    public void TogglePause() {
+        if(Time.timeScale == 0){
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            OnPause?.Invoke();
+            playerActions.Enable();
+        } else {
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            OnPause?.Invoke();
+            playerActions.Disable();
+        }
+    }
+
+    public void SetFireDelay(float delay){
+        fireDelay = delay;
     }
 }

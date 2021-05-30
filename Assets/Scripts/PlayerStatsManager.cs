@@ -10,6 +10,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float maxHealth = 100f;
     public float lowHealthThreshold = 20f;
     public float currentHealth = 100f;
+    private bool isImmortal = false;
 
     [Header("Stamina")]
     [SerializeField] private float staminaChargeRecoveryTime = 5.0f;
@@ -57,6 +58,9 @@ public class PlayerStatsManager : MonoBehaviour
 
 
     public void TakeDamage(float amount) {
+        if(isImmortal) {
+            return;
+        }
         if (amount > 0) {
             currentHealth -= amount;
             if (currentHealth <= 0 ) {
@@ -120,5 +124,9 @@ public class PlayerStatsManager : MonoBehaviour
     {
         staminaChargeQueue.Enqueue(RecoverStaminaCharge());
         OnStaminaChange?.Invoke(CountStaminaChargesLeft());
+    }
+
+    public void SetImmortal(bool value) {
+        isImmortal = value;
     }
 }
