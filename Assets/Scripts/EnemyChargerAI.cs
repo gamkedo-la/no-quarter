@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyChargerAI : MonoBehaviour
 {
-    [SerializeField] Transform player = null;
+    private GameObject player = null;
     [SerializeField] bool debug = false;
     [SerializeField] float viewCone = 60.0f;
  
@@ -56,6 +56,8 @@ public class EnemyChargerAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = wanderSpeed;
         lineRenderer = GetComponent<LineRenderer>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
 
         StartCoroutine(AIThink());
     }
@@ -168,7 +170,7 @@ public class EnemyChargerAI : MonoBehaviour
 
     private void ChasePlayer()
     {
-        target = player.position;
+        target = player.transform.position;
     }
 
     private void RandomWander()
@@ -191,7 +193,7 @@ public class EnemyChargerAI : MonoBehaviour
     {
         if (!isPlayerInDetectionArea) { return; }
 
-        if (Physics.Linecast(transform.position, player.position, out rayToPlayer))
+        if (Physics.Linecast(transform.position, player.transform.position, out rayToPlayer))
         {
             Transform hitLocation = rayToPlayer.collider.gameObject.transform;            
             if(hitLocation.parent)
@@ -209,8 +211,8 @@ public class EnemyChargerAI : MonoBehaviour
 
     private void CheckIfPlayerInDetectionArea()
     {
-        distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        angleToPlayer = Vector3.Angle(transform.forward, player.position - transform.position);
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        angleToPlayer = Vector3.Angle(transform.forward, player.transform.position - transform.position);
 
         if (distanceToPlayer < detectionDistance && angleToPlayer < viewCone)
         {
