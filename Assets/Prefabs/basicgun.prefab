@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2872388608620938138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8558603845056126274}
+  m_Layer: 10
+  m_Name: FirePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8558603845056126274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872388608620938138}
+  m_LocalRotation: {x: -0.000000011175868, y: -0.70710737, z: -0.0000000069849175,
+    w: 0.7071062}
+  m_LocalPosition: {x: -0.5580001, y: 0.40899992, z: -0.007000029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2454609240397379613}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &7345460431138193225
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2454609240397379613}
+  - component: {fileID: 3549774768516323891}
   m_Layer: 10
   m_Name: basicgun
   m_TagString: Untagged
@@ -29,9 +61,40 @@ Transform:
   m_Children:
   - {fileID: 868114871953229167}
   - {fileID: 6756606637749199513}
+  - {fileID: 8558603845056126274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3549774768516323891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345460431138193225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3dca3dd1e65ae44975a3e09fb7d9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 4116877043479323930, guid: 053b799fad1fbd14cae31109e2fc0d12,
+    type: 3}
+  mods: []
+  firePosition: {fileID: 8558603845056126274}
+  fireDelay: 0.3
+  gunshotSFX:
+  - {fileID: 8300000, guid: 11f91e8a4d9b8654fb2f8c58fc6e8667, type: 3}
+  - {fileID: 8300000, guid: 3bb34960d5cc35b4d9bd2d1d8ba2bb2d, type: 3}
+  - {fileID: 8300000, guid: 38289cb578561444eac25682d81a2eee, type: 3}
+  - {fileID: 8300000, guid: ac3a9bfde5f234444a525d54fbe2d300, type: 3}
+  - {fileID: 8300000, guid: eec3160edd58ca341b8c2e12aba36529, type: 3}
+  - {fileID: 8300000, guid: 7cd797029941bab4b8000fa78092f0a6, type: 3}
+  - {fileID: 8300000, guid: 93222b7ce203a4845b3b17f742ce0b5b, type: 3}
+  - {fileID: 8300000, guid: 5f4e8b9c81c776241863e5036bae3cdb, type: 3}
+  - {fileID: 8300000, guid: bf2708bbb46dcaf4ab96079adf026b0f, type: 3}
+  - {fileID: 8300000, guid: 4166021d32f2afa44a50ed5694e8ea20, type: 3}
+  - {fileID: 8300000, guid: 8e1c1dfaf3cc69a4e8798ea12a884b1b, type: 3}
+  - {fileID: 8300000, guid: ca55c4e453bda3f4dba7fc206ddaaf10, type: 3}
 --- !u!1001 &830510185712509572
 PrefabInstance:
   m_ObjectHideFlags: 0

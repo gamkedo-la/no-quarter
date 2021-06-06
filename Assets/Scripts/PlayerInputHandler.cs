@@ -35,6 +35,8 @@ public class PlayerInputHandler : TeleportAgent
     [SerializeField]
     private Projectile projectile;
     [SerializeField]
+    private FPSWeapon activeWeapon;
+    [SerializeField]
     private Transform firePosition;
     [SerializeField]
     private float fireDelay = 0.3f;
@@ -61,7 +63,6 @@ public class PlayerInputHandler : TeleportAgent
 
     public UnityEvent OnFire;
 
-	public List<AudioClip> gunshotSFX = new List<AudioClip>();
     public float footstepPace = 0.333f;
     public List<AudioClip> footstepSFX = new List<AudioClip>();
 
@@ -201,67 +202,12 @@ public class PlayerInputHandler : TeleportAgent
         characterController.Move(moveSpeed * deltaTime * (moveX + moveZ).normalized);
     }
 
-    int GetProjectileCount()
-    {
-        var projectileCount = projectile.baseProjectileCount;
-
-        foreach (var mod in equippedMods)
-        {
-            projectileCount += mod.additionalProjectiles;
-        }
-
-        return projectileCount;
-    }
-
-    float GetFireDelay()
-    {
-        var delay = fireDelay;
-        
-        foreach (var mod in equippedMods)
-        {
-            delay *= mod.fireDelayMultiplier;
-        }
-
-        return delay;
-    }
-
-    List<Vector3> GetProjectileDirections(Vector3 originalDirection)
-    {
-        var numProjectiles = GetProjectileCount();
-        List<Vector3> directions = new List<Vector3>();
-
-        if (numProjectiles > 1)
-        {
-            for (var i = 0; i < numProjectiles; i++)
-            {
-                Vector3 spread = UnityEngine.Random.insideUnitCircle * 0.1f;
-                var skewedDirection = originalDirection + (spread.x * playerCamera.right) + (spread.y * playerCamera.up);
-                directions.Add(skewedDirection);
-            }
-        }
-        else
-        {
-            directions.Add(originalDirection);
-        }
-
-        return directions;
-    }
-
     void Fire(Vector3 fireDirection)
     {
-        StartCoroutine(Cooldown(GetFireDelay()));
-
-        var fireDirections = GetProjectileDirections(fireDirection);
-
-        foreach (var dir in fireDirections)
-        {
-            var projectileInstance = Instantiate(projectile, firePosition.position, playerCamera.rotation);
-            projectileInstance.GetComponent<Projectile>().projectileDirection = dir;
-        }
-        
+        StartCoroutine(Cooldown(activeWeapon.GetFireDelay()));
+        activeWeapon.Fire(fireDirection, playerCamera);
         OnFire.Invoke();
-
-        sfx.PlayRandomAudioOneshot(gunshotSFX, 0.7f, 1f, 0.9f, 1.1f);
+        sfx.PlayRandomAudioOneshot(activeWeapon.gunshotSFX, 0.7f, 1f, 0.9f, 1.1f);
     }
 
     private void Jump()
@@ -272,8 +218,9 @@ public class PlayerInputHandler : TeleportAgent
         }
         if (characterController.isGrounded && isJumping)
         {
-            float jumpHeight = capsuleCollider.bounds.size.y;
-            Debug.Log(capsuleCollider.bounds.size.y);
+            // characterController.height
+            float jumpHeight = characterController.height;
+            // Debug.Log(capsuleCollider.bounds.size.y);
             playerJumpVelocity.y += Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
             isJumping = false;
         }
