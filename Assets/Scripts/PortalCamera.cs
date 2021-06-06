@@ -23,6 +23,12 @@ public class PortalCamera : MonoBehaviour
         camera.targetTexture.Release();
         camera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
         cameraMat.mainTexture = camera.targetTexture;
+
+        if (!playerCamera)
+        {
+            Debug.LogWarning("[PortalCamera] No playerCamera assigned, defaulting to Camera.main");
+            playerCamera = Camera.main.transform;
+        }
     }
     // Update is called once per frame
     void Update()
