@@ -398,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTeleport: 1
   health: 2
+  deathFX: {fileID: 536672579346087223, guid: 9d98d35c57170bf4e812c707d3ae2827, type: 3}
 --- !u!1 &7186226010493818834
 GameObject:
   m_ObjectHideFlags: 0

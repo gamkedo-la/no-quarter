@@ -8,10 +8,13 @@ public class Enemy : TeleportAgent
     [SerializeField]
     private float health = 2.0f;
 
+    [SerializeField] ParticleSystem deathFX = null;
+
     private GameObject target;
 
     private void Update()
     {
+        
         if (target)
         {
             transform.LookAt(target.transform);
@@ -45,6 +48,10 @@ public class Enemy : TeleportAgent
         if (health <= 0)
         {
             Destroy(this.gameObject);
+            
+            ParticleSystem deathFXClone = Instantiate(deathFX, transform.position, transform.rotation);
+            Destroy(deathFXClone, 2);
+            // this.gameObject.SetActive(false);
         }
     }
 }
