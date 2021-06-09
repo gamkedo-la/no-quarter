@@ -36,6 +36,7 @@ public class PlayerInputHandler : TeleportAgent
     private Projectile projectile;
     [SerializeField]
     private FPSWeapon activeWeapon;
+    private WeaponSwitch weaponSwitcher;
     [SerializeField]
     private Transform firePosition;
     [SerializeField]
@@ -118,6 +119,7 @@ public class PlayerInputHandler : TeleportAgent
             if (!isSwitchingWeapon){
                 StartCoroutine(SwitchingWeaponDelay(weaponSwitchDuration));
                 OnWeaponScroll?.Invoke(Mathf.RoundToInt(ctx.ReadValue<Vector2>().y));
+                activeWeapon = weaponSwitcher.GetActiveWeapon()?.GetComponent<FPSWeapon>();
             }
         };
     }
@@ -142,6 +144,7 @@ public class PlayerInputHandler : TeleportAgent
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>().transform;
         sfx = GetComponent<SfxHelper>();
+        weaponSwitcher = GetComponentInChildren<WeaponSwitch>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

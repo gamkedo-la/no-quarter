@@ -14,6 +14,11 @@ public class WeaponSwitch : MonoBehaviour
         SelectWeapon();
     }
 
+    public GameObject GetActiveWeapon()
+    {
+        return transform.GetChild(selectedWeapon).gameObject;
+    }
+
     private void OnEnable()
     {
         PlayerInputHandler.OnWeaponScroll += ScrollWeapon;
@@ -25,10 +30,10 @@ public class WeaponSwitch : MonoBehaviour
     }
 
     private void SelectWeapon()
-    {   
+    {
         int i=0;
         foreach (Transform weapon in transform)
-        {   
+        {
             if (i == selectedWeapon )
             {
                 weapon.gameObject.SetActive(true);
