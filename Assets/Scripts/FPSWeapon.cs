@@ -28,6 +28,14 @@ public class FPSWeapon : MonoBehaviour
         return projectileCount;
     }
 
+    public List<WeaponMod> EquippedMods
+    {
+        get
+        {
+            return mods;
+        }
+    }
+
     public float GetFireDelay()
     {
         var delay = fireDelay;
@@ -70,7 +78,9 @@ public class FPSWeapon : MonoBehaviour
         foreach (var dir in fireDirections)
         {
             var projectileInstance = Instantiate(projectile, firePosition.position, playerCamera.rotation);
-            projectileInstance.GetComponent<Projectile>().projectileDirection = dir;
+            var projectileComponent = projectileInstance.GetComponent<Projectile>();
+            projectileComponent.projectileDirection = dir;
+            projectileComponent.originator = this;
         }
     }
 

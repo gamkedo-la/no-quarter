@@ -11,5 +11,11 @@ public abstract class WeaponMod : ScriptableObject
     public float fireDelayMultiplier = 1.0f;
     public float projectileDistanceMultiplier = 1.0f;
 
-    public abstract void ProjectileCollision(Collider collision, Vector3 projectileDirection);
+    /// <summary>
+    /// Collision handler specific to each weapon mod.
+    /// </summary>
+    /// <param name="hitInfo"></param>
+    /// <param name="projectile"></param>
+    /// <returns>Keep projectile alive?</returns>
+    public abstract bool OnCollision(RaycastHit hitInfo, Projectile projectile);
 }

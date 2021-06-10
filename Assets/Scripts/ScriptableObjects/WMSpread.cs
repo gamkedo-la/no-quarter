@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "WeaponMods/Spread", fileName = "Spread")]
 public class WMSpread : WeaponMod
 {
-    public override void ProjectileCollision(Collider collision, Vector3 projectileDirection)
+    public override bool OnCollision(RaycastHit hitInfo, Projectile projectile)
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 }

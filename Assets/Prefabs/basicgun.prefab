@@ -79,7 +79,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 4116877043479323930, guid: 053b799fad1fbd14cae31109e2fc0d12,
     type: 3}
-  mods: []
+  mods:
+  - {fileID: 11400000, guid: 1218db975c2e2b244b5503521cc74d62, type: 2}
+  - {fileID: 11400000, guid: 725e6a4d3e9500f43a3690fb733b9ae7, type: 2}
   firePosition: {fileID: 8558603845056126274}
   fireDelay: 0.3
   gunshotSFX:

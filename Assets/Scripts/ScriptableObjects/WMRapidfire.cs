@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "WeaponMods/Rapidfire", fileName = "Rapidfire")]
 public class WMRapidfire : WeaponMod
 {
-    public override void ProjectileCollision(Collider collision, Vector3 projectileDirection)
+    public override bool OnCollision(RaycastHit hitInfo, Projectile projectile)
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 }
