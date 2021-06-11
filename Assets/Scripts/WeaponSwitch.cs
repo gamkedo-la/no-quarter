@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,9 @@ public class WeaponSwitch : MonoBehaviour
 {   
     private PlayerInputHandler playerInputHandler;
     private int selectedWeapon = 0;
-    
+
+    public static event Action<GameObject> OnWeaponSelect;
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -37,6 +40,7 @@ public class WeaponSwitch : MonoBehaviour
             if (i == selectedWeapon )
             {
                 weapon.gameObject.SetActive(true);
+                OnWeaponSelect?.Invoke(weapon.gameObject);
             }
             else 
             {

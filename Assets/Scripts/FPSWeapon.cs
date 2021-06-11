@@ -13,6 +13,9 @@ public class FPSWeapon : MonoBehaviour
     [SerializeField]
     private float fireDelay = 0.3f;
 
+    public Sprite reticle;
+    public Color reticleTint;
+
 	public List<AudioClip> gunshotSFX = new List<AudioClip>();
 
 

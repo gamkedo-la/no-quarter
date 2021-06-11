@@ -81,6 +81,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 725e6a4d3e9500f43a3690fb733b9ae7, type: 2}
   firePosition: {fileID: 8558603845056126274}
   fireDelay: 0.3
+  reticle: {fileID: -1862640445303446442, guid: b01ab67faf6b94e7aa71de3d383446eb,
+    type: 3}
+  reticleTint: {r: 0.5803922, g: 0.6901961, b: 0.7607844, a: 1}
   gunshotSFX:
   - {fileID: 8300000, guid: 11f91e8a4d9b8654fb2f8c58fc6e8667, type: 3}
   - {fileID: 8300000, guid: 3bb34960d5cc35b4d9bd2d1d8ba2bb2d, type: 3}
