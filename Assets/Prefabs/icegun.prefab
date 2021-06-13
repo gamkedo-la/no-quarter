@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3dca3dd1e65ae44975a3e09fb7d9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 4116877043479323930, guid: 053b799fad1fbd14cae31109e2fc0d12,
+  projectile: {fileID: 4116877043479323930, guid: bcf7746bc206ab6b388db4e0c40f2b5f,
     type: 3}
   mods:
   - {fileID: 11400000, guid: 725e6a4d3e9500f43a3690fb733b9ae7, type: 2}
