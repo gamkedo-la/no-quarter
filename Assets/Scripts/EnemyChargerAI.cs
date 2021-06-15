@@ -120,6 +120,7 @@ public class EnemyChargerAI : MonoBehaviour
         }
         else
         {
+            Debug.Log("Chaaaaaaaaaaarge!!!");
             navMeshAgent.acceleration = chargeAcceleration;
             navMeshAgent.speed = chargeSpeed;
         }
@@ -185,14 +186,12 @@ public class EnemyChargerAI : MonoBehaviour
 
         if (Physics.Linecast(transform.position, player.transform.position, out rayToPlayer))
         {
-            Transform hitLocation = rayToPlayer.collider.gameObject.transform;            
-            if(hitLocation.parent)
+            Transform hitLocation = rayToPlayer.collider.gameObject.transform;
+            
+            if (hitLocation.CompareTag("Player"))
             {
-                if (hitLocation.parent.CompareTag("Player"))
-                {
-                    isPlayerVisible = true;
-                    return;
-                }
+                isPlayerVisible = true;
+                return;
             }
         }
 
