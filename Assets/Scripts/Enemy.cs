@@ -47,10 +47,9 @@ public class Enemy : TeleportAgent
         health -= amount;
         if (health <= 0)
         {
-            Destroy(this.gameObject);
-            
             ParticleSystem deathFXClone = Instantiate(deathFX, transform.position, transform.rotation);
-            Destroy(deathFXClone, 2);
+            Destroy(deathFXClone.gameObject, 2);
+            Destroy(this.gameObject);
             // this.gameObject.SetActive(false);
         }
     }
