@@ -28,8 +28,6 @@ public class EnemyChargerAI : MonoBehaviour
     [SerializeField] float minWanderDuration = 3.0f;
     [SerializeField] float pauseBeforeCharge = 0.1f;
 
-    private LineRenderer lineRenderer = null;
-
     private NavMeshAgent navMeshAgent;
 
     [SerializeField] Vector3 target;
@@ -55,17 +53,9 @@ public class EnemyChargerAI : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = wanderSpeed;
-        lineRenderer = GetComponent<LineRenderer>();
-
         player = GameObject.FindGameObjectWithTag("Player");
 
         StartCoroutine(AIThink());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        ShowPathIfDebugMode();
     }
 
     IEnumerator AIThink() 
@@ -224,15 +214,6 @@ public class EnemyChargerAI : MonoBehaviour
         }
     }
 
-    private void ShowPathIfDebugMode()
-    {
-        if (!debug || !navMeshAgent.hasPath) { return; }
-
-        lineRenderer.positionCount = navMeshAgent.path.corners.Length;
-        lineRenderer.SetPositions(navMeshAgent.path.corners);
-        lineRenderer.enabled = true;
-    }
-
     public void TakeDamage(float amount)
     {
         StartCoroutine(EnterRedAlertMode());
@@ -257,4 +238,14 @@ public class EnemyChargerAI : MonoBehaviour
             }
         }
     }
+
+    // private void ShowPathIfDebugMode()
+    // {
+    //     if (!debug || !navMeshAgent.hasPath) { return; }
+
+    //     lineRenderer.positionCount = navMeshAgent.path.corners.Length;
+    //     lineRenderer.SetPositions(navMeshAgent.path.corners);
+    //     lineRenderer.enabled = true;
+    // }
+
 }
