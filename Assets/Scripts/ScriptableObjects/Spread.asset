@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b83133496733b04ea2ccc4fb6f965fd, type: 3}
   m_Name: Spread
   m_EditorClassIdentifier: 
+  title: Scattershot
+  description: Grants additional projectiles at the cost of damage, accuracy, and
+    rate of fire.
   damageMultiplier: 0.8
   additionalProjectiles: 9
   fireDelayMultiplier: 3
