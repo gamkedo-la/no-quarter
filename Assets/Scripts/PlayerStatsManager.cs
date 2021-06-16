@@ -13,6 +13,7 @@ public class PlayerStatsManager : MonoBehaviour
     public float lowHealthThreshold = 20f;
     public float currentHealth = 100f;
     private bool isImmortal = false;
+    public int currency;
 
     [Header("Stamina")]
     [SerializeField] private float staminaChargeRecoveryTime = 5.0f;
@@ -139,10 +140,23 @@ public class PlayerStatsManager : MonoBehaviour
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/Save.dat");
         SaveData data = new SaveData();
+        //For weapon mods that are currently equipped. We store the names of the modes, then find those later in resources.
         foreach (var item in playerInputHandler.equippedMods)
         {
             data.equippedMods.Add(item.name);
         }
+        data.currency = currency;
+        //Placeholder stats
+        data.stat1 = "";
+        data.stat2 = "";
+        data.stat3 = "";
+        data.stat4 = "";
+        data.stat5 = "";
+        data.stat6 = "";
+        data.stat7 = "";
+        data.stat8 = "";
+        data.stat9 = "";
+
         binaryFormatter.Serialize(file, data);
         file.Close();
         Debug.Log("Game saved");
@@ -166,6 +180,17 @@ public class PlayerStatsManager : MonoBehaviour
                 WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
                 playerInputHandler.equippedMods.Add(weaponModToAdd);
             }
+            data.currency = currency;
+            //Placeholder stats
+            var stat1 = data.stat1;
+            var stat2 = data.stat2;
+            var stat3 = data.stat3;
+            var stat4 = data.stat4;
+            var stat5 = data.stat5;
+            var stat6 = data.stat6;
+            var stat7 = data.stat7;
+            var stat8 = data.stat8;
+            var stat9 = data.stat9;
 
             Debug.Log("Game data loaded!");
         }
