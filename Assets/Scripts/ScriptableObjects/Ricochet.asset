@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c85fdd7219c2d94a9f2c1a58ec0db58, type: 3}
   m_Name: Ricochet
   m_EditorClassIdentifier: 
+  title: Ricochet
+  description: Projectiles will bounce off hard surfaces until they have traveled
+    a maximum distance.
+  icon: {fileID: 7758953237426774775, guid: b01ab67faf6b94e7aa71de3d383446eb, type: 3}
   damageMultiplier: 1
   additionalProjectiles: 0
   fireDelayMultiplier: 1

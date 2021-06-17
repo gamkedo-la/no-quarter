@@ -15,6 +15,7 @@ MonoBehaviour:
   title: Scattershot
   description: Grants additional projectiles at the cost of damage, accuracy, and
     rate of fire.
+  icon: {fileID: 4841706824962371475, guid: b01ab67faf6b94e7aa71de3d383446eb, type: 3}
   damageMultiplier: 0.8
   additionalProjectiles: 9
   fireDelayMultiplier: 3
