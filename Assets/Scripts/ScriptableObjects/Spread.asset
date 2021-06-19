@@ -20,3 +20,4 @@ MonoBehaviour:
   additionalProjectiles: 9
   fireDelayMultiplier: 3
   projectileDistanceMultiplier: 0.5
+  purchasePrice: 1500

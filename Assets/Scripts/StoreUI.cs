@@ -21,7 +21,10 @@ public class StoreUI : MonoBehaviour
     {
         // TODO: instantiate this based on player's save game data.
         itemsOwned = new List<ScriptableObject>();
-        
+
+        // Remove example items from hierarchy.
+        gameObject.DestroyAllChildren();
+
         // Create UI entries for each unpurchased item.
         var i = 0;
         foreach (var item in storeInventory)

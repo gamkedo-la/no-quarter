@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Rapidfire
   m_EditorClassIdentifier: 
   title: Rapidfire
-  description: Greatyl increases the weapon's rate of fire. Reduces damage per projectile.
+  description: Greatly increases the weapon's rate of fire. Reduces damage per projectile.
   icon: {fileID: 7388921765012655795, guid: b01ab67faf6b94e7aa71de3d383446eb, type: 3}
   damageMultiplier: 0.5
   additionalProjectiles: 0
   fireDelayMultiplier: 0.2
   projectileDistanceMultiplier: 1
+  purchasePrice: 1000

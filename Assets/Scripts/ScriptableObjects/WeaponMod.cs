@@ -15,7 +15,7 @@ public abstract class WeaponMod : ScriptableObject
     public int additionalProjectiles = 0;
     public float fireDelayMultiplier = 1.0f;
     public float projectileDistanceMultiplier = 1.0f;
-
+    public int purchasePrice;
 
     /// <summary>
     /// Collision handler specific to each weapon mod.
