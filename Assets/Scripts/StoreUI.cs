@@ -23,7 +23,7 @@ public class StoreUI : MonoBehaviour
         itemsOwned = new List<ScriptableObject>();
 
         // Remove example items from hierarchy.
-        gameObject.DestroyAllChildren();
+        gridLayoutGroup.gameObject.DestroyAllChildren();
 
         // Create UI entries for each unpurchased item.
         var i = 0;
