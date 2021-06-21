@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 public class StoreUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text itemTitle;
     [SerializeField] private TMP_Text itemDescription;
+    [SerializeField] private TMP_Text itemPrice;
     [SerializeField] private Transform gridLayoutGroup;
     [Space]
     [SerializeField] private ScriptableObject[] storeInventory;
@@ -59,6 +62,7 @@ public class StoreUI : MonoBehaviour
             var modInfo = (WeaponMod) itemInfo;
             itemTitle.text = modInfo.title;
             itemDescription.text = modInfo.description;
+            itemPrice.text = modInfo.purchasePrice.ToString("N0", CultureInfo.CreateSpecificCulture("en-US"));
         }
     }
 }
