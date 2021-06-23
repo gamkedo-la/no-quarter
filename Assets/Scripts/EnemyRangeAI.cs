@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyRangeAI : MonoBehaviour
+public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
 {
     [SerializeField] Projectile projectile;
     [SerializeField] Transform topPart = null;
@@ -12,30 +12,28 @@ public class EnemyRangeAI : MonoBehaviour
     [SerializeField] Transform rightGun = null;
     [SerializeField] float timeBeforeShootingOtherGun = 0.2f;
 
-    private GameObject player;
     private NavMeshAgent navMeshAgent;
+    private Enemy baseCapacity;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         navMeshAgent = GetComponent<NavMeshAgent>();
-
-        StartCoroutine(Think());
+        baseCapacity = GetComponent<Enemy>();
+    }
+    public void Attack()
+    {
+        StartCoroutine(AIThink());
     }
 
-    private IEnumerator Think()
+    private IEnumerator AIThink()
     {
-        while (true) {
+        while (baseCapacity.IsPlayerLocated())
+        {
+            baseCapacity.ChasePlayer();
             Fire(transform.forward);
             yield return new WaitForSeconds(UnityEngine.Random.Range(1.0f, 2.5f));
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        navMeshAgent.SetDestination(player.transform.position);
     }
 
     private void Fire(Vector3 fireDirection)
