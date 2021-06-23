@@ -7,7 +7,10 @@ using UnityEngine.AI;
 public class EnemyRangeAI : MonoBehaviour
 {
     [SerializeField] Projectile projectile;
-    [SerializeField] Transform firePosition = null;
+    [SerializeField] Transform topPart = null;
+    [SerializeField] Transform leftGun = null;
+    [SerializeField] Transform rightGun = null;
+    [SerializeField] float timeBeforeShootingOtherGun = 0.2f;
 
     private GameObject player;
     private NavMeshAgent navMeshAgent;
@@ -20,6 +23,7 @@ public class EnemyRangeAI : MonoBehaviour
 
         StartCoroutine(Think());
     }
+
     private IEnumerator Think()
     {
         while (true) {
@@ -38,12 +42,25 @@ public class EnemyRangeAI : MonoBehaviour
     {
         var fireDirections = GetProjectileDirections(fireDirection);
 
+        StartCoroutine(FireBothGuns(fireDirections));
+    }
+
+    private IEnumerator FireBothGuns(List<Vector3> fireDirections)
+    {
+        FireOneGun(fireDirections, leftGun.position);
+
+        yield return new WaitForSeconds(timeBeforeShootingOtherGun);
+        
+        FireOneGun(fireDirections, rightGun.position);
+    }
+
+    private void FireOneGun(List<Vector3> fireDirections, Vector3 gunPosition)
+    {
         foreach (var dir in fireDirections)
         {
-            var projectileInstance = Instantiate(projectile, firePosition.position, player.transform.rotation);
+            var projectileInstance = Instantiate(projectile, gunPosition, topPart.rotation);
             var projectileComponent = projectileInstance.GetComponent<Projectile>();
             projectileComponent.projectileDirection = dir;
-            // projectileComponent.originator = this;
         }
     }
 
@@ -57,7 +74,7 @@ public class EnemyRangeAI : MonoBehaviour
             for (var i = 0; i < numProjectiles; i++)
             {
                 Vector3 spread = UnityEngine.Random.insideUnitCircle * 0.1f;
-                var skewedDirection = originalDirection + (spread.x * player.transform.right) + (spread.y * player.transform.up);
+                var skewedDirection = originalDirection + (spread.x * topPart.right) + (spread.y * topPart.up);
                 directions.Add(skewedDirection);
             }
         }
