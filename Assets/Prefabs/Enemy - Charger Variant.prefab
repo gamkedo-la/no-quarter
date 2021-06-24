@@ -46,6 +46,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3145058497754134291, guid: 7bdce7fd0d8cdf94ea794901ec728c6f, type: 3}
+--- !u!114 &4842776679623425657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834765062854338156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff376f79ced78e4ab8f389d9c62f7ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeDistance: 10
+  wanderSpeed: 5
+  wanderAcceleration: 10
+  attackSpeed: 10
+  attackAcceleration: 50
+  chargeSpeed: 20
+  chargeAcceleration: 100
+  pauseBeforeCharge: 0.1
+  damage: 10
 --- !u!1 &4645119294111231810
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,35 +181,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4842776679623425657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834765062854338156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ff376f79ced78e4ab8f389d9c62f7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 1
-  viewCone: 90
-  detectionDistance: 20
-  chargeDistance: 10
-  minWanderDistance: 15
-  maxWanderDistance: 30
-  wanderSpeed: 5
-  wanderAcceleration: 10
-  attackSpeed: 10
-  attackAcceleration: 50
-  chargeSpeed: 20
-  chargeAcceleration: 100
-  redAlertDuration: 5
-  minWanderDuration: 3
-  pauseBeforeCharge: 0.1
-  target: {x: 0, y: 0, z: 0}
-  damage: 10
 --- !u!1001 &6145998066073457839
 PrefabInstance:
   m_ObjectHideFlags: 0

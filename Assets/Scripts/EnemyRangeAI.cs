@@ -59,6 +59,7 @@ public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
             var projectileInstance = Instantiate(projectile, gunPosition, topPart.rotation);
             var projectileComponent = projectileInstance.GetComponent<Projectile>();
             projectileComponent.projectileDirection = dir;
+            Destroy(projectileInstance.gameObject, 3.0f);
         }
     }
 
