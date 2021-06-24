@@ -43,10 +43,10 @@ Material:
     m_Ints: []
     m_Floats:
     - Color_Sensitivity: 0
-    - Depth_Sensitivity: 0.2
+    - Depth_Sensitivity: 0
     - Normals_Sensitivity: 2
     - Thickness: 2
     m_Colors:
-    - Outline_Color: {r: 0.654902, g: 0.94117653, b: 0.43921572, a: 1}
+    - Outline_Color: {r: 0.10196079, g: 0.10980393, b: 0.17254902, a: 1}
     - Outline_Color_2: {r: 0.45098042, g: 0.93725497, b: 0.9686275, a: 1}
   m_BuildTextureStacks: []
