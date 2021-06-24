@@ -9,6 +9,9 @@ public class PlayerStatsManager : MonoBehaviour
 {
     private bool paused = false;    //TODO: support game pausing -> stamina recovery halted while on Pause Screen
 
+    public static SaveData saveData;
+    private List<ScriptableObject> itemsOwned;
+
     public float maxHealth = 100f;
     public float lowHealthThreshold = 20f;
     public float currentHealth = 100f;
@@ -41,6 +44,12 @@ public class PlayerStatsManager : MonoBehaviour
 
     void Start()
     {
+        // TODO: Rather than creating this out of the blue, check if there's a save file on disk already.
+        if (saveData == null) LoadGame();
+
+        // TODO: remove this later
+        saveData.currency = 10000;
+
         currentHealth = maxHealth;
         sfx = GetComponent<SfxHelper>();
         StartCoroutine(PlayHeartbeat());
@@ -60,7 +69,6 @@ public class PlayerStatsManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
     }
-
 
     public void TakeDamage(float amount) {
         if(isImmortal) {
@@ -139,28 +147,29 @@ public class PlayerStatsManager : MonoBehaviour
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/Save.dat");
-        SaveData data = new SaveData();
+        // SaveData data = new SaveData();
         //For weapon mods that are currently equipped. We store the names of the modes, then find those later in resources.
-        foreach (var item in playerInputHandler.equippedMods)
-        {
-            data.equippedMods.Add(item.name);
-        }
-        data.currency = currency;
+        // foreach (var item in saveData.equippedMods)
+        // {
+        //     saveData.equippedMods.Add(item.name);
+        // }
+        // saveData.currency = currency;
         //Placeholder stats
-        data.stat1 = "";
-        data.stat2 = "";
-        data.stat3 = "";
-        data.stat4 = "";
-        data.stat5 = "";
-        data.stat6 = "";
-        data.stat7 = "";
-        data.stat8 = "";
-        data.stat9 = "";
+        saveData.stat1 = "";
+        saveData.stat2 = "";
+        saveData.stat3 = "";
+        saveData.stat4 = "";
+        saveData.stat5 = "";
+        saveData.stat6 = "";
+        saveData.stat7 = "";
+        saveData.stat8 = "";
+        saveData.stat9 = "";
 
-        binaryFormatter.Serialize(file, data);
+        binaryFormatter.Serialize(file, saveData);
         file.Close();
         Debug.Log("Game saved");
     }
+
     public void LoadGame()
     {
         if (File.Exists(Application.persistentDataPath
@@ -170,31 +179,76 @@ public class PlayerStatsManager : MonoBehaviour
             FileStream file =
                        File.Open(Application.persistentDataPath
                        + "/Save.dat", FileMode.Open);
-            SaveData data = (SaveData)bf.Deserialize(file);
+            // SaveData data =
+            saveData = (SaveData)bf.Deserialize(file);
             file.Close();
 
             playerInputHandler.equippedMods.Clear();
-            foreach (var item in data.equippedMods)
+            foreach (var item in saveData.equippedMods)
             {
                 string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
                 WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
+                itemsOwned.Add(weaponModToAdd);
                 playerInputHandler.equippedMods.Add(weaponModToAdd);
             }
-            data.currency = currency;
+            saveData.currency = currency;
             //Placeholder stats
-            var stat1 = data.stat1;
-            var stat2 = data.stat2;
-            var stat3 = data.stat3;
-            var stat4 = data.stat4;
-            var stat5 = data.stat5;
-            var stat6 = data.stat6;
-            var stat7 = data.stat7;
-            var stat8 = data.stat8;
-            var stat9 = data.stat9;
+            var stat1 = saveData.stat1;
+            var stat2 = saveData.stat2;
+            var stat3 = saveData.stat3;
+            var stat4 = saveData.stat4;
+            var stat5 = saveData.stat5;
+            var stat6 = saveData.stat6;
+            var stat7 = saveData.stat7;
+            var stat8 = saveData.stat8;
+            var stat9 = saveData.stat9;
 
             Debug.Log("Game data loaded!");
         }
         else
-            Debug.LogError("There is no save data!");
+        {
+            InitializeSaveData();
+        }
+    }
+
+    private void InitializeSaveData()
+    {
+        saveData = new SaveData();
+        // SaveGame();
+    }
+
+    public int GetCurrency()
+    {
+        return saveData.currency;
+    }
+
+    public List<ScriptableObject> GetItemsOwned()
+    {
+        return itemsOwned;
+    }
+
+    public int UnlockMod(WeaponMod mod)
+    {
+        Debug.Log(mod.name);
+        itemsOwned.Add(mod);
+        saveData.equippedMods.Add(mod.name);
+        saveData.currency -= mod.purchasePrice;
+        SaveGame();
+
+        return saveData.currency;
+    }
+
+    public int UnlockWeapon(FPSWeapon weapon)
+    {
+        Debug.Log(weapon.name);
+        if (saveData.weapons.Contains(weapon.name))
+        {
+            Debug.LogErrorFormat("Weapon {0} purchased, but already owned", weapon.name);
+        }
+        saveData.weapons.Add(weapon.name);
+        // todo: create a scriptableObject around weapons, or else figure out a different way to represent
+        // them in the UI
+        // saveData.currency -= weapon.purchasePrice;
+        return saveData.currency;
     }
 }

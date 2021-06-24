@@ -7,6 +7,12 @@ using UnityEngine;
 public class SaveData
 {
     public List<string> equippedMods = new List<string>();
+
+    public List<string> weapons = new List<string>();
+
+    // mods applied to each weapon (?)
+    // public Dictionary<int, string> weaponMods = new Dictionary<int, string>();
+
     public int currency;
     public string stat1;
     public string stat2;
