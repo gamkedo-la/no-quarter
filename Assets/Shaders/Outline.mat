@@ -43,7 +43,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Color_Sensitivity: 0
-    - Depth_Sensitivity: 0
+    - Depth_Sensitivity: 0.1
     - Normals_Sensitivity: 2
     - Thickness: 2
     m_Colors:
