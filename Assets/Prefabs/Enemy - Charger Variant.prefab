@@ -59,12 +59,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeDistance: 10
-  wanderSpeed: 5
-  wanderAcceleration: 10
-  attackSpeed: 10
-  attackAcceleration: 50
-  chargeSpeed: 20
-  chargeAcceleration: 100
+  attackSpeed: 40
+  attackAcceleration: 80
+  chargeSpeed: 80
+  chargeAcceleration: 160
   pauseBeforeCharge: 0.1
   damage: 10
 --- !u!1 &4645119294111231810

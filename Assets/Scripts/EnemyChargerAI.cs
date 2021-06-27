@@ -8,8 +8,6 @@ public class EnemyChargerAI : MonoBehaviour, IEnemyCapacity
     [Header("Distances")]
     [SerializeField] float chargeDistance = 10.0f;
     [Header("Speeds")]
-    [SerializeField] float wanderSpeed = 5.0f;
-    [SerializeField] float wanderAcceleration = 10.0f;
     [SerializeField] float attackSpeed = 10.0f;
     [SerializeField] float attackAcceleration = 50.0f;
     [SerializeField] float chargeSpeed = 50.0f;

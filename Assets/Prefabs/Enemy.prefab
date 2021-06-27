@@ -301,12 +301,10 @@ MonoBehaviour:
   deathFX: {fileID: 536672579346087223, guid: 9d98d35c57170bf4e812c707d3ae2827, type: 3}
   viewCone: 100
   detectionDistance: 20
-  minWanderDistance: 5
-  maxWanderDistance: 15
-  wanderSpeed: 5
-  wanderAcceleration: 10
-  attackSpeed: 10
-  attackAcceleration: 50
+  minWanderDistance: 15
+  maxWanderDistance: 30
+  wanderSpeed: 20
+  wanderAcceleration: 40
   redAlertDuration: 5
   minWanderDuration: 3
   isPlayerLocated: 0

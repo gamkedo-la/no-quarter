@@ -18,8 +18,6 @@ public class Enemy : TeleportAgent
     [Header("Speeds")]
     [SerializeField] float wanderSpeed = 5.0f;
     [SerializeField] float wanderAcceleration = 10.0f;
-    [SerializeField] float attackSpeed = 10.0f;
-    [SerializeField] float attackAcceleration = 50.0f;
 
     [Header("Durations")]
     [SerializeField] float redAlertDuration = 5.0f;
