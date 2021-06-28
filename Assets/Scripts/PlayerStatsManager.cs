@@ -251,4 +251,14 @@ public class PlayerStatsManager : MonoBehaviour
         // saveData.currency -= weapon.purchasePrice;
         return saveData.currency;
     }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.transform.parent.CompareTag("Enemy"))
+        {
+            Transform otherParent = other.transform.parent;
+            EnemyRangeAI enemy = otherParent.GetComponent<EnemyRangeAI>();
+            TakeDamage(enemy.GetDamageAmount());
+        }
+    }
 }

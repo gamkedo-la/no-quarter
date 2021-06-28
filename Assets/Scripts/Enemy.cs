@@ -140,12 +140,15 @@ public class Enemy : TeleportAgent
 
         RandomWander();
         
+        if (navMeshAgent.isStopped) { navMeshAgent.isStopped = false; }
         navMeshAgent.SetDestination(target);
     }
 
     public void ChasePlayer()
     {
         target = player.transform.position;
+        
+        if (navMeshAgent.isStopped) { navMeshAgent.isStopped = false; }
         navMeshAgent.SetDestination(target);
     }
 
@@ -182,5 +185,10 @@ public class Enemy : TeleportAgent
     public bool IsPlayerLocated()
     {
         return isPlayerLocated;
+    }
+
+    public Transform GetPlayerLocation()
+    {
+        return player.transform;
     }
 }
