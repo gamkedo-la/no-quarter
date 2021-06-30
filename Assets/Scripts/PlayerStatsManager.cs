@@ -46,10 +46,8 @@ public class PlayerStatsManager : MonoBehaviour
     {
         // TODO: Rather than creating this out of the blue, check if there's a save file on disk already.
         if (saveData == null) LoadGame();
-
         // TODO: remove this later
         saveData.currency = 10000;
-
         currentHealth = maxHealth;
         sfx = GetComponent<SfxHelper>();
         StartCoroutine(PlayHeartbeat());
@@ -179,18 +177,22 @@ public class PlayerStatsManager : MonoBehaviour
             FileStream file =
                        File.Open(Application.persistentDataPath
                        + "/Save.dat", FileMode.Open);
-            // SaveData data =
             saveData = (SaveData)bf.Deserialize(file);
             file.Close();
+            itemsOwned = new List<ScriptableObject>();
 
-            playerInputHandler.equippedMods.Clear();
-            foreach (var item in saveData.equippedMods)
+            if (playerInputHandler != null)
             {
-                string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
-                WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
-                itemsOwned.Add(weaponModToAdd);
-                playerInputHandler.equippedMods.Add(weaponModToAdd);
+                playerInputHandler.equippedMods.Clear();
+                foreach (var item in saveData.equippedMods)
+                {
+                    string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
+                    WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
+                    itemsOwned.Add(weaponModToAdd);
+                    playerInputHandler.equippedMods.Add(weaponModToAdd);
+                }
             }
+
             saveData.currency = currency;
             //Placeholder stats
             var stat1 = saveData.stat1;
@@ -214,7 +216,8 @@ public class PlayerStatsManager : MonoBehaviour
     private void InitializeSaveData()
     {
         saveData = new SaveData();
-        // SaveGame();
+        itemsOwned = new List<ScriptableObject>();
+        SaveGame();
     }
 
     public int GetCurrency()

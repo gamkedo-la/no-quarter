@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - PlayerProjectile
   - EnemyProjectile
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Player
   - Portal
   - FirstPersonWeapon
-  - 
+  - Interactable
   - 
   - 
   - 

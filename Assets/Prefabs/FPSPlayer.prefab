@@ -142,6 +142,10 @@ MonoBehaviour:
   fireDelay: 0.3
   equippedMods: []
   isMoving: 0
+  interactionDistance: 4
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 2048
   capsuleCollider: {fileID: 4683705198333698965}
   OnFire:
     m_PersistentCalls:
@@ -278,6 +282,7 @@ MonoBehaviour:
   maxHealth: 100
   lowHealthThreshold: 20
   currentHealth: 100
+  currency: 0
   staminaChargeRecoveryTime: 3
   heartbeats:
   - {fileID: 8300000, guid: 0f2483c20f1764b4183151eac3576ff4, type: 3}
