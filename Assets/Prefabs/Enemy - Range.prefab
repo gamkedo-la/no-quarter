@@ -9941,6 +9941,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6799088702482402303, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
+      propertyPath: rotationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6799088702482402303, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
+        type: 3}
       propertyPath: detectionDistance
       value: 30
       objectReference: {fileID: 0}
