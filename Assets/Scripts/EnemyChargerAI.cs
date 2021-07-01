@@ -101,12 +101,9 @@ public class EnemyChargerAI : MonoBehaviour, IEnemyCapacity
 
     private void OnTriggerEnter(Collider other) 
     {
-        if(other.transform.parent)
+        if (other.CompareTag("Player"))
         {
-            if (other.transform.parent.CompareTag("Player"))
-            {
-                other.transform.parent.SendMessage("TakeDamage", damage);
-            }
+            other.SendMessage("TakeDamage", damage);
         }
     }
 
