@@ -31,7 +31,6 @@ public class EnemyChargerAI : MonoBehaviour, IEnemyCapacity
         baseCapacity = GetComponent<Enemy>();
     }
 
-
     public void Attack()
     {
         StartCoroutine(AIThink());
@@ -39,31 +38,52 @@ public class EnemyChargerAI : MonoBehaviour, IEnemyCapacity
 
     IEnumerator AIThink() 
     {
+        SetAgentSpeed();
         while (baseCapacity.IsPlayerLocated()) 
         {
             // Time before updating status
             thinkDuration = Random.Range(0.5f, 2.0f);
+            DashOnPlayer();
 
-            baseCapacity.ChasePlayer();
-            SetAgentSpeed();
-            ProcessBehaviourIfPlayerInChargeArea();
+            // baseCapacity.ChasePlayer();
+            // SetAgentSpeed();
+            // ProcessBehaviourIfPlayerInChargeArea();
 
             yield return new WaitForSeconds(thinkDuration);
         }
     }
 
+    private void DashOnPlayer()
+    {
+        Transform playerLocation = baseCapacity.GetPlayerLocation();
+        Vector3 playerPosition = playerLocation.position;
+        
+        Vector3 directionToPlayer = playerPosition - transform.position;
+        directionToPlayer.Normalize();
+
+        Vector3 potentialTarget = playerPosition + 10 * directionToPlayer;
+
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(potentialTarget, out navHit, 10, NavMesh.AllAreas);
+
+        navMeshAgent.SetDestination(navHit.position);
+    }
+
     private void SetAgentSpeed()
     {
-        if (!isPlayerInChargeArea)
-        {
-            navMeshAgent.acceleration = attackAcceleration;
-            navMeshAgent.speed = attackSpeed;
-        }
-        else
-        {
-            navMeshAgent.acceleration = chargeAcceleration;
-            navMeshAgent.speed = chargeSpeed;
-        }
+        navMeshAgent.acceleration = attackAcceleration;
+        navMeshAgent.speed = attackSpeed;
+
+        // if (!isPlayerInChargeArea)
+        // {
+        //     navMeshAgent.acceleration = attackAcceleration;
+        //     navMeshAgent.speed = attackSpeed;
+        // }
+        // else
+        // {
+        //     navMeshAgent.acceleration = chargeAcceleration;
+        //     navMeshAgent.speed = chargeSpeed;
+        // }
     }
 
     private void ProcessBehaviourIfPlayerInChargeArea()

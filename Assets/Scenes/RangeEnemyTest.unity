@@ -380,16 +380,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 797646806092488528, guid: c7950b2567f2ddf42a662fe2d148e646,
-        type: 3}
-      propertyPath: maxWanderDistance
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 797646806092488528, guid: c7950b2567f2ddf42a662fe2d148e646,
-        type: 3}
-      propertyPath: minWanderDistance
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 1834765062854338156, guid: c7950b2567f2ddf42a662fe2d148e646,
         type: 3}
       propertyPath: m_Name
@@ -580,7 +570,7 @@ PrefabInstance:
     - target: {fileID: 1908034502649226214, guid: 7db52fba69001fb4d8fc99cbdf73a23a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7db52fba69001fb4d8fc99cbdf73a23a, type: 3}

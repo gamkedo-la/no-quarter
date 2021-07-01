@@ -18,10 +18,12 @@ public class Enemy : TeleportAgent
     [Header("Speeds")]
     [SerializeField] float wanderSpeed = 5.0f;
     [SerializeField] float wanderAcceleration = 10.0f;
+    [SerializeField] float rotationSpeed = 10.0f;
 
     [Header("Durations")]
     [SerializeField] float redAlertDuration = 5.0f;
     [SerializeField] float minWanderDuration = 3.0f;
+    [SerializeField] float minTimeBeforeLosingPlayer = 1.5f;
 
     private GameObject player = null;
     private NavMeshAgent navMeshAgent;
@@ -38,6 +40,8 @@ public class Enemy : TeleportAgent
 
     private IEnemyCapacity capacity = null;
 
+    private float timeSincePlayerLastSeen = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,29 @@ public class Enemy : TeleportAgent
         capacity = GetComponent<IEnemyCapacity>();
 
         StartCoroutine(AIThink());
+    }
+
+    private void Update()
+    {
+        if (IsPlayerLocated())
+        {
+            RotateTowardsPlayer();
+        }
+    }
+
+    private void RotateTowardsPlayer()
+    {
+        // Determine which direction to rotate towards
+        Vector3 targetDirection = player.transform.position - transform.position;
+
+        // The step size is equal to speed times frame time.
+        float singleStep = rotationSpeed * Time.deltaTime;
+
+        // Rotate the forward vector towards the target direction by one step
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+
+        // Calculate a rotation a step closer to the target and applies rotation to this object
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
     public void TakeDamage(float amount)
@@ -85,6 +112,8 @@ public class Enemy : TeleportAgent
 
         if (isPlayerInDetectionArea && isPlayerVisible)
         {
+            timeSincePlayerLastSeen = 0f;
+
             if (!isPlayerLocated)
             {
                 isPlayerLocated = true;
@@ -94,7 +123,12 @@ public class Enemy : TeleportAgent
         }
         else if (isPlayerLocated)
         {
-            isPlayerLocated = false;
+            timeSincePlayerLastSeen += Time.deltaTime;
+
+            if (timeSincePlayerLastSeen > minTimeBeforeLosingPlayer)
+            {
+                isPlayerLocated = false;
+            }
         }
     }
 
@@ -157,13 +191,17 @@ public class Enemy : TeleportAgent
         if (isPlayerLocated){ return; }
         if (Time.time - timeSinceLastWander < minWanderDuration) { return; }
 
-        do {
+        target = transform.position;
+        for(int i = 0 ; i < 100 ; ++i)
+        {
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * maxWanderDistance;
-            randomDirection += transform.position;
+            target += randomDirection; // += transform.position;
             NavMeshHit navHit;
-            NavMesh.SamplePosition(randomDirection, out navHit, maxWanderDistance, NavMesh.AllAreas);
+            NavMesh.SamplePosition(target, out navHit, maxWanderDistance, NavMesh.AllAreas);
             target = navHit.position;
-        } while(Vector3.Distance(transform.position, target) < minWanderDistance);
+
+            if(Vector3.Distance(transform.position, target) > minWanderDistance) { break; }
+        }
         
         timeSinceLastWander = Time.time;
     }

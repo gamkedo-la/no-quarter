@@ -32,8 +32,6 @@ public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
     {
         if (!baseCapacity.IsPlayerLocated()) {return;}
 
-        transform.LookAt(baseCapacity.GetPlayerLocation());
-
         if (CheckIfInShootingDistance())
         {
             navMeshAgent.isStopped = true;
