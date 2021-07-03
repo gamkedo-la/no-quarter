@@ -42,6 +42,9 @@ public class Enemy : TeleportAgent
 
     private float timeSincePlayerLastSeen = 0f;
 
+    public delegate void Death();
+    public static event Death OnDeath;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +85,7 @@ public class Enemy : TeleportAgent
         if (health <= 0)
         {
             ParticleSystem deathFXClone = Instantiate(deathFX, transform.position, transform.rotation);
+            OnDeath?.Invoke();
             Destroy(deathFXClone.gameObject, 2);
             Destroy(this.gameObject);
         }
