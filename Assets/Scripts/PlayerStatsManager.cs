@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -75,8 +76,7 @@ public class PlayerStatsManager : MonoBehaviour
         if (amount > 0) {
             currentHealth -= amount;
             if (currentHealth <= 0 ) {
-                //TODO: player death or level fail; currently just reset hp to maxhp
-                currentHealth = maxHealth;
+                SceneManager.LoadScene("Scenes/HoldingCell", LoadSceneMode.Single);
             }
         }
         OnHealthChange?.Invoke(currentHealth);
