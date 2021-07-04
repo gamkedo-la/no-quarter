@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 59140a4ed6b8a1b43a6593562a4ccb51
+  - enabled: 1
+    path: Assets/Scenes/HoldingCell.unity
+    guid: c7bff1c35ffbff34ba20e9760ba1237c
+  - enabled: 1
+    path: Assets/Scenes/Store.unity
+    guid: 4c6d1bc2c9424144494f9f1c8782b035
+  - enabled: 1
+    path: Assets/Scenes/Skullboom Arena.unity
+    guid: 34436ed00607c154ca94198f5d85e8ce
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 58d7e1c4d704fe14aa4e9176b6b95af4,
       type: 2}

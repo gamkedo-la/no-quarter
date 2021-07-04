@@ -6,21 +6,45 @@ using UnityEngine.AI;
 
 public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
 {
-    [SerializeField] Projectile projectile;
     [SerializeField] Transform topPart = null;
-    [SerializeField] Transform leftGun = null;
-    [SerializeField] Transform rightGun = null;
+    [SerializeField] ParticleSystem leftGun = null;
+    [SerializeField] ParticleSystem rightGun = null;
     [SerializeField] float timeBeforeShootingOtherGun = 0.2f;
+    [SerializeField] float minDistanceToShoot = 5.0f;
+    [SerializeField] float maxDistanceToShoot = 15.0f;
+    [SerializeField] float shotDamage = 5.0f;
 
     private NavMeshAgent navMeshAgent;
     private Enemy baseCapacity;
+
+    private float shotDuration = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         baseCapacity = GetComponent<Enemy>();
+
+        shotDuration = leftGun.main.duration;
     }
+
+    private void Update()
+    {
+        if (!baseCapacity.IsPlayerLocated()) {return;}
+
+        if (CheckIfInShootingDistance())
+        {
+            navMeshAgent.isStopped = true;
+        }
+
+    }
+
+    private bool CheckIfInShootingDistance()
+    {
+        return (baseCapacity.GetDistanceToPlayer() > minDistanceToShoot && 
+                baseCapacity.GetDistanceToPlayer() < maxDistanceToShoot);
+    }
+
     public void Attack()
     {
         StartCoroutine(AIThink());
@@ -30,64 +54,57 @@ public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
     {
         while (baseCapacity.IsPlayerLocated())
         {
-            baseCapacity.ChasePlayer();
-            Fire(transform.forward);
-            yield return new WaitForSeconds(UnityEngine.Random.Range(1.0f, 2.5f));
+            RemainWithinShootingRange();
+
+            Fire();
+
+            float timeBeforeNextShot = shotDuration + UnityEngine.Random.Range(0.5f, 1.5f);
+
+            yield return new WaitForSeconds(timeBeforeNextShot);
         }
     }
 
-    private void Fire(Vector3 fireDirection)
+    private void RemainWithinShootingRange()
     {
-        var fireDirections = GetProjectileDirections(fireDirection);
+        if (baseCapacity.GetDistanceToPlayer() > maxDistanceToShoot)
+        {
+            baseCapacity.ChasePlayer();
+        }
+        else if (baseCapacity.GetDistanceToPlayer() < minDistanceToShoot)
+        {
+            Vector3 playerPosition = baseCapacity.GetPlayerLocation().position;
+            Vector3 directionToPlayer = playerPosition - transform.position;
+            directionToPlayer.Normalize();
 
-        StartCoroutine(FireBothGuns(fireDirections));
+            Vector3 destination = playerPosition - minDistanceToShoot * directionToPlayer;
+
+            if (navMeshAgent.isStopped) { navMeshAgent.isStopped = false; }
+            navMeshAgent.SetDestination(destination);
+        }
     }
 
-    private IEnumerator FireBothGuns(List<Vector3> fireDirections)
+    private void Fire()
     {
-        FireOneGun(fireDirections, leftGun.position);
+        StartCoroutine(FireBothGuns());
+    }
+
+    private IEnumerator FireBothGuns()
+    {
+        FireOneGun(leftGun);
 
         yield return new WaitForSeconds(timeBeforeShootingOtherGun);
         
-        FireOneGun(fireDirections, rightGun.position);
+        FireOneGun(rightGun);
     }
 
-    private void FireOneGun(List<Vector3> fireDirections, Vector3 gunPosition)
+    private void FireOneGun(ParticleSystem gun)
     {
-        foreach (var dir in fireDirections)
-        {
-            var projectileInstance = Instantiate(projectile, gunPosition, topPart.rotation);
-            var projectileComponent = projectileInstance.GetComponent<Projectile>();
-            projectileComponent.projectileDirection = dir;
-            Destroy(projectileInstance.gameObject, 3.0f);
-        }
+        // gun.transform.LookAt(baseCapacity.GetPlayerLocation());
+        gun.Play();
     }
 
-    List<Vector3> GetProjectileDirections(Vector3 originalDirection)
+    public float GetDamageAmount()
     {
-        var numProjectiles = GetProjectileCount();
-        List<Vector3> directions = new List<Vector3>();
-
-        if (numProjectiles > 1)
-        {
-            for (var i = 0; i < numProjectiles; i++)
-            {
-                Vector3 spread = UnityEngine.Random.insideUnitCircle * 0.1f;
-                var skewedDirection = originalDirection + (spread.x * topPart.right) + (spread.y * topPart.up);
-                directions.Add(skewedDirection);
-            }
-        }
-        else
-        {
-            directions.Add(originalDirection);
-        }
-
-        return directions;
-    }
-
-    int GetProjectileCount()
-    {
-        var projectileCount = projectile.baseProjectileCount;
-        return projectileCount;
+        return shotDamage;
     }
 }

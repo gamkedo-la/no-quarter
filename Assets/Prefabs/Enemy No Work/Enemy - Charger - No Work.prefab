@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7360212556673733378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920783771634626720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d7073651fd34c4faa517100889ce41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 30
+  rechargeTime: 3
 --- !u!1001 &3395442589676017356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,7 +79,13 @@ PrefabInstance:
     - target: {fileID: 1834765062854338156, guid: c7950b2567f2ddf42a662fe2d148e646,
         type: 3}
       propertyPath: m_Name
-      value: Enemy - Charger Variant
+      value: Enemy - Charger - No Work
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7950b2567f2ddf42a662fe2d148e646, type: 3}
+--- !u!1 &3920783771634626720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1834765062854338156, guid: c7950b2567f2ddf42a662fe2d148e646,
+    type: 3}
+  m_PrefabInstance: {fileID: 3395442589676017356}
+  m_PrefabAsset: {fileID: 0}

@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -20,6 +21,7 @@ public class StoreUI : MonoBehaviour
     [SerializeField] private Transform gridLayoutGroup;
     [SerializeField] private Button purchaseButton;
     [SerializeField] private TMP_Text playerCurrency;
+    [SerializeField] private Button exitButton;
     [Space]
     [Header("Prefabs")]
     [SerializeField] private GameObject storeItemPrefab;
@@ -39,12 +41,19 @@ public class StoreUI : MonoBehaviour
 
         // Assign dynamic component references.
         playerStatsManager = FindObjectOfType<PlayerStatsManager>();
-        UpdatePlayerCurrency(playerStatsManager.GetCurrency());
+        // var currency = playerStatsManager == null ? 10000 : playerStatsManager?.GetCurrency();
+        UpdatePlayerCurrency(10000);
 
-        itemsOwned = playerStatsManager.GetItemsOwned();
+        // itemsOwned = playerStatsManager.GetItemsOwned();
+        itemsOwned = new List<ScriptableObject>();
 
         // Register purchase button event.
         purchaseButton.onClick.AddListener(() => PurchaseItem());
+
+        exitButton.onClick.AddListener(() =>
+        {
+            SceneManager.UnloadSceneAsync("Scenes/Store");
+        });
 
         if (playerStatsManager == null)
         {

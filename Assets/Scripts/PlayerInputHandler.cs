@@ -57,6 +57,11 @@ public class PlayerInputHandler : TeleportAgent
     public bool isMoving = false;
     private bool isJumping = false;
 
+    // Interact
+    public Interactable interactionTarget;
+    public float interactionDistance = 2f;
+    public LayerMask interactionMask;
+
     [SerializeField]
     private CapsuleCollider capsuleCollider;
     private Vector3 playerJumpVelocity = Vector3.zero;
@@ -113,6 +118,25 @@ public class PlayerInputHandler : TeleportAgent
         {
             TogglePause();
         };
+        playerActions.Interact.performed += ctx =>
+        {
+            if (interactionTarget)
+            {
+                interactionTarget.started += () =>
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    playerActions.Disable();
+                };
+                interactionTarget.finished += () =>
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    playerActions.Enable();
+                };
+                interactionTarget.HandleInteraction(gameObject);
+            }
+        };
 
         // Swap Weapon Controls
         playerActions.ScrollWeapon.performed += ctx => {
@@ -155,6 +179,8 @@ public class PlayerInputHandler : TeleportAgent
     // Update is called once per frame
     void Update()
     {
+        DetectInteractables();
+
         if (canTeleport)
             Look(Time.deltaTime);
         
@@ -183,6 +209,19 @@ public class PlayerInputHandler : TeleportAgent
         float xRotation = lookDelta.y * lookSpeed * cameraRotationDirection;
         cameraRotation = Mathf.Clamp(cameraRotation + xRotation, cameraMinAngle, cameraMaxAngle);
         playerCamera.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
+    }
+
+    void DetectInteractables()
+    {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo, interactionDistance, interactionMask))
+        {
+            interactionTarget = hitInfo.transform.GetComponentInParent<Interactable>();
+        }
+        else
+        {
+            interactionTarget = null;
+        }
     }
 
     IEnumerator PlayFootsteps()
