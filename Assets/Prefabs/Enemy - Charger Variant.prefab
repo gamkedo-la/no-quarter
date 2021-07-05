@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5922186477924885396}
-  - component: {fileID: 4447630029485581793}
   m_Layer: 0
   m_Name: charger_bot
   m_TagString: Untagged
@@ -30,22 +29,8 @@ Transform:
   m_Children:
   - {fileID: 8402538914377303488}
   m_Father: {fileID: 22523619984722226}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &4447630029485581793
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768617816969068419}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3145058497754134291, guid: 7bdce7fd0d8cdf94ea794901ec728c6f, type: 3}
 --- !u!114 &4842776679623425657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,10 +46,23 @@ MonoBehaviour:
   chargeDistance: 10
   attackSpeed: 40
   attackAcceleration: 80
-  chargeSpeed: 80
-  chargeAcceleration: 160
-  pauseBeforeCharge: 0.1
+  chargeSpeed: 200
+  chargeAcceleration: 500
+  pauseBeforeCharge: 0.01
   damage: 10
+--- !u!65 &406161672677586958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834765062854338156}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.15, y: 3.5, z: 3}
+  m_Center: {x: 0.02, y: 0.05, z: -0.15}
 --- !u!1 &4645119294111231810
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +91,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22523619984722226}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6013344809478648263
 GameObject:
@@ -203,37 +201,37 @@ PrefabInstance:
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.87
+      value: -3.2805352
       objectReference: {fileID: 0}
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.79
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.79
+      value: -39.66466
       objectReference: {fileID: 0}
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
-        type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
+        type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
@@ -243,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6132492781126753693, guid: 0b7c9a472872d8f4cb8947c9a1bc6b20,
         type: 3}
