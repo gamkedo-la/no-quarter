@@ -31,6 +31,19 @@ Transform:
   m_Father: {fileID: 22523619984722226}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &406161672677586958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834765062854338156}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.15, y: 3.5, z: 3}
+  m_Center: {x: 0.02, y: 0.05, z: -0.15}
 --- !u!114 &4842776679623425657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,19 +63,6 @@ MonoBehaviour:
   chargeAcceleration: 500
   pauseBeforeCharge: 0.01
   damage: 10
---- !u!65 &406161672677586958
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834765062854338156}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.15, y: 3.5, z: 3}
-  m_Center: {x: 0.02, y: 0.05, z: -0.15}
 --- !u!1 &4645119294111231810
 GameObject:
   m_ObjectHideFlags: 0

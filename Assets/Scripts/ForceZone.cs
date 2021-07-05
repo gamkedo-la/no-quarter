@@ -10,11 +10,13 @@ public class ForceZone : MonoBehaviour
  
     void OnTriggerEnter(Collider collidee)
     {
-          AffectedObjects.Add(collidee.gameObject);
+       if(collidee.CompareTag("Enemy")) { return; }
+       AffectedObjects.Add(collidee.gameObject);
     }
  
     void OnTriggerExit(Collider collidee)
     {
+       if(collidee.CompareTag("Enemy")) { return; }
        AffectedObjects.Remove(collidee.gameObject);
     }
  

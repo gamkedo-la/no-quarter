@@ -385,26 +385,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy - Charger Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 1834765062854338156, guid: c7950b2567f2ddf42a662fe2d148e646,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4842776679623425657, guid: c7950b2567f2ddf42a662fe2d148e646,
-        type: 3}
-      propertyPath: chargeSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4842776679623425657, guid: c7950b2567f2ddf42a662fe2d148e646,
-        type: 3}
-      propertyPath: pauseBeforeCharge
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4842776679623425657, guid: c7950b2567f2ddf42a662fe2d148e646,
-        type: 3}
-      propertyPath: chargeAcceleration
-      value: 500
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7950b2567f2ddf42a662fe2d148e646, type: 3}
 --- !u!1 &471259166
@@ -566,11 +546,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy - Range
-      objectReference: {fileID: 0}
-    - target: {fileID: 1908034502649226214, guid: 7db52fba69001fb4d8fc99cbdf73a23a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7db52fba69001fb4d8fc99cbdf73a23a, type: 3}
@@ -886,7 +861,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907622887}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8423b7e1067eb2e4094d9e540d533ff4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
