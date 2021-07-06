@@ -132,6 +132,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   dashSFX: {fileID: 8300000, guid: 5463d65d169f50745bbbd5906323b9d9, type: 3}
   dashSFXVolume: 0.2
+  jumpSFX: {fileID: 8300000, guid: 2e84dfd7e32b2de409655cf37b1c4767, type: 3}
+  jumpSFXVolume: 1
   cameraMaxAngle: 60
   cameraMinAngle: -60
   invertCameraRotation: 0
@@ -142,6 +144,7 @@ MonoBehaviour:
   fireDelay: 0.3
   equippedMods: []
   isMoving: 0
+  interactionTarget: {fileID: 0}
   interactionDistance: 4
   interactionMask:
     serializedVersion: 2

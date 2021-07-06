@@ -20,6 +20,11 @@ public class PlayerInputHandler : TeleportAgent
     [SerializeField] private AudioClip dashSFX;
     [Range(0f, 1f)]
     [SerializeField] private float dashSFXVolume = 1f;
+    
+    [Header("Jump")]
+    [SerializeField] private AudioClip jumpSFX;
+    [Range(0f, 1f)]
+    [SerializeField] private float jumpSFXVolume = 1f;
 
     private CharacterController characterController;
     private Transform playerCamera;
@@ -265,6 +270,7 @@ public class PlayerInputHandler : TeleportAgent
             // Debug.Log(capsuleCollider.bounds.size.y);
             playerJumpVelocity.y += Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
             isJumping = false;
+            AudioManager.Instance.PlaySFX(jumpSFX, gameObject, jumpSFXVolume, 1f, 0f);
         }
         playerJumpVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerJumpVelocity * Time.deltaTime);
