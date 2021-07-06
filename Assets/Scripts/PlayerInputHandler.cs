@@ -258,10 +258,10 @@ public class PlayerInputHandler : TeleportAgent
         {
             playerJumpVelocity.y = 0f;
         }
-        if (characterController.isGrounded && isJumping)
+        if (isJumping && characterController.isGrounded)
         {
             // characterController.height
-            float jumpHeight = characterController.height;
+            float jumpHeight = characterController.height * 2;
             // Debug.Log(capsuleCollider.bounds.size.y);
             playerJumpVelocity.y += Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
             isJumping = false;
