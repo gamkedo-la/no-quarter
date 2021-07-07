@@ -71,6 +71,10 @@ MonoBehaviour:
   canTeleport: 1
   moveSpeed: 20
   lookSpeed: 0.2
+  gravityValue: -98.1
+  jumpHeight: 8
+  jumpSFX: {fileID: 8300000, guid: 2e84dfd7e32b2de409655cf37b1c4767, type: 3}
+  jumpSFXVolume: 1
   dashDistance: 20
   dashTime: 0.4
   dashSmoothingCurve:
@@ -132,24 +136,16 @@ MonoBehaviour:
     m_RotationOrder: 4
   dashSFX: {fileID: 8300000, guid: 5463d65d169f50745bbbd5906323b9d9, type: 3}
   dashSFXVolume: 0.2
-  jumpSFX: {fileID: 8300000, guid: 2e84dfd7e32b2de409655cf37b1c4767, type: 3}
-  jumpSFXVolume: 1
   cameraMaxAngle: 60
   cameraMinAngle: -60
   invertCameraRotation: 0
+  fireDelay: 0.3
+  weaponSwitchDuration: 0.3
   projectile: {fileID: 4116877043479323930, guid: 053b799fad1fbd14cae31109e2fc0d12,
     type: 3}
   activeWeapon: {fileID: 786251927015969258}
   firePosition: {fileID: 6191812220765478465}
-  fireDelay: 0.3
   equippedMods: []
-  isMoving: 0
-  interactionTarget: {fileID: 0}
-  interactionDistance: 4
-  interactionMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  capsuleCollider: {fileID: 4683705198333698965}
   OnFire:
     m_PersistentCalls:
       m_Calls:
@@ -165,11 +161,22 @@ MonoBehaviour:
           m_StringArgument: Fire
           m_BoolArgument: 0
         m_CallState: 2
+  canDash: 1
+  canFire: 1
+  isFiring: 0
+  isMoving: 0
+  isJumping: 0
+  isSwitchingWeapon: 0
   footstepPace: 0.333
   footstepSFX:
   - {fileID: 8300000, guid: ebe5325eb7d50584bb1b5126a9ea220b, type: 3}
   - {fileID: 8300000, guid: b263d10be9e14d742b84dcfbc0534567, type: 3}
-  weaponSwitchDuration: 0.3
+  interactionTarget: {fileID: 0}
+  interactionDistance: 4
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  capsuleCollider: {fileID: 4683705198333698965}
 --- !u!114 &8813864339694419779
 MonoBehaviour:
   m_ObjectHideFlags: 0

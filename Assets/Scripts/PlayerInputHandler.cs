@@ -8,82 +8,71 @@ using UnityEngine.Events;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerInputHandler : TeleportAgent
 {
-    public float moveSpeed = 10f;
-    [SerializeField]
-    private float lookSpeed = 3f;
-
-    [Header("Dash")]
-    [SerializeField] private float dashDistance = 1f;
-    [SerializeField] private float dashTime = 0.333f;
-    [SerializeField] private AnimationCurve dashSmoothingCurve;
-    [SerializeField] private AnimationCurve dashFovCurve;
-    [SerializeField] private AudioClip dashSFX;
-    [Range(0f, 1f)]
-    [SerializeField] private float dashSFXVolume = 1f;
-    
-    [Header("Jump")]
-    [SerializeField] private AudioClip jumpSFX;
-    [Range(0f, 1f)]
-    [SerializeField] private float jumpSFXVolume = 1f;
-
     private CharacterController characterController;
     private Transform playerCamera;
-
-    [SerializeField]
-    private float cameraMaxAngle = 60f;
-    [SerializeField]
-    private float cameraMinAngle = -60f;
-    private float cameraRotation = 0f;
-    [SerializeField]
-    private bool invertCameraRotation = false;
-
-    [SerializeField]
-    private Projectile projectile;
-    [SerializeField]
-    private FPSWeapon activeWeapon;
-    private WeaponSwitch weaponSwitcher;
-    [SerializeField]
-    private Transform firePosition;
-    [SerializeField]
-    private float fireDelay = 0.3f;
-    private bool canFire = true;
-
-    private bool canDash = true;
-    public delegate void DashStarted();
-    public static event DashStarted dashStarted;
-
-    public List<WeaponMod> equippedMods;
-
     private FPSPlayerControls controls;
     private FPSPlayerControls.PlayerActions playerActions;
 
-    // Toggled by PlayerInput events
-    private bool isFiring = false;
-    public bool isMoving = false;
-    private bool isJumping = false;
+    [Header("Movement")]
+    public float moveSpeed = 10f;
+    public float lookSpeed = 3f;
+    public float gravityValue = -9.81f;
 
-    // Interact
-    public Interactable interactionTarget;
-    public float interactionDistance = 2f;
-    public LayerMask interactionMask;
-
-    [SerializeField]
-    private CapsuleCollider capsuleCollider;
+    [Header("Jump")]
+    public float jumpHeight = 8f;
+    public AudioClip jumpSFX;
+    [Range(0f, 1f)]
+    public float jumpSFXVolume = 1f;
     private Vector3 playerJumpVelocity = Vector3.zero;
-    private float gravityValue = -9.81f;
 
+    [Header("Dash")]
+    public float dashDistance = 1f;
+    public float dashTime = 0.333f;
+    public AnimationCurve dashSmoothingCurve;
+    public AnimationCurve dashFovCurve;
+    public AudioClip dashSFX;
+    [Range(0f, 1f)]
+    public float dashSFXVolume = 1f;
+    public delegate void DashStarted();
+    public static event DashStarted dashStarted;
+    
+    [Header("Camera")]
+    public float cameraMaxAngle = 60f;
+    public float cameraMinAngle = -60f;
+    private float cameraRotation = 0f;
+    public bool invertCameraRotation = false;
+
+    [Header("Weapons")]
+    public float fireDelay = 0.3f;
+    public float weaponSwitchDuration = 0.3f;
+    public Projectile projectile;
+    public FPSWeapon activeWeapon;
+    private WeaponSwitch weaponSwitcher;
+    public Transform firePosition;
+    public List<WeaponMod> equippedMods;
     public UnityEvent OnFire;
-
-    public float footstepPace = 0.333f;
-    public List<AudioClip> footstepSFX = new List<AudioClip>();
-
-    private SfxHelper sfx;
-
-    private bool isSwitchingWeapon = false;
-    [SerializeField] private float weaponSwitchDuration = 0.3f;
     public delegate void WeaponScroll(int scrollDirection);
     public static event WeaponScroll OnWeaponScroll;
 
+    // Toggled by PlayerInput events
+    [Header("Current State")]
+    public bool canDash = true;
+    public bool canFire = true;
+    public bool isFiring = false;
+    public bool isMoving = false;
+    public bool isJumping = false;
+    public bool isSwitchingWeapon = false;
+
+    [Header("Footsteps")]
+    public float footstepPace = 0.333f;
+    public List<AudioClip> footstepSFX = new List<AudioClip>();
+    private SfxHelper sfx;
+
+    [Header("Interactions")]
+    public Interactable interactionTarget;
+    public float interactionDistance = 2f;
+    public LayerMask interactionMask;
+    public CapsuleCollider capsuleCollider;
     public delegate void Pause();
     public static event Pause OnPause;
 
@@ -266,7 +255,7 @@ public class PlayerInputHandler : TeleportAgent
         if (isJumping && characterController.isGrounded)
         {
             // characterController.height
-            float jumpHeight = characterController.height * 2;
+            //float jumpHeight = characterController.height * 2;
             // Debug.Log(capsuleCollider.bounds.size.y);
             playerJumpVelocity.y += Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
             isJumping = false;
