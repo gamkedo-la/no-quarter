@@ -36,7 +36,7 @@ public class Enemy : TeleportAgent
     private bool isInRedAlertMode = false;
     private float distanceToPlayer;
     private float angleToPlayer;
-    private float timeSinceLastWander = 0.0f;
+    private float timeTillNextWander = 0.0f;
 
     private IEnemyCapacity capacity = null;
 
@@ -95,6 +95,10 @@ public class Enemy : TeleportAgent
 
     IEnumerator AIThink() 
     {
+        // isPlayerLocated = false;
+        // SetTarget();
+        // yield return new WaitForSeconds(4.0f);
+
         while (true) 
         {
             // Time before updating status
@@ -102,7 +106,6 @@ public class Enemy : TeleportAgent
 
             LookForPlayer();
             SetTarget();
-
             yield return new WaitForSeconds(thinkDuration);
         }
     }
@@ -193,10 +196,14 @@ public class Enemy : TeleportAgent
     private void RandomWander()
     {
         if (isPlayerLocated){ return; }
-        if (Time.time - timeSinceLastWander < minWanderDuration) { return; }
+        if (timeTillNextWander > 0) { 
+            timeTillNextWander -= Time.deltaTime;
+            return;
+        }
 
         target = transform.position;
-        for(int i = 0 ; i < 100 ; ++i)
+        int i = 0;
+        for(i = 0 ; i < 100 ; ++i)
         {
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * maxWanderDistance;
             target += randomDirection; // += transform.position;
@@ -207,7 +214,7 @@ public class Enemy : TeleportAgent
             if(Vector3.Distance(transform.position, target) > minWanderDistance) { break; }
         }
         
-        timeSinceLastWander = Time.time;
+        timeTillNextWander = minWanderDuration;
     }
 
     private IEnumerator EnterRedAlertMode()

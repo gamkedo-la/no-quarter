@@ -37,7 +37,8 @@ public class EnemySpawnLocation : MonoBehaviour
                for (var i = 0; i < tier; i++)
                {
                     var enemyType = enemyQueue[i];
-                    Instantiate(enemyType, transform);
+                    Vector3 spawnAt = transform.position + Vector3.up * 1.5f + UnityEngine.Random.insideUnitSphere;
+                    Instantiate(enemyType, spawnAt, transform.rotation) ; //transform);
                }
 
                yield return new WaitForSeconds(spawnInterval);
