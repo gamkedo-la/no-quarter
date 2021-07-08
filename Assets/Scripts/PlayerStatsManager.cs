@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -27,14 +28,18 @@ public class PlayerStatsManager : MonoBehaviour
     public static event Action<int> OnStaminaChange;
 
     public List<AudioClip> heartbeats = new List<AudioClip>();
-    [SerializeField] AudioClip hurtSound = null;
     public float heartbeatPace = 1f;
     private SfxHelper sfx;
+
+    [Header("Damage")]
+    [SerializeField] AudioClip hurtSound = null;
 
     public delegate void HealthChange(float currentHealth);
     public static event HealthChange OnHealthChange;
 
     private PlayerInputHandler playerInputHandler;
+
+    
 
     private void OnEnable() {
         PlayerInputHandler.dashStarted += UseStaminaCharge;
@@ -80,6 +85,7 @@ public class PlayerStatsManager : MonoBehaviour
                 SceneManager.LoadScene("Scenes/HoldingCell", LoadSceneMode.Single);
             }
         }
+        FindObjectOfType<HurtScreen>().ShowHurtScreen();
         sfx.PlayAudioOneshot(hurtSound, 0.7f, 1.0f, 0.9f, 1.1f);
         OnHealthChange?.Invoke(currentHealth);
     }
