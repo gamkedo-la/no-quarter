@@ -9,6 +9,7 @@ public class Enemy : TeleportAgent
     [SerializeField] private float health = 2.0f;    
     [SerializeField] ParticleSystem deathFX = null;
     [SerializeField] float viewCone = 60.0f;
+    [SerializeField] AudioClip deathSFX = null;
 
     [Header("Distances")]
     [SerializeField] float detectionDistance = 20.0f;
@@ -84,13 +85,20 @@ public class Enemy : TeleportAgent
         health -= amount;
         if (health <= 0)
         {
-            ParticleSystem deathFXClone = Instantiate(deathFX, transform.position, transform.rotation);
-            OnDeath?.Invoke();
-            Destroy(deathFXClone.gameObject, 2);
-            Destroy(this.gameObject);
+            Die();
         }
 
         StartCoroutine(EnterRedAlertMode());
+    }
+
+    private void Die()
+    {
+        ParticleSystem deathFXClone = Instantiate(deathFX, transform.position, transform.rotation);
+        OnDeath?.Invoke();
+        AudioSource.PlayClipAtPoint(deathSFX, transform.position);
+        
+        Destroy(deathFXClone.gameObject, 2);
+        Destroy(this.gameObject);
     }
 
     IEnumerator AIThink() 

@@ -13,9 +13,11 @@ public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
     [SerializeField] float minDistanceToShoot = 5.0f;
     [SerializeField] float maxDistanceToShoot = 15.0f;
     [SerializeField] float shotDamage = 5.0f;
+    [SerializeField] AudioClip laserSFX = null;
 
     private NavMeshAgent navMeshAgent;
     private Enemy baseCapacity;
+    private AudioSource audioSource;
 
     private float shotDuration = 0f;
 
@@ -24,6 +26,7 @@ public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         baseCapacity = GetComponent<Enemy>();
+        audioSource = GetComponent<AudioSource>();
 
         shotDuration = leftGun.main.duration;
     }
@@ -101,6 +104,7 @@ public class EnemyRangeAI : MonoBehaviour, IEnemyCapacity
     {
         // gun.transform.LookAt(baseCapacity.GetPlayerLocation());
         gun.Play();
+        audioSource.PlayOneShot(laserSFX);
     }
 
     public float GetDamageAmount()

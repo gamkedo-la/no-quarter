@@ -388,8 +388,13 @@ PrefabInstance:
     - target: {fileID: 1834765062854338156, guid: c7950b2567f2ddf42a662fe2d148e646,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4842776679623425657, guid: c7950b2567f2ddf42a662fe2d148e646,
+        type: 3}
+      propertyPath: dashSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: f2db4ed920ddf5f48a9cb554c66b843a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7950b2567f2ddf42a662fe2d148e646, type: 3}
 --- !u!1 &471259166
@@ -1200,6 +1205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemy spawn pad
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211561581070610179, guid: e201c1b3c9fcfdd4a8b5a47437dcbc88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e201c1b3c9fcfdd4a8b5a47437dcbc88, type: 3}
