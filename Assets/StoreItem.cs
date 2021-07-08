@@ -21,6 +21,7 @@ public class StoreItem : MonoBehaviour
             var mod = (WeaponMod) itemObject;
             item = mod;
             icon.sprite = mod.icon;
+            icon.color = mod.iconColor;
         }
     }
 

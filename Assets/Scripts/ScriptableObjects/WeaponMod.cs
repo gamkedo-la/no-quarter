@@ -10,6 +10,7 @@ public abstract class WeaponMod : ScriptableObject
     [TextArea]
     public string description;
     public Sprite icon;
+    public Color iconColor;
 
     public float damageMultiplier = 1.0f;
     public int additionalProjectiles = 0;
