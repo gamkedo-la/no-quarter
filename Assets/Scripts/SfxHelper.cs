@@ -29,4 +29,15 @@ public class SfxHelper : MonoBehaviour
             return -1;
         }
     }
+
+    public void PlayAudioOneshot(AudioClip clip, float minVolume, float maxVolume, float minPitch, float maxPitch)
+    {
+       
+        AudioManager.Instance.PlaySFX(
+            clip,
+            gameObject,
+            UnityEngine.Random.Range(minVolume, maxVolume),
+            UnityEngine.Random.Range(minPitch, maxPitch),
+            0f);
+    }
 }

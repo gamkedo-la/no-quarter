@@ -27,6 +27,7 @@ public class PlayerStatsManager : MonoBehaviour
     public static event Action<int> OnStaminaChange;
 
     public List<AudioClip> heartbeats = new List<AudioClip>();
+    [SerializeField] AudioClip hurtSound = null;
     public float heartbeatPace = 1f;
     private SfxHelper sfx;
 
@@ -79,6 +80,7 @@ public class PlayerStatsManager : MonoBehaviour
                 SceneManager.LoadScene("Scenes/HoldingCell", LoadSceneMode.Single);
             }
         }
+        sfx.PlayAudioOneshot(hurtSound, 0.7f, 1.0f, 0.9f, 1.1f);
         OnHealthChange?.Invoke(currentHealth);
     }
 

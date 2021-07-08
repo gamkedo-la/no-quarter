@@ -297,6 +297,7 @@ MonoBehaviour:
   heartbeats:
   - {fileID: 8300000, guid: 0f2483c20f1764b4183151eac3576ff4, type: 3}
   - {fileID: 8300000, guid: e36bdd6a6ef04214790183a2ec7a2269, type: 3}
+  hurtSound: {fileID: 8300000, guid: ae0ad597237348c458eabae957968a1e, type: 3}
   heartbeatPace: 1
 --- !u!114 &5352909644043770458
 MonoBehaviour:
