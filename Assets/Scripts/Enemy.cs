@@ -63,6 +63,8 @@ public class Enemy : TeleportAgent
         {
             RotateTowardsPlayer();
         }
+        
+        timeTillNextWander -= Time.deltaTime;
     }
 
     private void RotateTowardsPlayer()
@@ -96,17 +98,13 @@ public class Enemy : TeleportAgent
         ParticleSystem deathFXClone = Instantiate(deathFX, transform.position, transform.rotation);
         OnDeath?.Invoke();
         AudioSource.PlayClipAtPoint(deathSFX, transform.position);
-        
+
         Destroy(deathFXClone.gameObject, 2);
         Destroy(this.gameObject);
     }
 
     IEnumerator AIThink() 
     {
-        // isPlayerLocated = false;
-        // SetTarget();
-        // yield return new WaitForSeconds(4.0f);
-
         while (true) 
         {
             // Time before updating status
@@ -204,14 +202,11 @@ public class Enemy : TeleportAgent
     private void RandomWander()
     {
         if (isPlayerLocated){ return; }
-        if (timeTillNextWander > 0) { 
-            timeTillNextWander -= Time.deltaTime;
-            return;
-        }
+        if (timeTillNextWander > 0) { return; }
 
         target = transform.position;
-        int i = 0;
-        for(i = 0 ; i < 100 ; ++i)
+        
+        for(int i = 0 ; i < 100 ; ++i)
         {
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * maxWanderDistance;
             target += randomDirection; // += transform.position;
