@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public class HurtySphere : MonoBehaviour
@@ -20,7 +21,7 @@ public class HurtySphere : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            playerStats.TakeDamage(damageAmount);
+            other.SendMessage("TakeDamage", damageAmount);
             m_Collider.enabled = false;
             gameObject.transform.localScale = Vector3.zero;
             StartCoroutine(WaitForRecharge());

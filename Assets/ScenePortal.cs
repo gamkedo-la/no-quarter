@@ -13,7 +13,7 @@ public class ScenePortal : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            SceneWrangler.Instance.LoadScene(scene);
         }
     }
 }

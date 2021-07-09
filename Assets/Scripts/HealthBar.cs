@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,9 +32,13 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
-        currentHealth = playerStats.currentHealth;
-        maxHealth = playerStats.maxHealth;
-        healthWarningThreashold = playerStats.lowHealthThreshold;
+
+        if (playerStats)
+        {
+            currentHealth = playerStats.currentHealth;
+            maxHealth = playerStats.maxHealth;
+            healthWarningThreashold = playerStats.lowHealthThreshold;
+        }
     }
 
     private void UpdateHealthBarFill()
@@ -48,7 +53,7 @@ public class HealthBar : MonoBehaviour
     }
 
     private void UpdateHealth(float newHealth)
-    {   
+    {
         StartCoroutine(HealthBarLerp(newHealth, lerpTime));
         currentHealth = newHealth;
         if (currentHealth < healthWarningThreashold)

@@ -82,7 +82,7 @@ public class PlayerStatsManager : MonoBehaviour
         if (amount > 0) {
             currentHealth -= amount;
             if (currentHealth <= 0 ) {
-                SceneManager.LoadScene("Scenes/HoldingCell", LoadSceneMode.Single);
+                SceneWrangler.Instance.LoadScene("Scenes/HoldingCell");
             }
         }
         FindObjectOfType<HurtScreen>().ShowHurtScreen();

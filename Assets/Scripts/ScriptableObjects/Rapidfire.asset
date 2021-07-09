@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Rapidfire
   description: Greatly increases the weapon's rate of fire. Reduces damage per projectile.
-  icon: {fileID: 7388921765012655795, guid: b01ab67faf6b94e7aa71de3d383446eb, type: 3}
+  icon: {fileID: 21300000, guid: a571034a3757ba146af289347d2680a5, type: 3}
+  iconColor: {r: 0.21960786, g: 0.7176471, b: 0.3921569, a: 1}
   damageMultiplier: 0.5
   additionalProjectiles: 0
   fireDelayMultiplier: 0.2
