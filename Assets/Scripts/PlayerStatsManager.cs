@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.PlayerLoop;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -39,7 +40,12 @@ public class PlayerStatsManager : MonoBehaviour
 
     private PlayerInputHandler playerInputHandler;
 
-    
+    [Header("Time Alive Rewards")]
+    [SerializeField] private float timeAlive = 0.0f;
+    [SerializeField] private float currencyMultiplierForTimeAlive = 1f;
+    [SerializeField] private float currencyMultiplierForexponentialGrowth = 1.2f;
+
+
 
     private void OnEnable() {
         PlayerInputHandler.dashStarted += UseStaminaCharge;
@@ -55,6 +61,7 @@ public class PlayerStatsManager : MonoBehaviour
         // if (saveData == null) LoadGame();
         // TODO: remove this later
         // saveData.currency = 10000;
+        timeAlive = 0.0f;
         currentHealth = maxHealth;
         sfx = GetComponent<SfxHelper>();
         StartCoroutine(PlayHeartbeat());
@@ -72,6 +79,11 @@ public class PlayerStatsManager : MonoBehaviour
             itemsOwned.Add(weaponModToAdd);
             playerInputHandler.equippedMods.Add(weaponModToAdd);
         }
+    }
+
+    void Update()
+    {
+        timeAlive += Time.deltaTime;
     }
 
     IEnumerator PlayHeartbeat()
@@ -94,12 +106,20 @@ public class PlayerStatsManager : MonoBehaviour
         if (amount > 0) {
             currentHealth -= amount;
             if (currentHealth <= 0 ) {
+                GiveCurrencyBasedOnTimeAlive();
                 SceneWrangler.Instance.LoadScene("Scenes/HoldingCell");
             }
         }
         FindObjectOfType<HurtScreen>().ShowHurtScreen();
         sfx.PlayAudioOneshot(hurtSound, 0.7f, 1.0f, 0.9f, 1.1f);
         OnHealthChange?.Invoke(currentHealth);
+    }
+
+    private void GiveCurrencyBasedOnTimeAlive()
+    {
+        float currencyToBeAdded = Mathf.Pow(currencyMultiplierForTimeAlive * timeAlive, currencyMultiplierForexponentialGrowth);
+        var gm = GameManager.Instance;
+        gm.saveData.currency += (int)Mathf.Floor(currencyToBeAdded);
     }
 
     public void RestoreHealth(float amount)
