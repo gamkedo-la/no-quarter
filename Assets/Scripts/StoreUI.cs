@@ -35,17 +35,22 @@ public class StoreUI : MonoBehaviour
     void Start()
     {
         // TODO: instantiate this based on player's save game data.
+        var saveData = GameManager.Instance.saveData;
 
         // Remove example items from hierarchy.
         gridLayoutGroup.gameObject.DestroyAllChildren();
 
         // Assign dynamic component references.
         playerStatsManager = FindObjectOfType<PlayerStatsManager>();
-        // var currency = playerStatsManager == null ? 10000 : playerStatsManager?.GetCurrency();
-        UpdatePlayerCurrency(10000);
+        UpdatePlayerCurrency(saveData.currency);
 
-        // itemsOwned = playerStatsManager.GetItemsOwned();
-        itemsOwned = new List<ScriptableObject>();
+        itemsOwned = playerStatsManager.GetItemsOwned();
+        foreach (var item in itemsOwned)
+        {
+            Debug.Log($"owned: {item.name}");
+        }
+        // itemsOwned = new List<ScriptableObject>();
+        // itemsOwned =
 
         // Register purchase button event.
         purchaseButton.onClick.AddListener(() => PurchaseItem());
@@ -123,17 +128,19 @@ public class StoreUI : MonoBehaviour
             var storeItem = storeEntry.GetComponent<StoreItem>();
             var so = storeItem.GetItem();
 
-            itemsOwned.Add(so);
-
             if (so is WeaponMod)
             {
-                var currency = playerStatsManager.UnlockMod((WeaponMod) so);
-                Debug.Log(currency);
-                UpdatePlayerCurrency(currency);
+                var gm = GameManager.Instance;
+                var wm = (WeaponMod) so;
+                if (gm.saveData.currency >= wm.purchasePrice)
+                {
+                    var currency = playerStatsManager.UnlockMod(wm);
+                    itemsOwned.Add(so);
+                    UpdatePlayerCurrency(currency);
+                    Destroy(storeEntry.gameObject);
+                    SetSelection(null);
+                }
             }
-
-            Destroy(storeEntry.gameObject);
-            SetSelection(null);
         }
     }
 }

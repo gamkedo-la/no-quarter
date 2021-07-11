@@ -11,7 +11,7 @@ public class PlayerStatsManager : MonoBehaviour
 {
     private bool paused = false;    //TODO: support game pausing -> stamina recovery halted while on Pause Screen
 
-    public static SaveData saveData;
+    // public static SaveData saveData;
     private List<ScriptableObject> itemsOwned;
 
     public float maxHealth = 100f;
@@ -52,14 +52,26 @@ public class PlayerStatsManager : MonoBehaviour
     void Start()
     {
         // TODO: Rather than creating this out of the blue, check if there's a save file on disk already.
-        if (saveData == null) LoadGame();
+        // if (saveData == null) LoadGame();
         // TODO: remove this later
-        saveData.currency = 10000;
+        // saveData.currency = 10000;
         currentHealth = maxHealth;
         sfx = GetComponent<SfxHelper>();
         StartCoroutine(PlayHeartbeat());
         StartCoroutine(StaminaChargesCoordinator());
         playerInputHandler = gameObject.GetComponent<PlayerInputHandler>();
+
+        var saveData = GameManager.Instance.saveData;
+
+        // Init itemsOwned
+        itemsOwned = new List<ScriptableObject>();
+        foreach (var item in saveData.equippedMods)
+        {
+            string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
+            WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
+            itemsOwned.Add(weaponModToAdd);
+            playerInputHandler.equippedMods.Add(weaponModToAdd);
+        }
     }
 
     IEnumerator PlayHeartbeat()
@@ -161,6 +173,7 @@ public class PlayerStatsManager : MonoBehaviour
         // }
         // saveData.currency = currency;
         //Placeholder stats
+        var saveData = new SaveData();
         saveData.stat1 = "";
         saveData.stat2 = "";
         saveData.stat3 = "";
@@ -185,6 +198,7 @@ public class PlayerStatsManager : MonoBehaviour
             FileStream file =
                        File.Open(Application.persistentDataPath
                        + "/Save.dat", FileMode.Open);
+            var saveData = new SaveData();
             saveData = (SaveData)bf.Deserialize(file);
             file.Close();
             itemsOwned = new List<ScriptableObject>();
@@ -223,14 +237,9 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void InitializeSaveData()
     {
-        saveData = new SaveData();
+        var saveData = new SaveData();
         itemsOwned = new List<ScriptableObject>();
-        SaveGame();
-    }
-
-    public int GetCurrency()
-    {
-        return saveData.currency;
+        // SaveGame();
     }
 
     public List<ScriptableObject> GetItemsOwned()
@@ -240,27 +249,30 @@ public class PlayerStatsManager : MonoBehaviour
 
     public int UnlockMod(WeaponMod mod)
     {
+        var gm = GameManager.Instance;
         Debug.Log(mod.name);
         itemsOwned.Add(mod);
-        saveData.equippedMods.Add(mod.name);
-        saveData.currency -= mod.purchasePrice;
-        SaveGame();
+        gm.saveData.equippedMods.Add(mod.name);
+        gm.saveData.currency -= mod.purchasePrice;
+        gm.SaveGame();
+        // SaveGame();
 
-        return saveData.currency;
+        return gm.saveData.currency;
     }
 
     public int UnlockWeapon(FPSWeapon weapon)
     {
+        var gm = GameManager.Instance;
         Debug.Log(weapon.name);
-        if (saveData.weapons.Contains(weapon.name))
+        if (gm.saveData.weapons.Contains(weapon.name))
         {
             Debug.LogErrorFormat("Weapon {0} purchased, but already owned", weapon.name);
         }
-        saveData.weapons.Add(weapon.name);
+        gm.saveData.weapons.Add(weapon.name);
         // todo: create a scriptableObject around weapons, or else figure out a different way to represent
         // them in the UI
         // saveData.currency -= weapon.purchasePrice;
-        return saveData.currency;
+        return gm.saveData.currency;
     }
 
     private void OnParticleCollision(GameObject other)

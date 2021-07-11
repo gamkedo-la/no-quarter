@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,20 @@ public class FPSWeapon : MonoBehaviour
 
 	public List<AudioClip> gunshotSFX = new List<AudioClip>();
 
+
+    private void Start()
+    {
+        // Get equipped mods from save file.
+        var gm = GameManager.Instance;
+        mods = new List<WeaponMod>();
+
+        foreach (var modName in gm.saveData.equippedMods)
+        {
+            var scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(modName)[0]);
+            var mod = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
+            mods.Add(mod);
+        }
+    }
 
     int GetProjectileCount()
     {
