@@ -2123,6 +2123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7082181294687557770, guid: 7851f2d36e5f3864380172ed1301dff0,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7082181294687557770, guid: 7851f2d36e5f3864380172ed1301dff0,
+        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 0}
@@ -50062,6 +50067,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 248305936329863797, guid: 7db52fba69001fb4d8fc99cbdf73a23a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584651927392639706, guid: 7db52fba69001fb4d8fc99cbdf73a23a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1302978616237189748, guid: 7db52fba69001fb4d8fc99cbdf73a23a,
         type: 3}
       propertyPath: m_IsTrigger
@@ -81553,6 +81568,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4272020133115953201, guid: 435dc02fc3537834d97dec23ec8457eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4272020133115953201, guid: 435dc02fc3537834d97dec23ec8457eb,
         type: 3}
