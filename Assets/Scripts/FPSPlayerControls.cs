@@ -359,7 +359,7 @@ public class @FPSPlayerControls : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Navigate"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""0e8ceef9-6330-4624-bd1c-71ea84ed3e9a"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

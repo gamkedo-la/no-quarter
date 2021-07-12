@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class MainMenuHandler : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject topPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject topMenuInitialElement;
+    [SerializeField] private GameObject settingsPanelInitialElement;
     [Header("Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
@@ -23,6 +26,9 @@ public class MainMenuHandler : MonoBehaviour
     [SerializeField] private Slider volume;
     [SerializeField] private Slider screenShake;
 
+
+    private GameObject previousMenuSelection;
+    private EventSystem eventSystem;
 
     private const string VOLUME_PREF_KEY = "volume";
     private const string SCREENSHAKE_PREF_KEY = "screen_shake";
@@ -39,20 +45,19 @@ public class MainMenuHandler : MonoBehaviour
         closeSettingsButton.onClick.AddListener(() =>
         {
             LoadSettings();
-            topPanel.SetActive(true);
-            settingsPanel.SetActive(false);
+            CloseSettingsMenu();
         });
 
         saveSettingsButton.onClick.AddListener(() =>
         {
             SaveSettings();
-            topPanel.SetActive(true);
-            settingsPanel.SetActive(false);
+            CloseSettingsMenu();
         });
     }
 
     private void Start()
     {
+        eventSystem = FindObjectOfType<EventSystem>();
         LoadSettings();
     }
 
@@ -61,10 +66,19 @@ public class MainMenuHandler : MonoBehaviour
         SceneManager.LoadScene("Scenes/HoldingCell", LoadSceneMode.Single);
     }
 
-    public void OnSettingsButtonClick() 
+    public void CloseSettingsMenu()
     {
+        topPanel.SetActive(true);
+        settingsPanel.SetActive(false);
+        eventSystem.SetSelectedGameObject(previousMenuSelection);
+    }
+
+    public void OnSettingsButtonClick()
+    {
+        previousMenuSelection = eventSystem.currentSelectedGameObject;
         topPanel.SetActive(false);
         settingsPanel.SetActive(true);
+        eventSystem.SetSelectedGameObject(settingsPanelInitialElement);
     }
 
     public void OnExitButtonClick() 
