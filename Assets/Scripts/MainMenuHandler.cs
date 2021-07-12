@@ -13,6 +13,9 @@ public class MainMenuHandler : MonoBehaviour
     [SerializeField] private GameObject topPanel;
     [SerializeField] private GameObject settingsPanel;
     [Header("Buttons")]
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button exitButton;
     [SerializeField] private Button resetSaveButton;
     [SerializeField] private Button saveSettingsButton;
     [SerializeField] private Button closeSettingsButton;
@@ -28,6 +31,10 @@ public class MainMenuHandler : MonoBehaviour
     {
         // todo: ask for confirmation first
         resetSaveButton.onClick.AddListener(() => GameManager.Instance.ResetSaveFile());
+
+        playButton.onClick.AddListener(() => OnPlayButtonClick());
+        settingsButton.onClick.AddListener(() => OnSettingsButtonClick());
+        exitButton.onClick.AddListener(() => OnExitButtonClick());
 
         closeSettingsButton.onClick.AddListener(() =>
         {

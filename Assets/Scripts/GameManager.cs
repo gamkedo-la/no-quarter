@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
 
     public void ResetSaveFile()
     {
-        Debug.Log("reset save file");
         saveData = new SaveData();
         SaveGame();
     }
