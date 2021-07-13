@@ -8,9 +8,12 @@ public class AudioManager : MonoBehaviour {
 	public AudioSource sfxPrefab;
 
 	void Awake() {
-		if (Instance == null) Instance = this;
+		if (Instance == null)
+		{
+			Instance = this;
+			DontDestroyOnLoad(this);
+		}
 		else Destroy(gameObject);
-		DontDestroyOnLoad(this);
 	}
 
 	public AudioSource PlaySFX(AudioClip clip, GameObject objectToAttachTo, float volume = 1, float pitch = 1, float blend = 1f) {

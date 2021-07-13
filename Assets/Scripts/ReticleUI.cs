@@ -16,11 +16,14 @@ public class ReticleUI : MonoBehaviour
 
     private void ChangeWeaponReticle(GameObject activeWeapon)
     {
-        var weapon = activeWeapon.GetComponent<FPSWeapon>();
-        if (weapon)
+        if (reticleImage)
         {
-            reticleImage.sprite = weapon.reticle;
-            reticleImage.color = weapon.reticleTint;
+            var weapon = activeWeapon.GetComponent<FPSWeapon>();
+            if (weapon)
+            {
+                reticleImage.sprite = weapon.reticle;
+                reticleImage.color = weapon.reticleTint;
+            }
         }
     }
 }
