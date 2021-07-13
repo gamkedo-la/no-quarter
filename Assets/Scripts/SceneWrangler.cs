@@ -11,42 +11,20 @@ public class SceneWrangler : MonoBehaviour
     public float minLoadingTime = 3f;
 
     private AsyncOperation loadingOperation;
-    private GameObject loadingScreenInstance;
 
 	void Awake() {
-		if (Instance == null) Instance = this;
+		if (Instance == null)
+		{
+			Instance = this;
+			DontDestroyOnLoad(this);
+		}
 		else Destroy(gameObject);
-		DontDestroyOnLoad(this);
 	}
-
-    // Update is called once per frame.
-    void Update()
-    {
-        if (loadingOperation != null)
-        {
-            if (loadingOperation.isDone)
-            {
-                Destroy(loadingScreenInstance);
-            }
-            // else
-            // {
-            //     var percentDone = Mathf.Round(Mathf.Clamp01(loadingOperation.progress / 0.9f) * 100);
-            // }
-        }
-        else
-        {
-            Destroy(loadingScreenInstance);
-        }
-    }
-
-    bool OperationCompleted()
-    {
-        return loadingOperation == null || loadingOperation.isDone;
-    }
 
     public void LoadScene(string sceneName)
     {
-        loadingScreenInstance = Instantiate(loadingScreen, transform.root);
+        loadingScreen.SetActive(true);
         loadingOperation = SceneManager.LoadSceneAsync(sceneName);
+        loadingOperation.completed += (operation) => loadingScreen.SetActive(false);
     }
 }
