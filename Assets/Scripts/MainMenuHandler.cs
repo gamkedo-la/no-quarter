@@ -26,9 +26,7 @@ public class MainMenuHandler : MonoBehaviour
     [SerializeField] private Slider volume;
     [SerializeField] private Slider screenShake;
 
-
     private GameObject previousMenuSelection;
-    private EventSystem eventSystem;
 
     private const string VOLUME_PREF_KEY = "volume";
     private const string SCREENSHAKE_PREF_KEY = "screen_shake";
@@ -57,7 +55,6 @@ public class MainMenuHandler : MonoBehaviour
 
     private void Start()
     {
-        eventSystem = FindObjectOfType<EventSystem>();
         LoadSettings();
     }
 
@@ -70,11 +67,12 @@ public class MainMenuHandler : MonoBehaviour
     {
         topPanel.SetActive(true);
         settingsPanel.SetActive(false);
-        eventSystem.SetSelectedGameObject(previousMenuSelection);
+        EventSystem.current.SetSelectedGameObject(previousMenuSelection);
     }
 
     public void OnSettingsButtonClick()
     {
+        var eventSystem = EventSystem.current;
         previousMenuSelection = eventSystem.currentSelectedGameObject;
         topPanel.SetActive(false);
         settingsPanel.SetActive(true);
