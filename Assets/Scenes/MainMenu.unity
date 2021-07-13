@@ -3332,7 +3332,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1132055735}
     - target: {fileID: 5264013874258446704, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
@@ -51915,6 +51915,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Screen shake panel
       objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1601516935}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 78760512}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05006cf391aa50d4e90427afa0082bf7, type: 3}
 --- !u!224 &1132055734 stripped
@@ -103816,7 +103826,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1132055735}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05006cf391aa50d4e90427afa0082bf7, type: 3}
 --- !u!1001 &7308086742375094292
