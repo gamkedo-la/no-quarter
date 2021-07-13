@@ -7,6 +7,6 @@ public class WMRapidfire : WeaponMod
 {
     public override bool OnCollision(RaycastHit hitInfo, Projectile projectile)
     {
-        return true;
+        return false;
     }
 }
