@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +26,10 @@ public class MainMenuHandler : MonoBehaviour
     [Header("Values")]
     [SerializeField] private Slider volume;
     [SerializeField] private Slider screenShake;
+    [Header("Components")]
+    [SerializeField] private AudioMixer audioMixer;
+
+    private float baseVolume;
 
     private GameObject previousMenuSelection;
 
@@ -51,16 +56,26 @@ public class MainMenuHandler : MonoBehaviour
             SaveSettings();
             CloseSettingsMenu();
         });
+
+        volume.onValueChanged.AddListener(AdjustVolume);
     }
 
     private void Start()
     {
+        audioMixer.GetFloat("master_volume", out baseVolume);
         LoadSettings();
     }
 
     public void OnPlayButtonClick() 
     {
         SceneManager.LoadScene("Scenes/HoldingCell", LoadSceneMode.Single);
+    }
+
+    private void AdjustVolume(float level)
+    {
+        var volumeAdjust = level == 0 ? -80f : 10 * Mathf.Log10(level);
+        var adjustedVolume = Mathf.Clamp(baseVolume + volumeAdjust, -80f, 0f); // ensure bad math isn't exploding eardrums.
+        audioMixer.SetFloat("master_volume", adjustedVolume);
     }
 
     public void CloseSettingsMenu()
@@ -91,8 +106,10 @@ public class MainMenuHandler : MonoBehaviour
     private void LoadSettings()
     {
         var vol = PlayerPrefs.GetFloat(VOLUME_PREF_KEY, 0.5f);
-        var ss = PlayerPrefs.GetFloat(SCREENSHAKE_PREF_KEY, 1f);
         volume.SetValueWithoutNotify(vol);
+        AdjustVolume(vol);
+
+        var ss = PlayerPrefs.GetFloat(SCREENSHAKE_PREF_KEY, 1f);
         screenShake.SetValueWithoutNotify(ss);
     }
 
