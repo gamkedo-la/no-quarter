@@ -12,6 +12,8 @@ public class Projectile : TeleportAgent
     public int baseProjectileCount = 1;
     public Vector3 projectileDirection;
 
+    public GameObject spawnOnImpact; // optional fx
+
     [SerializeField]
     private float spinRate = 30f;
 
@@ -31,6 +33,10 @@ public class Projectile : TeleportAgent
 
         RaycastHit hitInfo;
         if (Physics.Raycast(transform.position, projectileDirection, out hitInfo, travelDistance, LayerMask.NameToLayer("PlayerProjectile")))
+        // $CTK: we want bullets to hit walls too - but buggy if I remove this mask ---v
+        //, LayerMask.NameToLayer("PlayerProjectile")))
+        // FIXME: no such layer in edit->projectsettings->physics????
+        // bah
         {
             target = hitInfo.point;
             travelDistance = hitInfo.distance;
@@ -41,10 +47,15 @@ public class Projectile : TeleportAgent
                 keepAlive = keepAlive || mod.OnCollision(hitInfo, this);
             }
 
-            hitInfo.collider.SendMessageUpwards("TakeDamage", baseDamage, SendMessageOptions.DontRequireReceiver);
+            if (hitInfo.collider!=null)
+                hitInfo.collider.SendMessageUpwards("TakeDamage", baseDamage, SendMessageOptions.DontRequireReceiver);
 
             if (!keepAlive)
             {
+                if (spawnOnImpact!=null) {
+                    Debug.Log("Projectile spawning Impact FX!");
+                    Instantiate(spawnOnImpact,transform.position,transform.rotation);
+                }
                 Destroy(gameObject);
             }
         }
