@@ -74,10 +74,11 @@ public class PlayerStatsManager : MonoBehaviour
         itemsOwned = new List<ScriptableObject>();
         foreach (var item in saveData.equippedMods)
         {
-            string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
-            WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
-            itemsOwned.Add(weaponModToAdd);
-            playerInputHandler.equippedMods.Add(weaponModToAdd);
+            // string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
+            // WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
+            var mod = Resources.Load<WeaponMod>(item);
+            itemsOwned.Add(mod);
+            playerInputHandler.equippedMods.Add(mod);
         }
     }
 
@@ -228,10 +229,12 @@ public class PlayerStatsManager : MonoBehaviour
                 playerInputHandler.equippedMods.Clear();
                 foreach (var item in saveData.equippedMods)
                 {
-                    string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
-                    WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
-                    itemsOwned.Add(weaponModToAdd);
-                    playerInputHandler.equippedMods.Add(weaponModToAdd);
+                    
+                    // string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
+                    // WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
+                    var mod = Resources.Load<WeaponMod>(item);
+                    itemsOwned.Add(mod);
+                    playerInputHandler.equippedMods.Add(mod);
                 }
             }
 
