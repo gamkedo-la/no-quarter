@@ -29,8 +29,6 @@ public class FPSWeapon : MonoBehaviour
         foreach (var modName in gm.saveData.equippedMods)
         {
             var mod = Resources.Load<WeaponMod>(modName);
-            // var scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(modName)[0]);
-            // var mod = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
             mods.Add(mod);
         }
     }

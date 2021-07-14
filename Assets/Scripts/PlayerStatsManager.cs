@@ -4,9 +4,6 @@ using System;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.PlayerLoop;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -57,10 +54,6 @@ public class PlayerStatsManager : MonoBehaviour
 
     void Start()
     {
-        // TODO: Rather than creating this out of the blue, check if there's a save file on disk already.
-        // if (saveData == null) LoadGame();
-        // TODO: remove this later
-        // saveData.currency = 10000;
         timeAlive = 0.0f;
         currentHealth = maxHealth;
         sfx = GetComponent<SfxHelper>();
@@ -74,8 +67,6 @@ public class PlayerStatsManager : MonoBehaviour
         itemsOwned = new List<ScriptableObject>();
         foreach (var item in saveData.equippedMods)
         {
-            // string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
-            // WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
             var mod = Resources.Load<WeaponMod>(item);
             itemsOwned.Add(mod);
             playerInputHandler.equippedMods.Add(mod);
@@ -207,7 +198,6 @@ public class PlayerStatsManager : MonoBehaviour
 
         binaryFormatter.Serialize(file, saveData);
         file.Close();
-        Debug.Log("Game saved");
     }
 
     public void LoadGame()
@@ -229,9 +219,6 @@ public class PlayerStatsManager : MonoBehaviour
                 playerInputHandler.equippedMods.Clear();
                 foreach (var item in saveData.equippedMods)
                 {
-                    
-                    // string scriptableObjectPath = UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets(item)[0]);
-                    // WeaponMod weaponModToAdd = UnityEditor.AssetDatabase.LoadAssetAtPath<WeaponMod>(scriptableObjectPath);
                     var mod = Resources.Load<WeaponMod>(item);
                     itemsOwned.Add(mod);
                     playerInputHandler.equippedMods.Add(mod);
@@ -249,8 +236,6 @@ public class PlayerStatsManager : MonoBehaviour
             var stat7 = saveData.stat7;
             var stat8 = saveData.stat8;
             var stat9 = saveData.stat9;
-
-            Debug.Log("Game data loaded!");
         }
         else
         {
@@ -273,12 +258,10 @@ public class PlayerStatsManager : MonoBehaviour
     public int UnlockMod(WeaponMod mod)
     {
         var gm = GameManager.Instance;
-        Debug.Log(mod.name);
         itemsOwned.Add(mod);
         gm.saveData.equippedMods.Add(mod.name);
         gm.saveData.currency -= mod.purchasePrice;
         gm.SaveGame();
-        // SaveGame();
 
         return gm.saveData.currency;
     }

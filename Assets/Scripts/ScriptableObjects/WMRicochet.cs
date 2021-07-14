@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering.LWRP;
 
 [CreateAssetMenu(menuName = "WeaponMods/Ricochet", fileName = "Ricochet")]
 public class WMRicochet : WeaponMod
