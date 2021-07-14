@@ -37163,41 +37163,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 6278667187587728372, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863630138986616428, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863630138986616428, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863630138986616428, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863630140778422804, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863630140778422804, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863630140778422804, guid: ed49fe6db44039b4b99ef95d4e6236e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7380924106138100680, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

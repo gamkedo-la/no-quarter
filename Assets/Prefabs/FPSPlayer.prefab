@@ -297,8 +297,11 @@ MonoBehaviour:
   heartbeats:
   - {fileID: 8300000, guid: 0f2483c20f1764b4183151eac3576ff4, type: 3}
   - {fileID: 8300000, guid: e36bdd6a6ef04214790183a2ec7a2269, type: 3}
-  hurtSound: {fileID: 8300000, guid: ae0ad597237348c458eabae957968a1e, type: 3}
   heartbeatPace: 1
+  hurtSound: {fileID: 8300000, guid: ae0ad597237348c458eabae957968a1e, type: 3}
+  timeAlive: 0
+  currencyMultiplierForTimeAlive: 1
+  currencyMultiplierForexponentialGrowth: 1.2
 --- !u!114 &5352909644043770458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +426,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966271
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -589,7 +592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4528564800295297213
 Transform:
   m_ObjectHideFlags: 0
