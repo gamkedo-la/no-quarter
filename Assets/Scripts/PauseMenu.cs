@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -14,9 +15,13 @@ public class PauseMenu : MonoBehaviour
         {
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-            #else
-            Application.Quit();
-            #endif
+#else
+            if (Application.platform == RuntimePlatform.WebGLPlayer) {
+                SceneManager.LoadScene(0);
+            } else {
+                Application.Quit();
+            }
+#endif
         });
     }
     private void OnDestroy() {
