@@ -24952,7 +24952,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1203464004}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!199 &607566361
 ParticleSystemRenderer:
@@ -57164,6 +57164,41 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 78760512}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1203464006}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: screenShakeNow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Screenshaker, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05006cf391aa50d4e90427afa0082bf7, type: 3}
 --- !u!224 &1132055734 stripped
@@ -59708,6 +59743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203464004}
+  - component: {fileID: 1203464006}
   - component: {fileID: 1203464003}
   - component: {fileID: 1203464002}
   - component: {fileID: 1203464001}
@@ -59813,8 +59849,8 @@ Transform:
   m_LocalPosition: {x: -2.093645, y: 5.208901, z: -3.1623173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1762444871}
   - {fileID: 607566360}
+  - {fileID: 1762444871}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59825,7 +59861,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203464000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4d489b64b3f91343810a829cb59055c, type: 3}
   m_Name: 
@@ -59854,6 +59890,21 @@ MonoBehaviour:
   rotmagnitudeX: 0
   rotmagnitudeY: 0
   rotmagnitudeZ: 0
+--- !u!114 &1203464006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203464000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6eb6a0d231813439fc0df1b86cf2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeSize: 0.25
+  shakeTimespan: 0.2
+  shakeTimeLeft: 0
 --- !u!43 &1205490242
 Mesh:
   m_ObjectHideFlags: 0
@@ -88233,7 +88284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1203464004}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &1762444872
 ParticleSystemRenderer:
@@ -88256,7 +88307,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a00cf92d7599b4b4cad246c1520ea629, type: 2}
+  - {fileID: 2100000, guid: 034c59cda30d1b24e9ca7ee133541d04, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88385,7 +88436,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -88438,7 +88489,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
+      scalar: 0.5
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -88870,7 +88921,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 3333
+    maxNumParticles: 1600
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -88938,7 +88989,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 4, y: 1, z: 1}
+    m_Scale: {x: 6, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -89136,7 +89187,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 777
+      scalar: 1111
       minScalar: 10
       maxCurve:
         serializedVersion: 2
