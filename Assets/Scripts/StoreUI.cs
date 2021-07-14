@@ -73,6 +73,12 @@ public class StoreUI : MonoBehaviour
                 storeEntry.name = storeItem.GetItem().name;
             }
         }
+
+        // Set initially selected element for event system.
+        var initialSelection = gridLayoutGroup.childCount > 0
+            ? gridLayoutGroup.GetChild(0).gameObject
+            : exitButton.gameObject;
+        EventSystem.current.SetSelectedGameObject(initialSelection);
     }
 
     void SetSelection(GameObject storeEntry)
