@@ -2426,6 +2426,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 3357253297363005110}
+    - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 4751669328003783443}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05006cf391aa50d4e90427afa0082bf7, type: 3}
 --- !u!114 &7409295541390927031 stripped
@@ -2453,6 +2468,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2562878285797773151}
     m_Modifications:
+    - target: {fileID: 5264013874258446704, guid: 2ae65271cc3cf8546aa19030d36c8e53,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264013874258446704, guid: 2ae65271cc3cf8546aa19030d36c8e53,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 7409295541390927031}
+    - target: {fileID: 5264013874258446704, guid: 2ae65271cc3cf8546aa19030d36c8e53,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 5344110075818805203}
     - target: {fileID: 5264013874258446707, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
       propertyPath: m_Name
@@ -2612,9 +2642,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7347543718196437597, guid: f548b7a3a0eee124e9f56442e08e9b3e,
         type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      propertyPath: m_Navigation.m_Mode
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7347543718196437597, guid: f548b7a3a0eee124e9f56442e08e9b3e,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 3417858293309415262}
+    - target: {fileID: 7347543718196437597, guid: f548b7a3a0eee124e9f56442e08e9b3e,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 7409295541390927031}
     - target: {fileID: 7347543718196437598, guid: f548b7a3a0eee124e9f56442e08e9b3e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2752,6 +2792,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2562878285797773151}
     m_Modifications:
+    - target: {fileID: 5264013874258446704, guid: 2ae65271cc3cf8546aa19030d36c8e53,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264013874258446704, guid: 2ae65271cc3cf8546aa19030d36c8e53,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 5344110075818805203}
+    - target: {fileID: 5264013874258446704, guid: 2ae65271cc3cf8546aa19030d36c8e53,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 3357253297363005110}
     - target: {fileID: 5264013874258446707, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
       propertyPath: m_Name
