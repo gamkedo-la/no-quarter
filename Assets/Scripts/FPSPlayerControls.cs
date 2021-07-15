@@ -353,6 +353,17 @@ public class @FPSPlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""0ec1c068-afc4-4de4-8179-bff842e55e79"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ScrollWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6451de4b-1487-44df-987c-e58bb0a5cbd0"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",

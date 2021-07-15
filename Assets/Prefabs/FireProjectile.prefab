@@ -350,7 +350,7 @@ MonoBehaviour:
   projectileDirection: {x: 0, y: 0, z: 0}
   gravityDirection: {x: 0, y: -1, z: 0}
   useGravity: 1
-  gravity: 0.2
+  gravity: 0.1
   maxFallRate: 100
   bounciness: 0.7
   collisionMask:
