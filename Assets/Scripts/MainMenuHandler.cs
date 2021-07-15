@@ -9,8 +9,10 @@ public class MainMenuHandler : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject topPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject creditsPanel;
     [SerializeField] private GameObject topMenuInitialElement;
     [SerializeField] private GameObject settingsPanelInitialElement;
+    [SerializeField] private GameObject creditsPanelInitialElement;
     [Header("Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
@@ -18,6 +20,8 @@ public class MainMenuHandler : MonoBehaviour
     [SerializeField] private Button resetSaveButton;
     [SerializeField] private Button saveSettingsButton;
     [SerializeField] private Button closeSettingsButton;
+    [SerializeField] private Button creditsButton;
+    [SerializeField] private Button closeCreditsButton;
     [Header("Values")]
     [SerializeField] private Slider volume;
     [SerializeField] private Slider screenShake;
@@ -51,6 +55,9 @@ public class MainMenuHandler : MonoBehaviour
             SaveSettings();
             CloseSettingsMenu();
         });
+
+        creditsButton.onClick.AddListener(() => OpenCredits());
+        closeCreditsButton.onClick.AddListener(() => CloseCredits());
 
         volume.onValueChanged.AddListener(AdjustVolume);
     }
@@ -87,6 +94,22 @@ public class MainMenuHandler : MonoBehaviour
         topPanel.SetActive(false);
         settingsPanel.SetActive(true);
         eventSystem.SetSelectedGameObject(settingsPanelInitialElement);
+    }
+
+    private void OpenCredits()
+    {
+        var eventSystem = EventSystem.current;
+        previousMenuSelection = eventSystem.currentSelectedGameObject;
+        topPanel.SetActive(false);
+        creditsPanel.SetActive(true);
+        eventSystem.SetSelectedGameObject(creditsPanelInitialElement);
+    }
+
+    private void CloseCredits()
+    {
+        topPanel.SetActive(true);
+        creditsPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(previousMenuSelection);
     }
 
     public void OnExitButtonClick() 
