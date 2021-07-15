@@ -406,7 +406,7 @@ Camera:
   m_GameObject: {fileID: 5477605148766593107}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1098,10 +1098,20 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8119230137777416602, guid: 3add03b262a57a9489915e432b178b61,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 3419
+      objectReference: {fileID: 0}
     - target: {fileID: 8459408839239370872, guid: 3add03b262a57a9489915e432b178b61,
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459408839239370872, guid: 3add03b262a57a9489915e432b178b61,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 946
       objectReference: {fileID: 0}
     - target: {fileID: 8499997386085772043, guid: 3add03b262a57a9489915e432b178b61,
         type: 3}
@@ -1113,10 +1123,20 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8639395589962844167, guid: 3add03b262a57a9489915e432b178b61,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 504
+      objectReference: {fileID: 0}
     - target: {fileID: 8955432975056761142, guid: 3add03b262a57a9489915e432b178b61,
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955432975056761142, guid: 3add03b262a57a9489915e432b178b61,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 1079
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3add03b262a57a9489915e432b178b61, type: 3}

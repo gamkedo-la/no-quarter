@@ -73,8 +73,6 @@ public class PlayerInputHandler : TeleportAgent
     public float interactionDistance = 2f;
     public LayerMask interactionMask;
     public CapsuleCollider capsuleCollider;
-    public delegate void Pause();
-    public static event Pause OnPause;
 
     private void Awake()
     {
@@ -107,10 +105,6 @@ public class PlayerInputHandler : TeleportAgent
             if (canDash){
                  StartCoroutine(Dash());
             }
-        };
-        controls.UI.Pause.performed += ctx =>
-        {
-            TogglePause();
         };
         playerActions.Interact.performed += ctx =>
         {
@@ -146,6 +140,7 @@ public class PlayerInputHandler : TeleportAgent
     {
         controls.Enable();
         PlayerStatsManager.OnStaminaChange += updateCanDash;
+        PauseMenu.OnPause += TogglePause;
     }
 
     private void OnDisable() {
@@ -155,6 +150,7 @@ public class PlayerInputHandler : TeleportAgent
     private void OnDestroy()
     {
         controls.Disable();
+        PauseMenu.OnPause -= TogglePause;
     }
 
     void Start()
@@ -332,13 +328,11 @@ public class PlayerInputHandler : TeleportAgent
             Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            OnPause?.Invoke();
             playerActions.Enable();
         } else {
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            OnPause?.Invoke();
             playerActions.Disable();
         }
     }

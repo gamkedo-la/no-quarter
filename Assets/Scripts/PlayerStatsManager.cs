@@ -46,10 +46,12 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void OnEnable() {
         PlayerInputHandler.dashStarted += UseStaminaCharge;
+        PauseMenu.OnImmortalToggle += SetImmortal;
     }
 
     private void OnDisable() {
         PlayerInputHandler.dashStarted -= UseStaminaCharge;
+        PauseMenu.OnImmortalToggle -= SetImmortal;
     }
 
     void Start()
@@ -71,6 +73,8 @@ public class PlayerStatsManager : MonoBehaviour
             itemsOwned.Add(mod);
             playerInputHandler.equippedMods.Add(mod);
         }
+
+        isImmortal = PlayerPrefs.GetInt(PauseMenu.IMMORTAL_MODE_KEY, 0) == 1;
     }
 
     void Update()

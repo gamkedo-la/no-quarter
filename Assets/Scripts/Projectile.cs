@@ -57,10 +57,7 @@ public class Projectile : TeleportAgent
             target = hitInfo.point;
             travelDistance = hitInfo.distance;
 
-            Debug.Log($"collided with {hitInfo.collider.name}");
-
             if (spawnOnImpact!=null) {
-                Debug.Log("Projectile spawning Impact FX!");
                 var impactfx = Instantiate(spawnOnImpact,transform.position,transform.rotation);
                 Destroy(impactfx.gameObject, 2);
             }
@@ -70,8 +67,6 @@ public class Projectile : TeleportAgent
             {
                 keepAlive = keepAlive || mod.OnCollision(hitInfo, this);
             }
-
-            Debug.Log($"should keep alive? {keepAlive}");
 
             if (hitInfo.collider!=null)
                 hitInfo.collider.SendMessageUpwards("TakeDamage", baseDamage, SendMessageOptions.DontRequireReceiver);

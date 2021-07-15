@@ -66,6 +66,10 @@ public class MainMenuHandler : MonoBehaviour
     {
         audioMixer.GetFloat("master_volume", out baseVolume);
         LoadSettings();
+
+        #if UNITY_WEBGL
+        exitButton.gameObject.SetActive(false);
+        #endif
     }
 
     public void OnPlayButtonClick() 
