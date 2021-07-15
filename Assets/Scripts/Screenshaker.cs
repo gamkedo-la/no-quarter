@@ -17,6 +17,20 @@ public class Screenshaker : MonoBehaviour
 
     private Vector3 startLocation;
 
+    public void SetShakeAmountAndDemo(float amount)
+    {
+        shakeSize = amount;
+        screenShakeNow();
+    }
+
+    private void maybeScreenshake(float currentHealth, float delta)
+    {
+        if (delta < 0)
+        {
+            screenShakeNow();
+        }
+    }
+
     public void screenShakeNow() {
         if (!shakeThisCamera) return;
         Debug.Log("Screenshake starting!");
@@ -24,8 +38,11 @@ public class Screenshaker : MonoBehaviour
         startLocation = shakeThisCamera.transform.localPosition;
     }
 
-    private void Start() {
+    private void Start()
+    {
+        shakeSize = PlayerPrefs.GetFloat(MainMenuHandler.SCREENSHAKE_PREF_KEY, 1.0f);
         shakeThisCamera = GetComponent<Camera>();
+        PlayerStatsManager.OnHealthChange += maybeScreenshake;
         Debug.Log("Screenshake is enabled.");
     }
 

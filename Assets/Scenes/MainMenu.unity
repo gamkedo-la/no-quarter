@@ -57846,7 +57846,7 @@ PrefabInstance:
     - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
         type: 3}
@@ -57861,7 +57861,7 @@ PrefabInstance:
     - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: screenShakeNow
+      value: SetShakeAmountAndDemo
       objectReference: {fileID: 0}
     - target: {fileID: 7299362707073759823, guid: 05006cf391aa50d4e90427afa0082bf7,
         type: 3}

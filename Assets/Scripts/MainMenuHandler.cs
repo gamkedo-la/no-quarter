@@ -32,8 +32,8 @@ public class MainMenuHandler : MonoBehaviour
 
     private GameObject previousMenuSelection;
 
-    private const string VOLUME_PREF_KEY = "volume";
-    private const string SCREENSHAKE_PREF_KEY = "screen_shake";
+    public static string VOLUME_PREF_KEY = "volume";
+    public static string SCREENSHAKE_PREF_KEY = "screen_shake";
 
     private void Awake()
     {

@@ -52,7 +52,7 @@ public class HealthBar : MonoBehaviour
         hpText.text = Mathf.Round(currentHealth).ToString();
     }
 
-    private void UpdateHealth(float newHealth)
+    private void UpdateHealth(float newHealth, float delta)
     {
         StartCoroutine(HealthBarLerp(newHealth, lerpTime));
         currentHealth = newHealth;

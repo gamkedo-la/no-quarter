@@ -32,7 +32,7 @@ public class PlayerStatsManager : MonoBehaviour
     [Header("Damage")]
     [SerializeField] AudioClip hurtSound = null;
 
-    public delegate void HealthChange(float currentHealth);
+    public delegate void HealthChange(float currentHealth, float delta);
     public static event HealthChange OnHealthChange;
 
     private PlayerInputHandler playerInputHandler;
@@ -91,7 +91,8 @@ public class PlayerStatsManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float amount) {
+    public void TakeDamage(float amount)
+    {
         if(isImmortal) {
             return;
         }
@@ -104,7 +105,7 @@ public class PlayerStatsManager : MonoBehaviour
         }
         FindObjectOfType<HurtScreen>().ShowHurtScreen();
         sfx.PlayAudioOneshot(hurtSound, 0.7f, 1.0f, 0.9f, 1.1f);
-        OnHealthChange?.Invoke(currentHealth);
+        OnHealthChange?.Invoke(currentHealth, -amount);
     }
 
     private void GiveCurrencyBasedOnTimeAlive()
@@ -124,7 +125,7 @@ public class PlayerStatsManager : MonoBehaviour
                 currentHealth = maxHealth;
             }
         }
-        OnHealthChange?.Invoke(currentHealth);
+        OnHealthChange?.Invoke(currentHealth, amount);
     }
 
     
