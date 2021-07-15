@@ -331,6 +331,17 @@ public class @FPSPlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9a3eec29-c742-4aee-b682-595ae87f6127"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5864089b-2eda-4337-9f35-b84703dcce26"",
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
