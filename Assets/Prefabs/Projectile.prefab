@@ -103,8 +103,15 @@ MonoBehaviour:
   maxDistance: 100
   baseProjectileCount: 1
   projectileDirection: {x: 0, y: 0, z: 0}
+  gravityDirection: {x: 0, y: 0, z: 0}
+  gravity: 0
+  maxFallRate: 100
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 2615
+  spawnOnImpact: {fileID: 980542095277679986, guid: ca6eb0896031c8f4b9d019616088926c,
+    type: 3}
   spinRate: 540
-  originator: {fileID: 0}
 --- !u!65 &-395353406664939869
 BoxCollider:
   m_ObjectHideFlags: 0

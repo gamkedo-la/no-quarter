@@ -24,12 +24,15 @@ public class FPSWeapon : MonoBehaviour
     {
         // Get equipped mods from save file.
         var gm = GameManager.Instance;
-        mods = new List<WeaponMod>();
 
-        foreach (var modName in gm.saveData.equippedMods)
+        if (gm)
         {
-            var mod = Resources.Load<WeaponMod>(modName);
-            mods.Add(mod);
+            mods = new List<WeaponMod>();
+            foreach (var modName in gm.saveData.equippedMods)
+            {
+                var mod = Resources.Load<WeaponMod>(modName);
+                mods.Add(mod);
+            }
         }
     }
 
