@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 
 [RequireComponent(typeof(CharacterController))]
@@ -128,9 +129,12 @@ public class PlayerInputHandler : TeleportAgent
 
         // Swap Weapon Controls
         playerActions.ScrollWeapon.performed += ctx => {
-            if (!isSwitchingWeapon){
+            if (!isSwitchingWeapon)
+            {
+                var input = ctx.ReadValue<Vector2>();
+                var scrollDirectionRaw = Mathf.RoundToInt(input.y == 0 ? input.x : input.y);
                 StartCoroutine(SwitchingWeaponDelay(weaponSwitchDuration));
-                OnWeaponScroll?.Invoke(Mathf.RoundToInt(ctx.ReadValue<Vector2>().y));
+                OnWeaponScroll?.Invoke(Mathf.RoundToInt(scrollDirectionRaw));
                 activeWeapon = weaponSwitcher.GetActiveWeapon()?.GetComponent<FPSWeapon>();
             }
         };
