@@ -5519,7 +5519,6 @@ RectTransform:
   m_Children:
   - {fileID: 452683715}
   - {fileID: 333821380}
-  - {fileID: 1131616356}
   - {fileID: 1351673775}
   m_Father: {fileID: 3528907938365934912}
   m_RootOrder: 2
@@ -15240,15 +15239,16 @@ RectTransform:
   m_GameObject: {fileID: 333821379}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.05, y: 1.05, z: 1}
-  m_Children: []
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_Children:
+  - {fileID: 1131616356}
   m_Father: {fileID: 152220059}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 30.139112, y: -58.148712}
-  m_SizeDelta: {x: -220.09888, y: -493.7522}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &333821381
 MonoBehaviour:
@@ -18935,11 +18935,11 @@ RectTransform:
   m_Father: {fileID: 152220059}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 383.44}
-  m_SizeDelta: {x: 776.48, y: 189.27}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 776.48, y: 189.27002}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &452683716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18997,7 +18997,7 @@ MonoBehaviour:
   m_fontSizeMax: 96
   m_fontStyle: 17
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -57530,15 +57530,15 @@ RectTransform:
   m_GameObject: {fileID: 1131616355}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 1.25}
   m_Children: []
-  m_Father: {fileID: 152220059}
-  m_RootOrder: 2
+  m_Father: {fileID: 333821380}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.1391, y: -58.14872}
-  m_SizeDelta: {x: 1699.9011, y: 693.9094}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1131616357
 MonoBehaviour:
@@ -57560,30 +57560,31 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tyler Funk: Project lead, core gameplay, main controls, weapon bob, step
+  m_text: "-Tyler Funk: Project lead, core gameplay, main controls, weapon bob, step
     sounds, low health heartbeat feedback, teleport sound, main weapon features (scattershot,
     ricochet, rapid fire), store UI, outline shader effect, hub scene, occlusion
     culling, player death, settings persistence, menu font selection, gamepad support,
     custom sliders, assorted integration, html5/webGL related support fixes, minor
-    optimizations\nIan Cherabier: Charger enemy AI, navmesh integration, AI wander
+    optimizations\n-Ian Cherabier: Charger enemy AI, navmesh integration, AI wander
     behavior, AI line of sight and facing limitation, enemy, destruction effect,
     ranged enemy support, enemy spawn fix, explosion and laser sound, player hurt
-    sound, damage feedback effect\nAnna Rossetti: In-game health and other stylized
+    sound, damage feedback effect\n-Anna Rossetti: In-game health and other stylized
     HUD, healthpack functionality, player health system, mousewheel weapon change,
-    different reticle per weapon, dash recharge, UI-related bug fix, healthbar animation\nChrister
+    different reticle per weapon, dash recharge, UI-related bug fix, healthbar animation\n-Christer
     \"McFunkypants\" Kaitila: Skullboom arena level, baked lighting, material palette,
     low poly environment primitives, floorboards/trim/beams, player speed tuning,
     jump pad zones, input refactor, coin/click/tick sounds, shot trails, main menu
-    polish, screenshake\nGabriel Cornish: Small enemy models (charger and second
-    ranged), robot skull decoration, ice elemental gun, portal model\nJeremiah Franczyk:
-    Facing Portals level, fire element sound, jump tuning, jump sound hookup\nSimon
-    J Hoffiz: Soundtrack (Arena and Dubstep)\nCharlene A.: Ice projectiles with trail,
-    fire gun, fire bullet\nCassidy Noble: Player gun model, large enemy robot model\nBar\u0131\u015F
-    K\xF6kl\xFC: Player jump, currency system, save/load functionality\nBen Stone:
-    Main menu UI, camera alignment improvement\nAudrey Margolis: Portal (including
-    ripple effect and teleport functionality)\nJeff \"Axphin\" Hanlon: Health pick
-    up model\nMichael \"Misha\" Fewkes: Basic projectile sounds, audio manager, gunshot
-    integration\nLuis Monta\xF1a: Pause menu with immortal mode and fire delay options"
+    polish, screenshake\n-Gabriel Cornish: Small enemy models (charger and second
+    ranged), robot skull decoration, ice elemental gun, portal model\n-Jeremiah Franczyk:
+    Facing Portals level, fire element sound, jump tuning, jump sound hookup\n-Simon
+    J Hoffiz: Soundtrack (Arena and Dubstep)\n-Charlene A.: Ice projectiles with
+    trail, fire gun, fire bullet\n-Cassidy Noble: Player gun model, large enemy robot
+    model\n-Bar\u0131\u015F K\xF6kl\xFC: Player jump, currency system, save/load
+    functionality\n-Ben Stone: Main menu UI, camera alignment improvement\n-Audrey
+    Margolis: Portal (including ripple effect and teleport functionality)\n-Jeff
+    \"Axphin\" Hanlon: Health pick up model\n-Michael \"Misha\" Fewkes: Basic projectile
+    sounds, audio manager, gunshot integration\n-Luis Monta\xF1a: Pause menu with
+    immortal mode and fire delay options"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 92490550cef9a724ea6d517772d7c546, type: 2}
   m_sharedMaterial: {fileID: 4882449327139688636, guid: 92490550cef9a724ea6d517772d7c546,
@@ -57612,7 +57613,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.25
+  m_fontSize: 37.3
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -66935,12 +66936,12 @@ PrefabInstance:
     - target: {fileID: 5264013874258446719, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264013874258446719, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5264013874258446719, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
@@ -67015,7 +67016,7 @@ PrefabInstance:
     - target: {fileID: 5264013874258446719, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 36.487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264013874258446719, guid: 2ae65271cc3cf8546aa19030d36c8e53,
         type: 3}
