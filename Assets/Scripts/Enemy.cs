@@ -71,6 +71,7 @@ public class Enemy : TeleportAgent
     {
         // Determine which direction to rotate towards
         Vector3 targetDirection = player.transform.position - transform.position;
+        targetDirection.y = 0;
 
         // The step size is equal to speed times frame time.
         float singleStep = rotationSpeed * Time.deltaTime;
