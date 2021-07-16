@@ -252,8 +252,9 @@ public class PlayerInputHandler : TeleportAgent
         {
             playerJumpVelocity.y = 0f;
         }
-        if (isJumping && characterController.isGrounded)
+        if (isJumping && characterController.isGrounded) 
         {
+            Debug.Log("Jump");
             // characterController.height
             //float jumpHeight = characterController.height * 2;
             // Debug.Log(capsuleCollider.bounds.size.y);
@@ -261,8 +262,12 @@ public class PlayerInputHandler : TeleportAgent
             isJumping = false;
             AudioManager.Instance.PlaySFX(jumpSFX, gameObject, jumpSFXVolume, 1f, 0f);
         }
-        playerJumpVelocity.y += gravityValue * Time.deltaTime;
-        characterController.Move(playerJumpVelocity * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+            playerJumpVelocity.y += gravityValue * Time.deltaTime;
+            characterController.Move(playerJumpVelocity * Time.deltaTime);
     }
 
     private IEnumerator Dash()
