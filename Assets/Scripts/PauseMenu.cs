@@ -94,8 +94,11 @@ public class PauseMenu : MonoBehaviour
         immortalMode.SetIsOnWithoutNotify(immortalModeSetting == 1);
 
         audioMixer.GetFloat("master_volume", out baseVolume);
+        if(EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(immortalMode.gameObject);
+        }
 
-        EventSystem.current.SetSelectedGameObject(immortalMode.gameObject);
     }
 
     private void ToggleMenu() {

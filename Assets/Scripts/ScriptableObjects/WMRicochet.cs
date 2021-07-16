@@ -12,7 +12,7 @@ public class WMRicochet : WeaponMod
     {
         if (++projectile.bounces > maxBounces) return false;
 
-        Debug.Log($"used {projectile.bounces}/{maxBounces} bounces");
+        //Debug.Log($"used {projectile.bounces}/{maxBounces} bounces");
 
         projectile.projectileDirection = Vector3.Reflect(projectile.projectileDirection, hitInfo.normal);
 

@@ -25,6 +25,7 @@ public class PlayerInputHandler : TeleportAgent
     [Range(0f, 1f)]
     public float jumpSFXVolume = 1f;
     private Vector3 playerJumpVelocity = Vector3.zero;
+    public float timeSinceGround = 0.0f; //coyote time for jumping on platforms 
 
     [Header("Dash")]
     public float dashDistance = 1f;
@@ -187,7 +188,18 @@ public class PlayerInputHandler : TeleportAgent
         {
             Move(Time.deltaTime);
         }
-        if(canTeleport)
+        RaycastHit rhInfo;
+        bool groundBelow = Physics.Raycast(transform.position, Vector3.down, out rhInfo, 2.0f);
+        if(characterController.isGrounded || groundBelow)
+        {
+            timeSinceGround = 0.0f;
+        }
+        else
+        {
+            timeSinceGround += Time.deltaTime;
+        }
+
+        if (canTeleport)
             Jump();
     }
 
@@ -248,17 +260,14 @@ public class PlayerInputHandler : TeleportAgent
 
     private void Jump()
     {
-        if (characterController.isGrounded && playerJumpVelocity.y < 0)
+      
+        bool recentlyOnGround = timeSinceGround < 1.0f; // coyote time implementation
+        if (isJumping && recentlyOnGround) 
         {
-            playerJumpVelocity.y = 0f;
-        }
-        if (isJumping && characterController.isGrounded) 
-        {
-            Debug.Log("Jump");
             // characterController.height
             //float jumpHeight = characterController.height * 2;
             // Debug.Log(capsuleCollider.bounds.size.y);
-            playerJumpVelocity.y += Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
+            playerJumpVelocity.y = Mathf.Sqrt(jumpHeight *  jumpHeight * -gravityValue);
             isJumping = false;
             AudioManager.Instance.PlaySFX(jumpSFX, gameObject, jumpSFXVolume, 1f, 0f);
         }
@@ -266,8 +275,12 @@ public class PlayerInputHandler : TeleportAgent
 
     private void FixedUpdate()
     {
-            playerJumpVelocity.y += gravityValue * Time.deltaTime;
-            characterController.Move(playerJumpVelocity * Time.deltaTime);
+        if (characterController.isGrounded && playerJumpVelocity.y < 0)
+        {
+            playerJumpVelocity.y = 0f;
+        }
+        playerJumpVelocity.y += gravityValue * Time.deltaTime;
+        characterController.Move(playerJumpVelocity * Time.deltaTime);
     }
 
     private IEnumerator Dash()

@@ -33,7 +33,7 @@ public class Screenshaker : MonoBehaviour
 
     public void screenShakeNow() {
         if (!shakeThisCamera) return;
-        Debug.Log("Screenshake starting!");
+        //Debug.Log("Screenshake starting!");
         shakeTimeLeft = shakeTimespan;
         startLocation = shakeThisCamera.transform.localPosition;
     }

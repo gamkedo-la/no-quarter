@@ -62,16 +62,17 @@ public class PlayerStatsManager : MonoBehaviour
         StartCoroutine(PlayHeartbeat());
         StartCoroutine(StaminaChargesCoordinator());
         playerInputHandler = gameObject.GetComponent<PlayerInputHandler>();
-
-        var saveData = GameManager.Instance.saveData;
-
-        // Init itemsOwned
-        itemsOwned = new List<ScriptableObject>();
-        foreach (var item in saveData.equippedMods)
+        if(GameManager.Instance != null)
         {
-            var mod = Resources.Load<WeaponMod>(item);
-            itemsOwned.Add(mod);
-            playerInputHandler.equippedMods.Add(mod);
+            var saveData = GameManager.Instance.saveData;
+            // Init itemsOwned
+            itemsOwned = new List<ScriptableObject>();
+            foreach (var item in saveData.equippedMods)
+            {
+                var mod = Resources.Load<WeaponMod>(item);
+                itemsOwned.Add(mod);
+                playerInputHandler.equippedMods.Add(mod);
+            }
         }
 
         isImmortal = PlayerPrefs.GetInt(PauseMenu.IMMORTAL_MODE_KEY, 0) == 1;
