@@ -98,6 +98,7 @@ public class PlayerStatsManager : MonoBehaviour
     public void TakeDamage(float amount)
     {
         if(isImmortal) {
+            Debug.Log("Did not die, is immortal");
             return;
         }
         if (amount > 0) {
@@ -116,7 +117,14 @@ public class PlayerStatsManager : MonoBehaviour
     {
         float currencyToBeAdded = Mathf.Pow(currencyMultiplierForTimeAlive * timeAlive, currencyMultiplierForexponentialGrowth);
         var gm = GameManager.Instance;
-        gm.saveData.currency += (int)Mathf.Floor(currencyToBeAdded);
+        if(gm != null &&  gm.saveData != null)
+        {
+            gm.saveData.currency += (int)Mathf.Floor(currencyToBeAdded);
+        }
+       else
+        {
+            Debug.Log("game manager currency data not found");
+        }
     }
 
     public void RestoreHealth(float amount)
