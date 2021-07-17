@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 4224148286998523964}
   - component: {fileID: 2070327977738986292}
   - component: {fileID: 2070327977738986295}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: force pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
