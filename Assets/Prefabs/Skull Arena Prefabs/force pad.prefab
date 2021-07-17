@@ -111,7 +111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4401574852413036974
 Transform:
   m_ObjectHideFlags: 0
@@ -639,12 +639,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4224148286998523965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb11d764924c0bf4a8995eb44366b90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForceVector: {x: 0, y: 1, z: 0}
+  ForceVector: {x: 0, y: 2, z: 0}
   AffectedObjects: []
 --- !u!1 &6247564354594212919
 GameObject:
@@ -756,7 +756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5467006427342121084
 Transform:
   m_ObjectHideFlags: 0
