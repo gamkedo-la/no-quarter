@@ -76,6 +76,7 @@ MonoBehaviour:
   jumpHeight: 8
   jumpSFX: {fileID: 8300000, guid: 2e84dfd7e32b2de409655cf37b1c4767, type: 3}
   jumpSFXVolume: 1
+  timeSinceGround: 0
   dashDistance: 20
   dashTime: 0.4
   dashSmoothingCurve:
@@ -327,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6f8e6aafe92314f8a33a7c767fe931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heightIndicator: {fileID: 0}
 --- !u!1 &1825647250157117504
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +819,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4074093673977100174, guid: 9ac6cfe30a60a31f7be48eef857c6bf6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ed750b8f73d34f068d67ab9e29d4be8, type: 2}
     - target: {fileID: 6756606638111926289, guid: 9ac6cfe30a60a31f7be48eef857c6bf6,
         type: 3}
       propertyPath: m_Enabled
