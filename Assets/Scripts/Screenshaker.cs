@@ -63,7 +63,6 @@ public class Screenshaker : MonoBehaviour
 
             }
         } else {
-            shakeThisCamera.transform.localPosition = startLocation;
             shakeTimeLeft = 0f;
         }
     }
