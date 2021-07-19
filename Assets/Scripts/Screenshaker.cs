@@ -32,16 +32,21 @@ public class Screenshaker : MonoBehaviour
     }
 
     public void screenShakeNow() {
+        if (shakeTimeLeft <= 0f) {
+            startLocation = shakeThisCamera.transform.localPosition;
+        }
+
         if (!shakeThisCamera) return;
         //Debug.Log("Screenshake starting!");
+
         shakeTimeLeft = shakeTimespan;
-        startLocation = shakeThisCamera.transform.localPosition;
     }
 
     private void Start()
     {
         shakeSize = PlayerPrefs.GetFloat(MainMenuHandler.SCREENSHAKE_PREF_KEY, 1.0f);
         shakeThisCamera = GetComponent<Camera>();
+        startLocation = shakeThisCamera.transform.localPosition;
         PlayerStatsManager.OnHealthChange += maybeScreenshake;
         Debug.Log("Screenshake is enabled.");
     }
@@ -58,6 +63,7 @@ public class Screenshaker : MonoBehaviour
 
             }
         } else {
+            shakeThisCamera.transform.localPosition = startLocation;
             shakeTimeLeft = 0f;
         }
     }

@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void ResetSaveFile()
     {
         saveData = new SaveData();
+        saveData.currency = 1500;
         SaveGame();
     }
 }

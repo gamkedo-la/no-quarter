@@ -25911,12 +25911,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Press E at Computer to Buy Upgrades
+  m_Text: 'Press E at store computer to buy upgrades
 
-    Mousewheel changes weapon
+    Mousewheel to cycle weapon
+    type
 
-    Defeat
-    robots to earn currency'
+    Stay alive fighting robots to gain currency'
 --- !u!222 &1241651385
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35163,7 +35163,7 @@ GameObject:
   - component: {fileID: 1916752357}
   - component: {fileID: 1916752361}
   m_Layer: 5
-  m_Name: ConsoleTipCanvas
+  m_Name: ConsoleTipCanvas with play hints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38657,7 +38657,7 @@ PrefabInstance:
     - target: {fileID: 3846270734928363860, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1082
+      value: 1091
       objectReference: {fileID: 0}
     - target: {fileID: 4144974977129470456, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
@@ -38667,7 +38667,7 @@ PrefabInstance:
     - target: {fileID: 4144974977129470456, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3422
+      value: 3431
       objectReference: {fileID: 0}
     - target: {fileID: 4345269445390284826, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
@@ -38677,7 +38677,7 @@ PrefabInstance:
     - target: {fileID: 4345269445390284826, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 949
+      value: 958
       objectReference: {fileID: 0}
     - target: {fileID: 4525528900729501797, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
@@ -38687,7 +38687,7 @@ PrefabInstance:
     - target: {fileID: 4525528900729501797, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 507
+      value: 516
       objectReference: {fileID: 0}
     - target: {fileID: 5478742275720330401, guid: ed49fe6db44039b4b99ef95d4e6236e9,
         type: 3}

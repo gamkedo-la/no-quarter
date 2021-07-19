@@ -63701,7 +63701,7 @@ MonoBehaviour:
   saveData:
     equippedMods: []
     weapons: []
-    currency: 0
+    currency: 1500
     stat1: 
     stat2: 
     stat3: 

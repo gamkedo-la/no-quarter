@@ -294,7 +294,7 @@ MonoBehaviour:
   maxHealth: 100
   lowHealthThreshold: 20
   currentHealth: 100
-  currency: 0
+  currency: 1500
   staminaChargeRecoveryTime: 3
   heartbeats:
   - {fileID: 8300000, guid: 0f2483c20f1764b4183151eac3576ff4, type: 3}
