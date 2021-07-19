@@ -25911,9 +25911,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Press E at Computer
+  m_Text: 'Press E at Computer to Buy Upgrades
 
-    to purchase upgrades'
+    Mousewheel changes weapon
+
+    Defeat
+    robots to earn currency'
 --- !u!222 &1241651385
 CanvasRenderer:
   m_ObjectHideFlags: 0
