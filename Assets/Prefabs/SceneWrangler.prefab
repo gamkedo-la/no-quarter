@@ -47,6 +47,18 @@ MonoBehaviour:
   loadingScene: LoadingScene
   loadingScreen: {fileID: 8145321571550571542}
   minLoadingTime: 3
+  scenes:
+  - Scenes/MainMenu
+  - Scenes/HoldingCell
+  - Scenes/Skullboom Arena
+  - Scenes/Mini Arena
+  - Scenes/Facing Portals Arena
+  sceneTracks:
+  - {fileID: 8300000, guid: 49c3ed6098677d142bdc6fec878703bf, type: 3}
+  - {fileID: 8300000, guid: 49c3ed6098677d142bdc6fec878703bf, type: 3}
+  - {fileID: 8300000, guid: b55505f4f25e3fa41a3d47d165b375a9, type: 3}
+  - {fileID: 8300000, guid: b55505f4f25e3fa41a3d47d165b375a9, type: 3}
+  - {fileID: 8300000, guid: b55505f4f25e3fa41a3d47d165b375a9, type: 3}
 --- !u!1001 &9101967815758246495
 PrefabInstance:
   m_ObjectHideFlags: 0

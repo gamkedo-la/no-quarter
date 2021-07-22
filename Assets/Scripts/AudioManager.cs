@@ -14,6 +14,14 @@ public class AudioManager : MonoBehaviour {
 		else Destroy(gameObject);
 	}
 
+	public void SetTrack(AudioClip sceneTrack)
+	{
+		var source = GetComponent<AudioSource>();
+		source.Stop();
+		source.clip = sceneTrack;
+		source.Play();
+	}
+
 	public AudioSource PlaySFX(AudioClip clip, GameObject objectToAttachTo, float volume = 1, float pitch = 1, float blend = 1f) {
 		AudioSource freshAudioSource = Instantiate(sfxPrefab);
 		freshAudioSource.transform.parent = transform;

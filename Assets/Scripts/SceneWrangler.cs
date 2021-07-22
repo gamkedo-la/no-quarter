@@ -12,6 +12,9 @@ public class SceneWrangler : MonoBehaviour
 
     private AsyncOperation loadingOperation;
 
+    public List<string> scenes;
+    public List<AudioClip> sceneTracks;
+
 	void Awake() {
 		if (Instance == null)
 		{
@@ -26,5 +29,16 @@ public class SceneWrangler : MonoBehaviour
         loadingScreen.SetActive(true);
         loadingOperation = SceneManager.LoadSceneAsync(sceneName);
         loadingOperation.completed += (operation) => loadingScreen.SetActive(false);
+        loadingOperation.completed += (operation) =>
+        {
+	        loadingScreen.SetActive(false);
+
+	        var index = scenes.FindIndex(s => s == sceneName);
+	        if (index >= 0)
+	        {
+		        var clip = sceneTracks[index];
+				AudioManager.Instance.SetTrack(clip);
+	        }
+        };
     }
 }
