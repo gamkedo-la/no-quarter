@@ -46,6 +46,10 @@ public class PlayerStatsManager : MonoBehaviour
     public float streakTimeout = 5f;
     public float currentStreakTime = 0f;
 
+    public delegate void KillChange(int streak);
+
+    public static event KillChange OnKill;
+
 
     private void OnEnable() {
         PlayerInputHandler.dashStarted += UseStaminaCharge;
@@ -112,7 +116,7 @@ public class PlayerStatsManager : MonoBehaviour
     public void TakeDamage(float amount)
     {
         ResolveStreak();
-        
+
         if(isImmortal) {
             Debug.Log("Did not die, is immortal");
             return;
@@ -135,6 +139,8 @@ public class PlayerStatsManager : MonoBehaviour
         kills++;
         streak++;
 
+        OnKill?.Invoke(streak);
+
         // Reset streak timer on each kill.
         currentStreakTime = 0;
     }
@@ -150,6 +156,7 @@ public class PlayerStatsManager : MonoBehaviour
         }
 
         streak = 0;
+        OnKill?.Invoke(streak);
     }
 
     private void GiveCurrencyBasedOnKills()
