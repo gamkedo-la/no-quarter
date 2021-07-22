@@ -277,6 +277,11 @@ public class PlayerStatsManager : MonoBehaviour
         gm.saveData.currency -= mod.purchasePrice;
         gm.SaveGame();
 
+        foreach (var weapon in GetComponentsInChildren<FPSWeapon>(true))
+        {
+            weapon.AddMod(mod);
+        }
+
         return gm.saveData.currency;
     }
 

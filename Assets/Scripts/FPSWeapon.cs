@@ -56,6 +56,12 @@ public class FPSWeapon : MonoBehaviour
         }
     }
 
+    public List<WeaponMod> AddMod(WeaponMod mod)
+    {
+        mods.Add(mod);
+        return mods;
+    }
+
     public float GetFireDelay()
     {
         var delay = fireDelay;
