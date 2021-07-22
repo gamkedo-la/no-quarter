@@ -304,6 +304,10 @@ MonoBehaviour:
   timeAlive: 0
   currencyMultiplierForTimeAlive: 1
   currencyMultiplierForexponentialGrowth: 1.2
+  kills: 0
+  streak: 0
+  streakTimeout: 5
+  currentStreakTime: 0
 --- !u!114 &5352909644043770458
 MonoBehaviour:
   m_ObjectHideFlags: 0

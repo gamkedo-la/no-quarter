@@ -41,17 +41,22 @@ public class PlayerStatsManager : MonoBehaviour
     [SerializeField] private float timeAlive = 0.0f;
     [SerializeField] private float currencyMultiplierForTimeAlive = 1f;
     [SerializeField] private float currencyMultiplierForexponentialGrowth = 1.2f;
-
+    public int kills;
+    public int streak;
+    public float streakTimeout = 5f;
+    public float currentStreakTime = 0f;
 
 
     private void OnEnable() {
         PlayerInputHandler.dashStarted += UseStaminaCharge;
         PauseMenu.OnImmortalToggle += SetImmortal;
+        Enemy.OnDeath += AddKill;
     }
 
     private void OnDisable() {
         PlayerInputHandler.dashStarted -= UseStaminaCharge;
         PauseMenu.OnImmortalToggle -= SetImmortal;
+        Enemy.OnDeath -= AddKill;
     }
 
     void Start()
@@ -61,6 +66,7 @@ public class PlayerStatsManager : MonoBehaviour
         sfx = GetComponent<SfxHelper>();
         StartCoroutine(PlayHeartbeat());
         StartCoroutine(StaminaChargesCoordinator());
+
         playerInputHandler = gameObject.GetComponent<PlayerInputHandler>();
         if(GameManager.Instance != null)
         {
@@ -81,6 +87,13 @@ public class PlayerStatsManager : MonoBehaviour
     void Update()
     {
         timeAlive += Time.deltaTime;
+
+        if (streak > 0)
+        {
+            currentStreakTime += Time.deltaTime;
+            if (currentStreakTime >= streakTimeout) ResolveStreak();
+        }
+
     }
 
     IEnumerator PlayHeartbeat()
@@ -98,6 +111,8 @@ public class PlayerStatsManager : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        ResolveStreak();
+        
         if(isImmortal) {
             Debug.Log("Did not die, is immortal");
             return;
@@ -105,13 +120,49 @@ public class PlayerStatsManager : MonoBehaviour
         if (amount > 0) {
             currentHealth -= amount;
             if (currentHealth <= 0 ) {
-                GiveCurrencyBasedOnTimeAlive();
+                // GiveCurrencyBasedOnTimeAlive();
+                GiveCurrencyBasedOnKills();
                 SceneWrangler.Instance.LoadScene("Scenes/HoldingCell");
             }
         }
         FindObjectOfType<HurtScreen>().ShowHurtScreen();
         sfx.PlayAudioOneshot(hurtSound, 0.7f, 1.0f, 0.9f, 1.1f);
         OnHealthChange?.Invoke(currentHealth, -amount);
+    }
+
+    private void AddKill()
+    {
+        kills++;
+        streak++;
+
+        // Reset streak timer on each kill.
+        currentStreakTime = 0;
+    }
+
+    private void ResolveStreak()
+    {
+        if (streak > 10)
+        {
+            var power = Mathf.Floor(streak / 10f);
+            var streakMultiplier = Mathf.Pow(power, 2);
+            var extraPoints = Mathf.CeilToInt(streak * streakMultiplier);
+            kills += extraPoints;
+        }
+
+        streak = 0;
+    }
+
+    private void GiveCurrencyBasedOnKills()
+    {
+        // Award currency, save game.
+        var gm = GameManager.Instance;
+        gm.saveData.currency += kills;
+        gm.SaveGame();
+
+        // Reset kill and streak variables.
+        kills = 0;
+        streak = 0;
+        currentStreakTime = 0;
     }
 
     private void GiveCurrencyBasedOnTimeAlive()
